@@ -6,6 +6,7 @@
     --accent-purple: #8a2be2; 
     --text-color: #f0f0f0;
     --card-hover: #2a2a3e;
+    --accent: #7765fa;
 }
 
 body {
@@ -35,19 +36,25 @@ header {
 
 
 .site-left {
-    display: flex;
-    align-items: center;
+     display:flex;
+    align-items:center;
+    gap:10px;
+    flex-shrink:0
 }
 
-.logo img {
-    height: 40px; 
-     margin-right: 10px;
+.logo {
+     width:44px;
+    height:44px;
+    border-radius:8px;
+    background:linear-gradient(135deg,rgba(122, 21, 97, 0.678), var(--accent));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
 }
 
 .site-name {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--accent-purple);
+     font-weight:700
 }
 
 
@@ -134,11 +141,26 @@ header {
   margin-top:auto;
 
 }
+ .hamburger {
+    justify-content: center; /* center bars horizontally in container */
+    align-items: center; /* center bars vertically */
+    flex-direction: column; /* stack the three bars vertically */
+    gap: 5px; /* spacing between bars */
+    display: none; /* hidden by default (shown on small screens) */
+  }
+  
+   .hamburger span {
+    width: 25px; /* bar length */
+    height: 3px; /* bar thickness */
+    border-radius: 50px; /* rounded bar ends */
+    background-color: var(--accent); /* bar color */
+  }
+  
 
 @media (max-width:900px){
   .main-nav{display:none}
   .site-name{display:none}
-  .menu-toggle{display:inline-block}
+  .hamburger{display:flex}
   header{gap:8px}
   .search{max-width:360px}
 }

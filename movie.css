@@ -6,6 +6,7 @@
     --accent-purple: #8a2be2; 
     --text-color: #f0f0f0;
     --card-hover: #2a2a3e;
+    --accent: #7765fa;
 }
 
 body {
@@ -33,21 +34,26 @@ header {
     padding: 10px 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
-
 .site-left {
-    display: flex;
-    align-items: center;
+     display:flex;
+    align-items:center;
+    gap:10px;
+    flex-shrink:0
 }
 
-.logo img {
-    height: 40px; 
-    margin-right: 10px;
+.logo {
+     width:44px;
+    height:44px;
+    border-radius:8px;
+    background:linear-gradient(135deg,rgba(122, 21, 97, 0.678), var(--accent));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
 }
 
 .site-name {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--accent-purple);
+     font-weight:700
 }
 
 .main-nav ul {

@@ -6,20 +6,22 @@
   <title>ReelTime - Discover, Rate & Watch</title>
 
   <link rel="stylesheet" href="movie.css">
-  
+
+
   <script src="movie.js" defer></script> 
 </head>
 <body>
   <header>
-    <div class="site-left">
-      <div class="logo"><img src="imgs\Gemini_Generated_Image_nb4833nb4833nb48.png" alt="ReelTime Logo"></div>
+    
+        <div class="site-left">
+      <div class="logo">RT</div>
       <div class="site-name">ReelTime</div>
     </div>
 
     <nav class="main-nav" id="mainNav">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a style="background-color: blueviolet;" href="index2.html">Movies</a></li>
+        <li><a style="background-color: blueviolet;" href="movie.html">Movies</a></li>
         <li><a href="">Reviews</a></li>
         <li><a href="">Bookings</a></li>
         <li><a href="">Watchlist</a></li>
@@ -27,7 +29,11 @@
       </ul>
     </nav>
 
-    <button id="menuToggle" class="menu-toggle" title="Open menu">☰</button>
+     <div class="hamburger" id="hamburger">
+            <span></span> <!-- Line 1 of the hamburger menu -->
+            <span></span> <!-- Line 2 of the hamburger menu -->
+            <span></span> <!-- Line 3 of the hamburger menu -->
+        </div>
 
     <div class="search">
       <input id="SearchInput" placeholder="Search movies, actors, genres..." />

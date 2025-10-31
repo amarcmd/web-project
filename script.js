@@ -1,4 +1,4 @@
-let menuToggle = document.getElementById("menuToggle");
+let menuToggle = document.getElementById("hamburger");
 let header=document.querySelector("header");
 let gallery=document.querySelector(".gallery");
 
