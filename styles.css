@@ -27,6 +27,8 @@ header {
     align-items: center;
     padding: 10px 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    flex-wrap: wrap;
+    
 }
 
 
@@ -115,6 +117,7 @@ header {
     background:blueviolet; 
     margin-left: 20px;
    margin-right: 20px;
+  
 
   }
   .login button:hover{
@@ -123,18 +126,52 @@ background: linear-gradient(135deg,rgba(122, 21, 97, 0.678), var(--accent));
   }
 
 .welcome-box{
-  background-color:var(--card-hover);
-  height: 500px;
+height: 500px;
   width: 93%;
   margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  
+  
+  
+}
+.welcome-box .Welcome1 img{
+    height: 400px;
+    width: 95%;
+   
+    
+}
+.welcome-box .Welcome2{
+    
+    background-color: transparent blueviolet;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    margin-left: 50px;
+    
+}
+.welcome-box .Welcome2 p{
+font-size: smaller;
+color: grey;
+}
+.welcome-box .Welcome2 a:hover{
+    color: grey;
+    cursor: pointer;
+    
 }
 
-
 .gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  display: flex;
+  flex-direction: column;
+  justify-items: start;
+  align-items: start;
+
   gap:18px;
   padding:28px;
+ position: relative;
+  overflow: hidden;
 }
 .gallery figure{
   margin:0;
@@ -142,6 +179,8 @@ background: linear-gradient(135deg,rgba(122, 21, 97, 0.678), var(--accent));
   border-radius:10px;
   overflow:hidden;
   cursor:pointer;
+  width: 240px;
+  
   transition: transform .15s ease, box-shadow .15s ease;
 }
 .gallery figure:hover{ 
@@ -151,7 +190,7 @@ background: linear-gradient(135deg,rgba(122, 21, 97, 0.678), var(--accent));
 .gallery img{
     display:block;
     width:100%;
-    height:260px;
+    height:350px;
     object-fit:cover;
 }
 .gallery figcaption{
@@ -164,6 +203,49 @@ background: linear-gradient(135deg,rgba(122, 21, 97, 0.678), var(--accent));
   margin-top:auto;
 
 }
+.gallery section .movie{
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+     overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.new{
+    position: relative;
+  
+}
+.movie {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+
+
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  
+  border-radius: 50%;
+ 
+  
+}
+.arrow:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+
+
  .hamburger {
     justify-content: center; /* center bars horizontally in container */
     align-items: center; /* center bars vertically */

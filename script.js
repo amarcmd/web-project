@@ -6,6 +6,25 @@ let gallery=document.querySelector(".gallery");
 menuToggle.addEventListener("click",()=>{
     header.classList.toggle("header-nav-open");
 });
+const movieContainer = document.getElementById('movie');
+const leftArrow = document.querySelector('.arrow.left');
+
+movieContainer.addEventListener('scroll', () => {
+  if (movieContainer.scrollLeft > 0) {
+    leftArrow.style.display = 'block';
+  } else {
+    leftArrow.style.display = 'none';
+  }
+});
+
+function scrollLeft() {
+  movieContainer.scrollBy({ left: -300, behavior: 'smooth' });
+}
+
+function scrollRight() {
+  movieContainer.scrollBy({ left: 300, behavior: 'smooth' });
+}
+
 
 // --- Modal Elements ---
 let modal = document.getElementById('card-modal');
