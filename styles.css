@@ -5,7 +5,8 @@
     --main-dark: #1e1e2d; 
     --accent-purple: #8a2be2; 
     --text-color: #f0f0f0;
-    --card-hover: #2a2a3e;    --accent: #7765fa}
+    --card-hover: #2a2a3e;
+    --accent: #7765fa;
 body {
     background-color: var(--dark-bg);
     color: var(--text-color);
@@ -125,42 +126,99 @@ background: linear-gradient(135deg,rgba(122, 21, 97, 0.678), var(--accent));
     
   }
 
-.welcome-box{
-height: 500px;
-  width: 93%;
-  margin: 50px;
+.welcome-box {
+  position: relative;
+  height: 500px;
+  width: min(100% - 40px, 1800px);
+  margin: 50px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background: url("imgs/welcome page.png") center/cover no-repeat;
+}
+
+/* darken left/bottom */
+.welcome-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 55%);
+  pointer-events: none;
+}
+
+/* text */
+.Welcome2 {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  
-  
-  
+  gap: 10px;
+  color: #fff;
+  max-width: 380px;
+  z-index: 2;
 }
-.welcome-box .Welcome1 img{
-    height: 400px;
-    width: 95%;
-   
-    
+
+.Welcome2 a {
+  display: inline-block;
+  background: var(--accent-purple);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
 }
-.welcome-box .Welcome2{
-    
-    background-color: transparent blueviolet;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: start;
-    margin-left: 50px;
-    
+
+/* ARROWS */
+.hero-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 3;
+  display: grid;
+  place-items: center;
 }
-.welcome-box .Welcome2 p{
-font-size: smaller;
-color: grey;
+.hero-btn.prev { left: 16px; }
+.hero-btn.next { right: 16px; }
+.hero-btn:hover { background: rgba(0,0,0,0.75); }
+
+/* tablet */
+@media (max-width: 900px) {
+  .welcome-box { height: 430px; }
+  .Welcome2 {
+    left: 24px;
+    bottom: 28px;
+    max-width: 70%;
+  }
 }
-.welcome-box .Welcome2 a:hover{
-    color: grey;
-    cursor: pointer;
-    
+
+/* phone */
+@media (max-width: 600px) {
+  .welcome-box {
+    height: 380px;
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 0;
+  }
+  .Welcome2 {
+    left: 16px;
+    bottom: 24px;
+    max-width: 85%;
+  }
+  .hero-btn.prev { left: 8px; }
+  .hero-btn.next { right: 8px; }
 }
+
+
+
+
 
 .gallery{
   display: flex;
@@ -203,23 +261,37 @@ color: grey;
   margin-top:auto;
 
 }
-.gallery section .movie{
-    display: flex;
-    justify-content: start;
-    gap: 10px;
-     overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
-.new{
-    position: relative;
-  
-}
+.gallery .movie,
 .movie {
   display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
+  flex-wrap: wrap;     /* let cards go to next line */
+  gap: 20px;
+  justify-content: flex-start;
+  overflow-x: visible; /* no horizontal scroll */
 }
+.add-watchlist-btn {
+  margin-top: 8px;
+  width: 100%;
+  border: none;
+  padding: 8px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.add-watchlist-btn:hover {
+  background: #5f10a0;
+}
+
+
+.new .arrow{
+    
+  display:none;
+}
+
 
 
 
