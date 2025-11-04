@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ReelTime - Discover, Rate & Watch</title>
   <link rel="shortcut icon" href="" type="image/x-icon">
-
-
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- for search icon-->
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -29,20 +27,28 @@
       </ul>
     </nav>
 
-   
+    
     <div class="hamburger" id="hamburger">
             <span></span> <!-- Line 1 of the hamburger menu -->
             <span></span> <!-- Line 2 of the hamburger menu -->
             <span></span> <!-- Line 3 of the hamburger menu -->
     </div>
+    
      <div class="search">
       <input id="SearchInput" placeholder="Search movies, actors, genres..." />
+       <button class="search-icon" id="searchToggle">
+        <i class="fa fa-search" aria-hidden="true"></i>
+
+      </button>
     </div>
 
+   
     <div class="login">
       <button>LOGIN</button>
 
     </div>
+
+   
   </header>
 
   <main>
@@ -52,7 +58,7 @@
       <button class="hero-btn next" onclick="nextImage()">&#10095;</button>
 
       <div class="Welcome2">
-        <p>YOUR MOVIES IN ONE PLACE</p>
+        <p style="font-style: italic;">YOUR MOVIES IN ONE PLACE</p>
         <h1>Welcome to ReelTime</h1>
         <a href="about.html">Learn More</a>
       </div>
@@ -166,9 +172,6 @@
     
 
      
-
-      
-
       
     </section>
   </main>

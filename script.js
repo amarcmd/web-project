@@ -24,6 +24,14 @@ function scrollLeft() {
 function scrollRight() {
   movieContainer.scrollBy({ left: 300, behavior: 'smooth' });
 }
+const searchToggle = document.getElementById("searchToggle");
+const searchBox = document.querySelector(".search");
+
+if (searchToggle) {
+  searchToggle.addEventListener("click", () => {
+    searchBox.classList.toggle("active");
+  });
+}
 
 
 // --- Modal Elements ---
