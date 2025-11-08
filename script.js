@@ -6,24 +6,7 @@ let gallery=document.querySelector(".gallery");
 menuToggle.addEventListener("click",()=>{
     header.classList.toggle("header-nav-open");
 });
-const movieContainer = document.getElementById('movie');
-const leftArrow = document.querySelector('.arrow.left');
 
-movieContainer.addEventListener('scroll', () => {
-  if (movieContainer.scrollLeft > 0) {
-    leftArrow.style.display = 'block';
-  } else {
-    leftArrow.style.display = 'none';
-  }
-});
-
-function scrollLeft() {
-  movieContainer.scrollBy({ left: -300, behavior: 'smooth' });
-}
-
-function scrollRight() {
-  movieContainer.scrollBy({ left: 300, behavior: 'smooth' });
-}
 const searchToggle = document.getElementById("searchToggle");
 const searchBox = document.querySelector(".search");
 
@@ -79,6 +62,26 @@ function closeModal() {
     }
 }
 
+const movieContainer = document.getElementById('movie');
+const leftArrow = document.querySelector('.arrow.left');
+const rightArrow = document.querySelector('.arrow.right');
+
+movieContainer.addEventListener('scroll', () => {
+  leftArrow.style.display = movieContainer.scrollLeft > 0 ? 'block' : 'none';
+
+  const maxScrollLeft = movieContainer.scrollWidth - movieContainer.clientWidth;
+  rightArrow.style.display = movieContainer.scrollLeft >= maxScrollLeft ? 'none' : 'block';
+});
+
+function scrollLeft() {
+  console.log("Scrolling left");
+
+  movieContainer.scrollBy({ left: -300, behavior: 'smooth' });
+}
+
+function scrollRight() {
+  movieContainer.scrollBy({ left: 300, behavior: 'smooth' });
+}
 // --- Event Listener for Clicking Movie Cards ---
 figure.forEach(function (cardEl) {
     cardEl.onclick = function () {

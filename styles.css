@@ -7,6 +7,7 @@
     --text-color: #f0f0f0;
     --card-hover: #2a2a3e;
     --accent: #7765fa;
+}
 body {
     background-color: var(--dark-bg);
     color: var(--text-color);
@@ -49,6 +50,10 @@ header {
     align-items: center;
     justify-content: center;
     font-weight: 700;
+}
+.login button:hover{
+   background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
+    cursor: pointer;
 }
 
 
@@ -250,6 +255,7 @@ header {
   z-index: 2;
 }
 
+
 .Welcome2 a {
   display: inline-block;
   background: var(--accent-purple);
@@ -293,9 +299,9 @@ header {
 
 /* phone */
 @media (max-width: 600px) {
-  .welcome-box {
+  .welcome-box{
     height: 380px;
-    width: 100%;
+    width: 500px;
     margin: 20px 0;
     border-radius: 0;
   }
@@ -353,14 +359,39 @@ header {
   margin-top:auto;
 
 }
-.gallery .movie,
+.new-releases{
+  position: relative;
+ 
+}
 .movie {
   display: flex;
-  flex-wrap: wrap;     /* let cards go to next line */
   gap: 20px;
-  justify-content: flex-start;
-  overflow-x: visible; /* no horizontal scroll */
+  overflow-x: auto;
+  scroll-behavior: smooth;/* no horizontal scroll */
 }
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+.arrow.left {
+  left: 10px;
+  display: none; /* hidden until scroll happens */
+}
+
+.arrow.right {
+  right: 10px;
+}
+
 .add-watchlist-btn {
   margin-top: 8px;
   width: 100%;
@@ -516,4 +547,43 @@ header {
 }
 
 
+ footer {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+    background-color:var(--main-dark); 
+    padding: 20px 20px 40px;
+    gap: 40px; 
+    color: #fff; 
+    flex-wrap: wrap;
+  }
+  
+  footer a {
+    text-decoration: none; 
+    color: #fff; 
+  }
+  
+
+ .nav-desc {
+    position: absolute; /* position dropdown relative to nav */
+    
+    
+    flex-direction: column; /* stack links vertically */
+   
+    gap: 0; /* remove extra gap between links */
+    padding: 8px 0; /* vertical inner spacing */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12); /* soft elevation shadow */
+    z-index: 1000; /* ensure dropdown appears above content */
+  }
+  .nav-desc a {
+    padding: 12px 16px; /* clickable padding for each link */
+
+  }
+  .nav-desc a:hover {
+   
+    color: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
+    cursor: pointer;
+    
+  }
 
