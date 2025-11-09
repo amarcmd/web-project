@@ -174,3 +174,48 @@ document.querySelectorAll('.add-watchlist-btn').forEach((btn) => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("SearchInput");
+  const movieCards = document.querySelectorAll(".movie-card");
+  const overlay = document.getElementById("searchOverlay");
+  const resultsContainer = overlay.querySelector(".search-results");
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase().trim();
+
+  
+    resultsContainer.innerHTML = "";
+
+    if (query === "") {
+      overlay.style.display = ""; 
+      return;
+    }
+
+    
+    const matches = Array.from(movieCards).filter(card => {
+      const title = card.dataset.title.toLowerCase();
+      const description = card.dataset.description.toLowerCase();
+      return title.includes(query) || description.includes(query);
+    });
+
+    
+    if (matches.length > 0) {
+      overlay.style.display = "flex";
+      matches.forEach(card => {
+        const clone = card.cloneNode(true);
+        resultsContainer.appendChild(clone);
+      });
+    } else {
+      overlay.style.display = "flex";
+      resultsContainer.innerHTML = `<p style="color:white; font-size:1.2em;">No movies found</p>`;
+    }
+  });
+
+  
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.style.display = "none";
+      searchInput.value = "";
+    }
+  });
+});
