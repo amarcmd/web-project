@@ -7,6 +7,10 @@
     --text-color: #f0f0f0;
     --card-hover: #2a2a3e;
     --accent: #7765fa;
+    --cards-per-view: 8;  /* how many cards visible at once */
+    --card-gap: 1rem;     /* space between cards */
+    --card-height: 300px; /* poster height */
+    --card-radius: 14px;
 }
 body {
     background-color: var(--dark-bg);
@@ -363,38 +367,86 @@ header {
   margin-top:auto;
 
 }
-.new-releases{
+.new-releases, .Horror{
   position: relative;
+  width:100%;
+  max-width: none;
+  margin: 0 auto;
  
 }
-.movie {
+#movie.movie {
   display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;/* no horizontal scroll */
+  gap: var(--card-gap);
+  overflow-x: auto;       /* horizontal scroll only */
+  overflow-y: hidden;
+  padding: 0.25rem 0 0.75rem;  /* bottom padding so the scrollbar doesn't overlap cards */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable both-edges; /* keeps layout steady when scrollbar appears */
+  border-radius: 12px;
+ 
 }
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  font-size: 24px;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 1;
-  border-radius: 50%;
+#movie.movie::-webkit-scrollbar {
+  height: 10px;          /* horizontal scrollbar height */
+}
+#movie.movie::-webkit-scrollbar-track {
+  background: #18181c;
+  border-radius: 999px;
+}
+#movie.movie::-webkit-scrollbar-thumb {
+  background: #3a3a44;
+  border-radius: 999px;
+}
+#movie.movie::-webkit-scrollbar-thumb:hover {
+  background: #5a5a66;
+}
+/* Firefox */
+#movie.movie {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a44 #18181c;
 }
 
-.arrow.left {
-  left: 10px;
-  display: none; /* hidden until scroll happens */
+/* --- Cards --- */
+.movie-card {
+  flex: 0 0 calc(
+    (100% - (var(--cards-per-view) - 1) * var(--card-gap))
+    / var(--cards-per-view)
+  );                      /* makes nb cards fit exactly */
+  max-width: 240px;       /* optional cap so they don't get huge on ultrawide */
+  background: #141419;
+  border: 1px solid #22222b;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
 }
 
-.arrow.right {
-  right: 10px;
+.movie-card img {
+  width: 100%;
+  height: var(--card-height);
+  object-fit: cover;
+  display: block;
 }
+
+.movie-card figcaption {
+  padding: 0.6rem 0.75rem 0.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+@media (max-width: 1133px){
+  :root { --cards-per-view: 5; --card-height: 230px; }
+}
+@media (max-width: 900px) {
+  :root { --cards-per-view: 3; --card-height: 230px; }
+  .arrow { display: none; } /* optional: hide arrows on mobile */
+}
+@media (max-width: 560px) {
+  :root { --cards-per-view: 2; --card-height: 210px; }
+}
+
+
+
 
 .add-watchlist-btn {
   margin-top: 8px;
@@ -423,24 +475,6 @@ header {
 
 
 
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  font-size: 24px;
-  padding: 10px;
-  cursor: pointer;
-  
-  border-radius: 50%;
- 
-  
-}
-.arrow:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
 
 
 
@@ -631,22 +665,75 @@ header {
 }
 
 
- footer {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column; 
-    background-color:var(--main-dark); 
-    padding: 20px 20px 40px;
-    gap: 40px; 
-    color: #fff; 
-    flex-wrap: wrap;
-  }
+footer {
+  position: relative;
+  display: flex;
+  padding: 30px;
+  align-items: center;
+  background: var(--main-dark);  
+  height:100px;
+
+}
+
+#footernav,
+footer p {
+  flex: 1 1 0;                  
+  min-width: 0;                  
+}
+
+#footernav ul {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+footer h1 {
+ position: absolute;
+  left: 50%;
+  transform: translateX(-50%);   /* centers hatta law fee left right osas*/
+  margin: 0;
+  font-size: 35px;
+  font-weight: 800;
   
-  footer a {
-    text-decoration: none; 
-    color: #fff; 
+  
+}
+
+/* Right: copyright text aligned to the right */
+footer p {
+  margin-right: 120px;
+  text-align: right;
+
+ 
+}
+
+/* Mobile: stack nicely */
+@media (max-width: 936px) {
+footer {
+    flex-direction: column;   /* now they stack vertically */
+    height: auto;
+    text-align: center;
+    padding: 20px;
   }
+
+  footer h1 {
+    position: static;         /* remove absolute center on mobile */
+    transform: none;
+    margin-top: 0.5rem;
+  }
+
+  footer p {
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-right:25px;
+  }
+  #footernav{
+    display: block;
+  }
+ 
+}
   
 
  .nav-desc {

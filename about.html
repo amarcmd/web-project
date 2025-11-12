@@ -1,13 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="about.css">
+  <meta http-equiv="Permissions-Policy" content="autoplay=(self),encrypted-media=(self)">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us</title>
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- for search icon-->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="about.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
+<header>
         <div class="site-left">
       <div class="logo">RT</div>
       <div class="site-name">ReelTime</div>
@@ -16,30 +21,38 @@
  
     <nav class="main-nav" id="mainNav">
       <ul>
-        <li><a  href="index.html">Home</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="watchlist.html">Watchlist</a></li>
         <li><a href="">Bookings</a></li>
         <li><a href="">Profile</a></li>
       </ul>
     </nav>
 
-   
+    
     <div class="hamburger" id="hamburger">
             <span></span> <!-- Line 1 of the hamburger menu -->
             <span></span> <!-- Line 2 of the hamburger menu -->
             <span></span> <!-- Line 3 of the hamburger menu -->
     </div>
+    
      <div class="search">
       <input id="SearchInput" placeholder="Search movies, actors, genres..." />
+       <button class="search-icon" id="searchToggle">
+        <i class="fa fa-search" aria-hidden="true"></i>
+
+      </button>
     </div>
 
+   
     <div class="login">
       <button>LOGIN</button>
 
     </div>
 
+   
   </header>
 
-  <img src="imgs/for welcome page.png" alt="">
+  <img src="imgs/welcome page.png" alt="">
     <section class="about" id="about">
   <div class="about-container">
     <h2>About RealTime</h2>
@@ -75,16 +88,21 @@
   
   </div>
   </section>
- <footer>
-        <div class="logo">RT</div>
-        <div class="nav-desc">
-            <a href="index.html">Home</a> 
-            <a href="about.html">About Us</a> 
-            <a href="watchlist.html">Watchlist</a> 
-        
-        </div>
-       
-        <p>&#169; RealTime</p>
-    </footer>
+  <footer>
+  
+    <nav class="main-nav" id="footernav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="watchlist.html">Watchlist</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="">Bookings</a></li>
+        <li><a href="">Profile</a></li>
+      </ul>
+    </nav>
+    <h1>ReelTime</h1>
+    <p>&copy; ReelTime. All rights reserved.</p>
+  </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
