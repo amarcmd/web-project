@@ -255,7 +255,9 @@ header {
   max-width: 380px;
   z-index: 2;
 }
-
+.Welcome2 h1{
+  margin-bottom: 10px;
+}
 
 .Welcome2 a {
   display: inline-block;
@@ -265,6 +267,7 @@ header {
   border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
+  width: 130px;
 }
 
 /* ARROWS */
