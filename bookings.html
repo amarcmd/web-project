@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Permissions-Policy" content="autoplay=(self),encrypted-media=(self)">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bookings</title>
+  <link rel="shortcut icon" href="" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- for search icon-->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="bookings.css">
+  <script src="script.js" defer></script>
+  <script src="scriptJQ.js" defer></script>
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<header>
+        <div class="site-left">
+      <div class="logo">RT</div>
+      <div class="site-name">ReelTime</div>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a  href="index.html">Home</a></li>
+        <li><a href="watchlist.html">Watchlist</a></li>
+        <li><a style="background-color: blueviolet;" href="bookings.html">Bookings</a></li>
+        <li><a href="">Profile</a></li>
+      </ul>
+    </nav>
+
+    
+    <div class="hamburger" id="hamburger">
+            <span></span> <!-- Line 1 of the hamburger menu -->
+            <span></span> <!-- Line 2 of the hamburger menu -->
+            <span></span> <!-- Line 3 of the hamburger menu -->
+    </div>
+    
+     <div class="search">
+      <input id="SearchInput" placeholder="Search movies, actors, genres..." />
+       <button class="search-icon" id="searchToggle">
+        <i class="fa fa-search" aria-hidden="true"></i>
+
+      </button>
+    </div>
+
+   
+    <div class="login">
+      <button>LOGIN</button>
+
+    </div>
+
+   
+  </header>
+<main>
+    <div class="booking">
+        <button class="stepsbtn" id="step1btn" onclick="showStep(1)">1</button>
+        <button class="stepsbtn" id="step2btn" onclick="showStep(2)">2</button>
+        <button class="stepsbtn" id="step3btn" onclick="showStep(3)">3</button>
+        <button class="stepsbtn" id="step4btn" onclick="showStep(4)">4</button>
+        <button class="stepsbtn" id="step5btn" onclick="showStep(5)">5</button>
+    </div>
+      <div class="step-content default" id="step1">
+            <select name="" id="cinemasSelect">
+                <option value="SpotChoueifat">The Spot Choueifat</option>
+                <option value="SpotSaida">The Spot Saida</option>
+            </select>
+            <button class="next" onclick="completeStep()">Submit Step 1</button>
+        </div>
+         <div class="step-content" id="step2">
+            <select name="" id="movieselect">
+                <option value="TheRunningMan">The Running Man</option>
+                <option value="Predator:Badlands">Predator: Badlands</option>
+                <option value="HardaBasht">Hardabasht</option>
+                <option value="Jujutsu Kaisen:Execution">Jujutsu Kaisen: Execution</option>
+                <option value="Playdate">Playdate</option>
+                <option value="ElSelemWElThoban">El Selem W El Thoban</option>
+            </select>
+            <button class="next" onclick="completeStep()">Submit Step 2</button>
+        </div>
+        <div class="step-content" id="step3">
+            <select name="" id="timeselect">
+                <option value="1:00">1:00 pm</option>
+                <option value="3:00">3:00 pm</option>
+                <option value="6:00">6:00 pm</option>
+                <option value="9:00">9:00 pm</option>
+            </select>
+            <button class="next" onclick="completeStep()">Submit Step 3</button>          
+        </div>
+        <div class="step-content" id="step4">
+            <div class="container">
+                <div class="front-screen">
+                    <div class="screen"></div>
+                    <div class="overlay"></div>
+                </div>
+                <div class="seats">
+                    <div class="front-row first-front-row">
+                    </div>
+                     <div class="front-row second-front-row">
+          
+                     </div>
+                     <div class="middle-row">
+
+                     </div>
+                     <div class="front-row second-last-row">
+
+                     </div>
+                     <div class="front-row first-last-row">
+
+                     </div>
+                </div>
+                <div class="legend">
+                    <div>
+                        <div class="seat available"></div>
+                        <span>Available</span>
+                    </div>
+                    <div>
+                        <div class="seat selected"></div>
+                        <span>Selected</span>
+                    </div>
+                    <div>
+                        <div class="seat reserved"></div>
+                        <span>Reserved</span>
+                    </div>
+                </div>
+            </div>
+            <button class="next" onclick="completeStep()">Submit Step 4</button>          
+        </div>
+        <div class="step-content" id="step5">
+            <input type="text" id="Name" placeholder="Enter Full Name">
+            <input type="text" id="Email" placeholder="Enter Email">
+            <input type="text" id="PhoneNumber" placeholder="Enter Phone Number">
+            <input type="text" id="CardNumber" placeholder="Enter your Card Number">
+            <input type="text" id="CVV" placeholder="Enter your CVV">
+            <button>Confirm</button>
+        </div>
+</main>
+  
+  <footer>
+  
+    <nav class="main-nav" id="footernav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="watchlist.html">Watchlist</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="">Bookings</a></li>
+        <li><a href="">Profile</a></li>
+      </ul>
+    </nav>
+    <h1>ReelTime</h1>
+    <p>&copy; ReelTime. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
