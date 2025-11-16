@@ -202,6 +202,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+ 
+    const container = document.getElementById('watchlist-container');
+    let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
 
+    if (saved.length === 0) {
+      container.innerHTML = "<p style='padding:20px;'>No movies added yet.</p>";
+    } else {
+      saved.forEach(movie => {
+        container.innerHTML += `
+          <figure class="movie-card">
+            <img src="${movie.image}" alt="${movie.title}">
+            <figcaption>${movie.title}</figcaption>
+          </figure>
+        `;
+      });
+    }
+  
 
 

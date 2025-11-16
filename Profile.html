@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Watchlist</title>
   <link rel="shortcut icon" href="" type="image/x-icon">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- for search icon-->
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
+  <script src="scriptJQ.js" defer></script>
 </head>
 <body>
 <header>
@@ -21,9 +21,9 @@
     <nav class="main-nav" id="mainNav">
       <ul>
         <li><a  href="index.html">Home</a></li>
-        <li><a style="background-color: blueviolet;" href="watchlist.html">Watchlist</a></li>
-        <li><a href="bookings.html">Bookings</a></li>
-        <li><a href="">Profile</a></li>
+         <li><a href="bookings.html">Bookings</a></li>
+        <li><a style="background-color: blueviolet;" href="Profile.html">Profile</a></li>
+       
       </ul>
     </nav>
 
@@ -42,12 +42,7 @@
       </button>
     </div>
 
-   
-    <div class="login">
-      <button>LOGIN</button>
-
-    </div>
-
+  
    
   </header>
 
@@ -62,33 +57,16 @@
     <nav class="main-nav" id="footernav">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="watchlist.html">Watchlist</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="">Bookings</a></li>
-        <li><a href="">Profile</a></li>
+       
       </ul>
     </nav>
     <h1>ReelTime</h1>
     <p>&copy; ReelTime. All rights reserved.</p>
   </footer>
 
-  <script>
-    const container = document.getElementById('watchlist-container');
-    let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
-
-    if (saved.length === 0) {
-      container.innerHTML = "<p style='padding:20px;'>No movies added yet.</p>";
-    } else {
-      saved.forEach(movie => {
-        container.innerHTML += `
-          <figure class="movie-card">
-            <img src="${movie.image}" alt="${movie.title}">
-            <figcaption>${movie.title}</figcaption>
-          </figure>
-        `;
-      });
-    }
-  </script>
-   <script src="script.js" defer></script>
+ 
+   
 </body>
 </html>

@@ -35,4 +35,59 @@ $(function(){
 
     selectSeats();
     markRandomSeats(SEATS_RESERVED);
+
+//login 
+
+let users = [
+    { username: "Tasneem", password: "AbdAlkareem" },
+    { username: "Amar", password: "444" },
+    { username: "roaa", password: "soloh" },
+];
+
+let currentUser = null;
+
+$(document).ready(function () {
+    const $loginPanel = $('.login');
+    const loggedInUser = sessionStorage.getItem('loggedInUser');
+
+    if (loggedInUser) {
+        $loginPanel.hide();
+        if (typeof loadWatchlist === 'function') {
+            loadWatchlist();
+        }
+    } else {
+        $loginPanel.css('display', 'flex');
+    }
+
+    $('.login-form').on('submit', function (e) {
+        e.preventDefault(); // Stop page reload
+
+        const enteredUsername = $('#username').val().trim();
+        const enteredPassword = $('#password').val();
+
+        const matchedUser = users.find(user =>
+            user.username === enteredUsername && user.password === enteredPassword
+        );
+
+        if (matchedUser) {
+            currentUser = matchedUser.username;
+            sessionStorage.setItem('loggedInUser', currentUser);
+
+            // Hide login panel
+            $loginPanel.fadeOut(); // Smooth hide
+
+            // Clear inputs
+            $('#username, #password').val('');
+
+            // Load watchlist or show success
+            if (typeof loadWatchlist === 'function') {
+                loadWatchlist();
+            } else {
+                console.log("Logged in as " + currentUser);
+            }
+        } else {
+            alert("Invalid username or password");
+        }
+    });
+});
 });
