@@ -43,7 +43,12 @@ const TRAILER_URLS = {
     "Avatar": "https://www.youtube.com/embed/nb_fFj_0rq8",
     "Extraction 2": "https://www.youtube.com/embed/Y274jZs5s7s",
     "The Discovery": "https://www.youtube.com/embed/z9j6WcdU-ts",
-    
+    "The Running Man": "https://www.youtube.com/embed/TsZxBZN1PZQ",
+    "Predator: Badlands": "https://www.youtube.com/embed/43R9l7EkJwE",
+   "HardaBasht": "https://www.youtube.com/embed/Z2yUk7IaE9A",
+    "Jujutsu Kaisen:Execution": "https://www.youtube.com/embed/oCIgbchrtu4",
+    "Playdate": "https://www.youtube.com/embed/ooJ8bJt-Y9A",
+    "El Selem W El Thoban": "https://www.youtube.com/embed/NwlRuumdJEA"
 };
 
 // Selecting all elements with the class 'movie-card'
@@ -132,30 +137,39 @@ if (modal) {
   function nextImage() { setHero(heroIndex + 1); }
   function prevImage() { setHero(heroIndex - 1); }
 
-
-// --- Add to Watchlist Logic ---
+// --- Add to Watchlist ---
 document.querySelectorAll('.add-watchlist-btn').forEach((btn) => {
   btn.addEventListener('click', function (e) {
-    e.stopPropagation(); // prevent clicking opening modal
+    e.stopPropagation(); 
 
-    const card = this.closest('.movie-card');
-    const title = card.getAttribute('data-title');
-    const image = card.getAttribute('data-image') || card.querySelector('img').src;
+    const title = document.getElementById('modal-title').textContent.trim();
 
-    // Get watchlist from localStorage
+    // Find original card from index.html
+    const originalCard = [...document.querySelectorAll('.movie-card')]
+        .find(c => c.dataset.title === title);
+
+    if (!originalCard) return;
+
+    const image = originalCard.querySelector("img").src;
+    const rating = originalCard.dataset.rating || "N/A";
+
+    // Load list
     let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
 
-    // Check if already saved
     const exists = watchlist.some(movie => movie.title === title);
+
     if (!exists) {
-      watchlist.push({ title, image });
+      watchlist.push({ title, image, rating });
       localStorage.setItem('watchlist', JSON.stringify(watchlist));
-      alert(`${title} added to Watchlist ✅`);
-    } else {
-      alert(`${title} is already in your Watchlist!`);
+
+      this.textContent = "Added to Watchlist";
+      this.classList.add("added");
     }
   });
 });
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("SearchInput");
@@ -203,21 +217,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
  
-    const container = document.getElementById('watchlist-container');
-    let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+const container = document.getElementById('watchlist-container');
+let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
 
-    if (saved.length === 0) {
-      container.innerHTML = "<p style='padding:20px;'>No movies added yet.</p>";
-    } else {
-      saved.forEach(movie => {
-        container.innerHTML += `
-          <figure class="movie-card">
-            <img src="${movie.image}" alt="${movie.title}">
-            <figcaption>${movie.title}</figcaption>
-          </figure>
-        `;
-      });
-    }
+if (saved.length === 0) {
+  container.innerHTML = "<p style='padding:20px;'>No movies added yet.</p>";
+} else {
+  container.innerHTML = `<div class="movie"></div>`;
+  const movieRow = container.querySelector(".movie");
+
+  saved.forEach(movie => {
+    movieRow.innerHTML += `
+      <figure class="movie-card" data-rating="${movie.rating}">
+        <img src="${movie.image}" alt="${movie.title}">
+        <figcaption>${movie.title}</figcaption>
+        <span class="rating-overlay">${movie.rating} / 5 ★</span>
+      </figure>
+    `;
+  });
+}
+
   
-
 

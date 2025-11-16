@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- for search icon-->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="bookings.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="script.js" defer></script>
- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-   <script src="scriptJQ.js" defer></script>
-   
+  <script src="scriptJQ.js" defer></script>
+
 </head>
 <body>
 <header>
@@ -23,9 +23,9 @@
 
     <nav class="main-nav" id="mainNav">
       <ul>
-       <li><a style="background-color: blueviolet;" href="index.html">Home</a></li>
-        <li><a href="bookings.html">Bookings</a></li>
-       <li><a href="profile.html">Profile</a></li>
+        <li><a  href="index.html">Home</a></li>
+        <li><a style="background-color: blueviolet;" href="bookings.html">Bookings</a></li>
+        <li><a href="Profile.html">Profile</a></li>
       </ul>
     </nav>
 
@@ -53,22 +53,24 @@
    
   </header>
 <main>
+  <div class="box1">
     <div class="booking">
-        <button class="stepsbtn" id="step1btn" onclick="showStep(1)">1</button>
-        <button class="stepsbtn" id="step2btn" onclick="showStep(2)">2</button>
-        <button class="stepsbtn" id="step3btn" onclick="showStep(3)">3</button>
-        <button class="stepsbtn" id="step4btn" onclick="showStep(4)">4</button>
-        <button class="stepsbtn" id="step5btn" onclick="showStep(5)">5</button>
+        <button class="stepsbtn default enabled" id="btn1" onclick="showStep(1)">1</button>
+        
+        <button class="stepsbtn" id="btn2" onclick="showStep(2)">2</button>
+        <button class="stepsbtn" id="btn3" onclick="showStep(3)">3</button>
+        <button class="stepsbtn" id="btn4" onclick="showStep(4)">4</button>
+        <button class="stepsbtn" id="btn5" onclick="showStep(5)">5</button>
     </div>
       <div class="step-content default" id="step1">
-            <select name="" id="cinemasSelect">
+            <select name="" id="cinemasSelect" class="selectoptions">
                 <option value="SpotChoueifat">The Spot Choueifat</option>
                 <option value="SpotSaida">The Spot Saida</option>
             </select>
             <button class="next" onclick="completeStep()">Submit Step 1</button>
         </div>
          <div class="step-content" id="step2">
-            <select name="" id="movieselect">
+            <select name="" id="movieselect" class="selectoptions">
                 <option value="TheRunningMan">The Running Man</option>
                 <option value="Predator:Badlands">Predator: Badlands</option>
                 <option value="HardaBasht">Hardabasht</option>
@@ -79,7 +81,8 @@
             <button class="next" onclick="completeStep()">Submit Step 2</button>
         </div>
         <div class="step-content" id="step3">
-            <select name="" id="timeselect">
+            <input type="date" id="dateselect">
+            <select name="" id="timeselect" class="selectoptions">
                 <option value="1:00">1:00 pm</option>
                 <option value="3:00">3:00 pm</option>
                 <option value="6:00">6:00 pm</option>
@@ -132,10 +135,94 @@
             <input type="text" id="PhoneNumber" placeholder="Enter Phone Number">
             <input type="text" id="CardNumber" placeholder="Enter your Card Number">
             <input type="text" id="CVV" placeholder="Enter your CVV">
-            <button>Confirm</button>
+            <button class="next" id="confirmbtn">Confirm</button>
+            <div id="confirmation"></div>
         </div>
+  </div>
+  <div class="box2">
+    <section class="gallery" id="gallery">
+      <div class="movie" id="movie">
+          <figure class="movie-card" data-title="The Running Man"
+            data-description="In a near-future society, The Running Man is the top-rated show on television—a deadly competition where contestants, known as Runners, must survive 30 days while being hunted by professional assassins, with every move broadcast to a bloodthirsty public and each day bringing a greater cash reward."
+            data-trailer-id="YOUR_TRAILER_ID_4">
+            <img src="imgs/therunningman.jpg" alt="The Running Man poster">
+            <figcaption>The Running Man</figcaption>
+            <div class="showtimes">1:00 • 3:00 • 6:00 • 9:00</div>
+            </figure>
+
+
+          <figure class="movie-card" data-title="Predator:Badlands"
+            data-description="A young Predator outcast from his clan finds an unlikely ally on his journey in search of the ultimate adversary."
+            data-trailer-id="YOUR_TRAILER_ID_4">
+            <img src="imgs/predator badlands.jpg" alt="Predator: Badlands poster">
+            <figcaption>Predator: Badlands</figcaption>
+            <div class="showtimes">1:00 • 3:00 • 6:00 • 9:00</div>
+           </figure>
+
+
+
+          <figure class="movie-card" data-title="HardaBasht"
+            data-description="A mother and her 3 boys live in the poor suburbs of Beirut. The youngest boy is religiously committed unlike his two older brothers who are drug dealers. They force their younger brother to work for them because of his clean reputation. A series of events bring chaos to the family and the whole neighborhood."
+            data-trailer-id="YOUR_TRAILER_ID_4">
+            <img src="imgs/hardabsht.jpg" alt="HardaBasht poster">
+            <figcaption>HardaBasht</figcaption>
+            <div class="showtimes">1:00 • 3:00 • 6:00 • 9:00</div>
+             </figure>
+
+
+
+          <figure class="movie-card" data-title="Jujutsu Kaisen:Execution"
+            data-description="A veil abruptly descends over the busy Shibuya area amid the bustling Halloween crowds, trapping countless civilians inside. Satoru Gojo, the strongest jujutsu sorcerer, steps into the chaos. But lying in wait are curse users and spirits scheming to seal him away. Yuji Itadori, accompanied by his classmates and other top-tier jujutsu sorcerers, enters the fray in an unprecedented clash of curses — the Shibuya Incident. In the aftermath, ten colonies across Japan are transformed into dens of curses in a plan orchestrated by Noritoshi Kamo, the most wicked sorcerer in history. As the deadly Culling Game starts, Special Grade sorcerer Yuta Okkotsu is assigned to carry out Yuji’s execution for his perceived crimes. The desperate confrontation between Satoru Gojo’s two beloved students comes to the big screen with an early preview. Be the first to experience Yuji and Yuta’s fateful battle with the hotly anticipated kickoff to Season 3 in theatres nationwide."
+            data-trailer-id="YOUR_TRAILER_ID_5">
+            <img src="imgs/jujutsu kaisen.jpg" alt="Jujutsu Kaisen:Execution poster">
+            <figcaption>Jujutsu Kaisen:Execution</figcaption>
+            <div class="showtimes">1:00 • 3:00 • 6:00 • 9:00</div>
+             </figure>
+
+
+
+          <figure class="movie-card" data-title="Playdate"
+            data-description="After being fired from his job, BRIAN, instantly becomes a reluctant stay-at-home dad to his step son. On his very first day, Brian accepts a random invitation for a playdate from another stay-at-home dad, JEFF. Jeff definitely seems a little bit…off. And as the playdate begins, Jeff turns out to be someone Brian never expected and they immediately have to go on the run from a very dangerous situation. It’s a playdate from hell as the two fathers and their sons spend the day trying not to get killed and solve a conspiracy."
+            data-trailer-id="YOUR_TRAILER_ID_6">
+            <img src="imgs/playdate.jpg" alt="Playdate poster">
+            <figcaption>Playdate</figcaption>
+            <div class="showtimes">1:00 • 3:00 • 6:00 • 9:00</div>
+            </figure>
+
+
+          <figure class="movie-card" data-title="El Selem W El Thoban"
+            data-description="In Snake and Ladder, love and ambition intertwine as Ahmed (Amr Youssef), a creative architect, and Malak (Asmaa Galal), a driven entrepreneur, struggle to reconcile who they’ve become with who they were together. When distance and new relationships—like Malak’s rekindled connection with Amir (Dhafer L’Abidine)—test their bond, both are forced to confront lost versions of themselves and the choices that shaped their paths."
+            data-trailer-id="GRm2_FzP1m0">
+            <img src="imgs/El Selem W El Thoban.jpg" alt="El Selem W El Thoban">
+            <figcaption>El Selem W El Thoban</figcaption>
+            <div class="showtimes">1:00 • 3:00 • 6:00 • 9:00</div>
+          </figure>
+
+    </section>
+  </div>
 </main>
-  
+    <div class="modal" id="card-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__dialog" role="document">
+      <button class="modal__close" id="modal-close" aria-label="Close dialog" data-close-modal>&times;</button>
+
+      <div class="modal__media">
+        <div id="trailer-container">
+          <iframe id="modal-trailer" width="100%" height="315" src="" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="modal__body">
+        <h3 id="modal-title">movie</h3>
+        <p id="modal-text"></p>
+         <button class="add-watchlist-btn">+ Add to Watchlist</button>
+          
+      </div>
+    </div>
+  </div>
   <footer>
   
     <nav class="main-nav" id="footernav">

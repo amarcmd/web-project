@@ -482,9 +482,13 @@ header {
   .hero-btn.prev { left: 8px; }
   .hero-btn.next { right: 8px; }
 }
-
-
-
+.movies-cat{
+  position: relative;
+  width:100%;
+  max-width: none;
+  margin: 0 auto;
+ 
+}
 
 
 .gallery{
@@ -528,41 +532,36 @@ header {
   margin-top:auto;
 
 }
-.movies-cat{
-  position: relative;
-  width:100%;
-  max-width: none;
-  margin: 0 auto;
- 
-}
-#movie.movie {
+
+.movie {
   display: flex;
   gap: var(--card-gap);
-  overflow-x: auto;       /* horizontal scroll only */
+  overflow-x: auto;        
   overflow-y: hidden;
-  padding: 0.25rem 0 0.75rem;  /* bottom padding so the scrollbar doesn't overlap cards */
+  padding: 0.25rem 0 0.75rem;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  scrollbar-gutter: stable both-edges; /* keeps layout steady when scrollbar appears */
+  scrollbar-gutter: stable both-edges;
   border-radius: 12px;
- 
 }
-#movie.movie::-webkit-scrollbar {
-  height: 10px;          /* horizontal scrollbar height */
+
+.movie::-webkit-scrollbar {
+  height: 10px;
 }
-#movie.movie::-webkit-scrollbar-track {
+.movie::-webkit-scrollbar-track {
   background: #18181c;
   border-radius: 999px;
 }
-#movie.movie::-webkit-scrollbar-thumb {
+.movie::-webkit-scrollbar-thumb {
   background: #3a3a44;
   border-radius: 999px;
 }
-#movie.movie::-webkit-scrollbar-thumb:hover {
+.movie::-webkit-scrollbar-thumb:hover {
   background: #5a5a66;
 }
+
 /* Firefox */
-#movie.movie {
+.movie {
   scrollbar-width: thin;
   scrollbar-color: #3a3a44 #18181c;
 }
@@ -573,7 +572,7 @@ header {
     (100% - (var(--cards-per-view) - 1) * var(--card-gap))
     / var(--cards-per-view)
   );                      /* makes nb cards fit exactly */
-  max-width: 240px;       /* optional cap so they don't get huge on ultrawide */
+  max-width: 240px;       
   background: #141419;
   border: 1px solid #22222b;
   border-radius: var(--card-radius);
@@ -581,6 +580,7 @@ header {
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
+ position: relative;
 }
 
 .movie-card img {
@@ -600,11 +600,37 @@ header {
 }
 @media (max-width: 900px) {
   :root { --cards-per-view: 3; --card-height: 230px; }
-  .arrow { display: none; } /* optional: hide arrows on mobile */
+  .arrow { display: none; } /* lal mobile */
 }
 @media (max-width: 560px) {
   :root { --cards-per-view: 2; --card-height: 210px; }
 }
+
+
+.rating-overlay {
+    position: absolute;
+    left: 0;
+    top: calc(var(--card-height) - 35px);/*over the image*/
+    width: 100%;
+    height: 35px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffd700;
+    text-align: center;
+    line-height: 35px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.25s ease-in-out;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.movie-card:hover .rating-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 
 
@@ -627,16 +653,19 @@ header {
 }
 
 
+
+
+
 .new .arrow{
     
   display:none;
 }
 
+.add-watchlist-btn.added {
 
-
-
-
-
+  color: white !important;
+  cursor: default !important;
+}
 
 
 .search-overlay {
