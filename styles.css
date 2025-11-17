@@ -26,6 +26,20 @@ a {
     text-decoration: none;
     transition: color 0.2s;
 }
+/* Profile icon beside search */
+.profile-icon a {
+  color: white;
+  font-size: 1.8rem;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon a:hover {
+  color: #a47dff; 
+}
+
+
 .modal {
   position: fixed;
   inset: 0;
@@ -135,7 +149,7 @@ header {
 .hamburger span {
     width: 25px;
     height: 3px;
-    background-color: var(--accent);
+    background-color: white;
     border-radius: 50px;
 }
 
@@ -194,21 +208,21 @@ header {
   transition: all 0.3s ease;
 }
 
-/* Hide search icon on desktop */
+/* Hide search icon */
 .search-icon {
   display: none;
 }
 .search-icon i {
-  color: var(--accent);  /* or any color you want */
+  color: white;  
 }
 
-/* Mobile & Tablet */
+
 @media (max-width: 768px) {
   .search {
     position: relative;
   }
 
-  /* Hide input by default on smaller screens */
+
   .search input {
     width: 0;
     opacity: 0;
@@ -217,7 +231,7 @@ header {
     pointer-events: none;
   }
 
-  /* Show search icon */
+
   .search-icon {
     display: inline-flex;
     background: none;
@@ -228,7 +242,7 @@ header {
     padding: 5px;
   }
 
-  /* When active (clicked), show input back */
+
   .search.active input {
     width: 180px;
     opacity: 1;
@@ -458,22 +472,21 @@ header {
 
 /* tablet */
 @media (max-width: 900px) {
-  .welcome-box { height: 430px; }
+  .welcome-box{
+    height:350px;
+  }
   .Welcome2 {
     left: 24px;
     bottom: 28px;
-    max-width: 70%;
+    max-width: 100%;
+    font-size:smaller;
   }
+
 }
 
 /* phone */
 @media (max-width: 600px) {
-  .welcome-box{
-    height: 380px;
-    width: 500px;
-    margin: 20px 0;
-    border-radius: 0;
-  }
+ 
   .Welcome2 {
     left: 16px;
     bottom: 24px;
@@ -560,7 +573,7 @@ header {
   background: #5a5a66;
 }
 
-/* Firefox */
+
 .movie {
   scrollbar-width: thin;
   scrollbar-color: #3a3a44 #18181c;
@@ -899,17 +912,17 @@ footer p {
  
 }
 
-/* Mobile: stack nicely */
+
 @media (max-width: 936px) {
 footer {
-    flex-direction: column;   /* now they stack vertically */
+    flex-direction: column; 
     height: auto;
     text-align: center;
     padding: 20px;
   }
 
   footer h1 {
-    position: static;         /* remove absolute center on mobile */
+    position: static;         
     transform: none;
     margin-top: 0.5rem;
   }
@@ -924,21 +937,24 @@ footer {
   }
  
 }
+@media (max-width:476px){
+   #footernav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+}
   
 
  .nav-desc {
-    position: absolute; /* position dropdown relative to nav */
-    
-    
-    flex-direction: column; /* stack links vertically */
-   
-    gap: 0; /* remove extra gap between links */
-    padding: 8px 0; /* vertical inner spacing */
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12); /* soft elevation shadow */
-    z-index: 1000; /* ensure dropdown appears above content */
+    position: absolute; 
+    flex-direction: column; 
+    gap: 0; 
+    padding: 8px 0; 
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12); 
+    z-index: 1000; 
   }
   .nav-desc a {
-    padding: 12px 16px; /* clickable padding for each link */
+    padding: 12px 16px; 
 
   }
   .nav-desc a:hover {
@@ -950,7 +966,12 @@ footer {
 
 /*about page style*/
 
-
+#imageabout{
+  width:100%;
+    height: auto;
+  object-fit: cover;      /* makes it crop instead of stretching */
+  object-position: center; /* shows the center of the image */
+}
 
 
 .about {
@@ -1006,4 +1027,11 @@ footer {
   width: 60px;
   height: 60px;
   margin-bottom: 15px;
+}
+@media (max-width:1113px){
+  #imageabout{
+    height: 380px;
+    object-fit: cover;
+    object-position: 50% 70%; /* horizontal center, vertical 70% */
+  }
 }

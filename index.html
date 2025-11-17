@@ -26,9 +26,8 @@
     <nav class="main-nav" id="mainNav">
       <ul>
         <li><a style="background-color: blueviolet;" href="index.html">Home</a></li>
-        <li><a href="bookings.html">Bookings</a></li>
-       <li><a href="profile.html">Profile</a></li>
-      
+        <li><a href="bookings.html">Bookings</a></li>   
+        <li><a href="about.html">About</a></li>
       </ul>
     </nav>
 
@@ -39,6 +38,7 @@
       <span></span> <!-- Line 3 of the hamburger menu -->
     </div>
 
+
     <div class="search">
       <input id="SearchInput" placeholder="Search movies, actors, genres..." />
       <button class="search-icon" id="searchToggle">
@@ -46,7 +46,9 @@
 
       </button>
     </div>
-
+    <div class="profile-icon">
+      <a href="profile.html"><i class="fa-solid fa-circle-user"></i></a>
+    </div>
 
   </header>
 
@@ -343,7 +345,7 @@
       <div class="modal__body">
         <h3 id="modal-title">movie</h3>
         <p id="modal-text"></p>
-         <button class="add-watchlist-btn">+ Add to Watchlist</button>
+         <button  class="add-watchlist-btn">+ Add to Watchlist</button>
           
       </div>
     </div>
@@ -356,8 +358,8 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
-        <li><a href="">Bookings</a></li>
-        <li><a href="">Profile</a></li>
+        <li><a href="bookings.html">Bookings</a></li>
+        <li><a href="Profile.html">Profile</a></li>
       </ul>
     </nav>
     <h1>ReelTime</h1>
@@ -367,7 +369,7 @@
 <div id="toast" class="toast"></div>
   <script src="script.js" defer></script>
   <script src="scriptJQ.js"></script>
-  <script>
+<script>
 document.querySelectorAll(".movie-card").forEach(card => {
     let rating = card.dataset.rating || "N/A";
 

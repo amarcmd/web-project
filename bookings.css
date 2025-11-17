@@ -124,8 +124,14 @@ main{
 /* selectosas */
 
 /* step5 */
+#reserveBtn:disabled {
+    background:#555;
+    opacity:.5;
+    cursor:not-allowed;
+}
 
 /*step 4*/
+
 *::-webkit-scrollbar{
     display:none;
 }
@@ -234,6 +240,10 @@ main{
     border: 2px solid #7a5cff !important;
     border-radius: 10px !important;
     cursor: pointer !important;
+}
+#dateselect::-webkit-calendar-picker-indicator { /*lal calendar icon*/
+    filter: invert(1); 
+    cursor: pointer;
 }
 /* step5 */
 #step5.step-content.default{
