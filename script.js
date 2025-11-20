@@ -24,10 +24,9 @@ let modalTitle = document.getElementById('modal-title');
 let modalText = document.getElementById('modal-text');
 let modalClose = document.getElementById('modal-close');
 
-// --- Map of Movie Titles to Trailer Embed URLs (Your manual links) ---
+
 const TRAILER_URLS = {
-    // 🎬 FIX: New, reliable embed ID for Barbie (Official Warner Bros. Trailer)
-    "Barbie": "https://www.youtube.com/embed/pBk4NYhWNMM",
+     "Barbie": "https://www.youtube.com/embed/pBk4NYhWNMM",
     "It Ends With Us": "https://www.youtube.com/embed/DLET_u31M4M", 
     "IT": "https://www.youtube.com/embed/xKJmEC5ieOk",
     "Jurassic World Rebirth": "https://www.youtube.com/embed/jan5CFWs9ic",
@@ -54,23 +53,23 @@ const TRAILER_URLS = {
 // Selecting all elements with the class 'movie-card'
 let figure = document.querySelectorAll('.movie-card'); 
 
-// --- Function to Close Modal ---
+
 function closeModal() {
     if (modal) {
         modal.classList.remove('open');
     }
     document.body.style.overflow = '';
     
-    // Stop the video by clearing the src
+    
     if (modalTrailer) {
         modalTrailer.src = ''; 
     }
 }
 
-const movieContainer = document.getElementById('movie');
+let movieContainer = document.getElementById('movie');
 
 
-// --- Event Listener for Clicking Movie Cards ---
+/*lama yekbus aal card*/
 figure.forEach(function (cardEl) {
     cardEl.onclick = function () {
         let card = cardEl.closest('figure');
@@ -100,14 +99,13 @@ figure.forEach(function (cardEl) {
             console.warn(`No trailer link found for movie: ${title}. Displaying content only.`);
         }
 
-        if (modal) { // Check before accessing modal properties
+        if (modal) { 
             modal.classList.add('open');
             document.body.style.overflow = 'hidden';
         }
     };
 });
 
-// --- Event Listeners for Closing Modal (Original safety checks maintained) ---
 if (modalClose) {
     modalClose.onclick = closeModal;
 }
@@ -137,35 +135,45 @@ if (modal) {
   function nextImage() { setHero(heroIndex + 1); }
   function prevImage() { setHero(heroIndex - 1); }
 
-// --- Add to Watchlist ---
-document.querySelectorAll('.add-watchlist-btn').forEach((btn) => {
-  btn.addEventListener('click', function (e) {
-    e.stopPropagation(); 
+$('.add-watchlist-btn').on('click', function () {
+  let userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  if (!userData) {
+    alert("Please log in to add to your watchlist.");
+    return;
+  }
 
-    const title = document.getElementById('modal-title').textContent.trim();
+  let movieTitle = $('#modal-title').text();
 
-    // Find original card from index.html
-    const originalCard = [...document.querySelectorAll('.movie-card')]
-        .find(c => c.dataset.title === title);
+  
+  let movieImage = $('.movie-card[data-title="' + movieTitle + '"] img').attr('src');
 
-    if (!originalCard) return;
+  let movieRating = $('.movie-card[data-title="' + movieTitle + '"]').data('rating') || 0;
 
-    const image = originalCard.querySelector("img").src;
-    const rating = originalCard.dataset.rating || "N/A";
+  let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
 
-    // Load list
-    let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+  let alreadyAdded = saved.some(
+    m => m.title === movieTitle && m.username === userData.username
+  );
 
-    const exists = watchlist.some(movie => movie.title === title);
 
-    if (!exists) {
-      watchlist.push({ title, image, rating });
-      localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  let movieObj = {
+    username: userData.username,
+    title: movieTitle,
+    image: movieImage,
+    rating: movieRating
+  };
 
-      this.textContent = "Added to Watchlist";
-      this.classList.add("added");
-    }
-  });
+  saved.push(movieObj);
+  localStorage.setItem('watchlist', JSON.stringify(saved));
+
+  /* Update sessionStorage*/
+  let updatedUser = { ...userData };
+  updatedUser.watchlist = saved.filter(m => m.username === userData.username);
+
+  sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+
+  alert(`"${movieTitle}" added to your watchlist.`);
+
 });
 
 
@@ -218,18 +226,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
  
 const container = document.getElementById('watchlist-container');
+let currentUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
 
-if (saved.length === 0) {
+// Filter only current user's watchlist
+let userWatchlist = saved.filter(movie => movie.username === currentUser.username);
+
+if (userWatchlist.length === 0) {
   container.innerHTML = "<p style='padding:20px;'>No movies added yet.</p>";
 } else {
-  container.innerHTML = `<div class="movie"></div>`;
-  const movieRow = container.querySelector(".movie");
+  container.innerHTML = `<div class="watchlist-grid"></div>`;
+  let movieRow = container.querySelector(".watchlist-grid");
 
-  saved.forEach(movie => {
+  userWatchlist.forEach(movie => {
     movieRow.innerHTML += `
-      <figure class="movie-card" data-rating="${movie.rating}">
-        <img src="${movie.image}" alt="${movie.title}">
+      <figure class="watchlist-card" data-rating="${movie.rating}">
+        <img src="${movie.image}" alt="${movie.title}" onerror="this.src='imgs/default.jpg'">
         <figcaption>${movie.title}</figcaption>
         <span class="rating-overlay">${movie.rating} / 5 ★</span>
       </figure>
@@ -237,5 +249,5 @@ if (saved.length === 0) {
   });
 }
 
-  
+
 

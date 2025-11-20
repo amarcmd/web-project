@@ -7,7 +7,11 @@
   <title>Watchlist</title>
   <link rel="shortcut icon" href="" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
-
+  <link rel="stylesheet" href="profile.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="moviesData.js"></script>
+  <script src="profile.js" defer></script>
+  <script src="watchlist.js" defer></script>
 </head>
 <body>
 <header>
@@ -33,31 +37,28 @@
             <span></span> <!-- Line 3 of the hamburger menu -->
     </div>
     
-     <div class="search">
-      <input id="SearchInput" placeholder="Search movies, actors, genres..." />
-       <button class="search-icon" id="searchToggle">
-        <i class="fa fa-search" aria-hidden="true"></i>
-
-      </button>
-    </div>
+     
 
   
    
   </header>
 
+  <div class="Profile-container">
+    
+  </div>
+
   <main>
-    <h2 style="padding:20px;">My Watchlist</h2>
     <div id="watchlist-container" class="gallery"></div>
   </main>
 
   
   <footer>
   
-    <nav class="main-nav" id="footernav">
+     <nav class="main-nav" id="footernav">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
-        <li><a href="">Bookings</a></li>
+        <li><a href="bookings.html">Bookings</a></li>
        
       </ul>
     </nav>
@@ -66,8 +67,8 @@
   </footer>
 
  
-   <div id="toast" class="toast"></div>
-     <script src="script.js" defer></script>
-  <script src="scriptJQ.js" defer></script>
+  
+     <!-- <script src="script.js" ></script> -->
+  <!-- <script src="scriptJQ.js" defer></script> -->
 </body>
 </html>

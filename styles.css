@@ -19,7 +19,9 @@ body {
     margin: 0;
     padding: 0;
     transition: background-color 0.3s;
-  flex: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 a {
     color: var(--text-color);
@@ -174,9 +176,7 @@ header {
         width: 180px;
     }
 
-    .login button {
-        padding: 6px 18px;
-    }
+   
 }
 /* Default - large screens */
 .search {
@@ -351,7 +351,7 @@ header {
 }
 
 .login-button:hover {
-    background-color: #6d5ce6; 
+    background-color: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent)); 
 }
 
 .login-button:active {
@@ -857,12 +857,14 @@ header {
 
 footer {
   position: relative;
+  bottom: 0;
   display: flex;
   padding: 30px;
   align-items: center;
   background: var(--main-dark);  
-  height:100px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+ margin-top: auto;  /*lahata dal in b0ttom*/
+ width: 100%;
+ 
 }
 
 #footernav,

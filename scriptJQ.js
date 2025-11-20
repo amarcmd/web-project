@@ -39,9 +39,9 @@ $(function(){
 //login 
 
 let users = [
-    { username: "Tasneem", password: "AbdAlkareem" },
-    { username: "Amar", password: "444" },
-    { username: "roaa", password: "soloh" },
+    { username: "Tasneem", password: "AbdAlkareem" ,img:"https://robohash.org/Amar",email:"tasneem@gmail.com",id:2025001,watchlist:[]},
+    { username: "Amar", password: "444" ,img:"https://robohash.org/tasneem",email:"Amar444@gmail.com",id:2025002,watchlist:[]},
+    { username: "roaa", password: "soloh",img:"https://robohash.org/roaa",email:"roaasoloh@gmail.com",id:2025003,watchlist:[] },
 ];
 
 let currentUser = null;
@@ -60,26 +60,25 @@ $(document).ready(function () {
     }
 
     $('.login-form').on('submit', function (e) {
-        e.preventDefault(); // Stop page reload
+        e.preventDefault(); 
 
         const enteredUsername = $('#username').val().trim();
         const enteredPassword = $('#password').val();
 
         const matchedUser = users.find(user =>
             user.username === enteredUsername && user.password === enteredPassword
+            
         );
 
         if (matchedUser) {
             currentUser = matchedUser.username;
-            sessionStorage.setItem('loggedInUser', currentUser);
+           sessionStorage.setItem('loggedInUser', JSON.stringify(matchedUser));
 
             // Hide login panel
             $loginPanel.fadeOut(); // Smooth hide
 
-            // Clear inputs
-            $('#username, #password').val('');
 
-            // Load watchlist or show success
+           
             if (typeof loadWatchlist === 'function') {
                 loadWatchlist();
             } else {
@@ -87,6 +86,12 @@ $(document).ready(function () {
             }
         } else {
             alert("Invalid username or password");
+
+
+
+
+           
+
         }
     });
 });
