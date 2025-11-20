@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Watchlist</title>
   <link rel="shortcut icon" href="" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="profile.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -14,21 +15,20 @@
   <script src="watchlist.js" defer></script>
 </head>
 <body>
-<header>
-        <div class="site-left">
-      <div class="logo">RT</div>
-      <div class="site-name">ReelTime</div>
-    </div>
+  <header>
+      <div class="site-left">
+        <div class="logo">RT</div>
+        <div class="site-name">ReelTime</div>
+      </div>
 
- <!-- lala-->
-    <nav class="main-nav" id="mainNav">
-      <ul>
-        <li><a  href="index.html">Home</a></li>
-         <li><a href="bookings.html">Bookings</a></li>
-        <li><a style="background-color: blueviolet;" href="Profile.html">Profile</a></li>
-       
-      </ul>
-    </nav>
+
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bookings.html">Bookings</a></li>   
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
 
     
     <div class="hamburger" id="hamburger">
@@ -37,15 +37,17 @@
             <span></span> <!-- Line 3 of the hamburger menu -->
     </div>
     
-     
+     <div class="search">
+      <input id="SearchInput" placeholder="Search movies, actors, genres..." />
+       <button class="search-icon" id="searchToggle">
+        <i class="fa fa-search" aria-hidden="true"></i>
+
+      </button>
+    </div>
 
   
    
   </header>
-
-  <div class="Profile-container">
-    
-  </div>
 
   <main>
     <div id="watchlist-container" class="gallery"></div>

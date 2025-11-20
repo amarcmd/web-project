@@ -15,43 +15,41 @@
 
 </head>
 <body>
-<header>
-        <div class="site-left">
-      <div class="logo">RT</div>
-      <div class="site-name">ReelTime</div>
-    </div>
+  <header>
+      <div class="site-left">
+        <div class="logo">RT</div>
+        <div class="site-name">ReelTime</div>
+      </div>
 
-    <nav class="main-nav" id="mainNav">
-      <ul>
-        <li><a  href="index.html">Home</a></li>
-        <li><a style="background-color: blueviolet;" href="bookings.html">Bookings</a></li>
-        <li><a href="Profile.html">Profile</a></li>
-      </ul>
-    </nav>
 
-    
-    <div class="hamburger" id="hamburger">
-            <span></span> <!-- Line 1 of the hamburger menu -->
-            <span></span> <!-- Line 2 of the hamburger menu -->
-            <span></span> <!-- Line 3 of the hamburger menu -->
-    </div>
-    
-     <div class="search">
-      <input id="SearchInput" placeholder="Search movies, actors, genres..." />
-       <button class="search-icon" id="searchToggle">
-        <i class="fa fa-search" aria-hidden="true"></i>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bookings.html" style="background-color: blueviolet;">Bookings</a></li>   
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
 
-      </button>
-    </div>
 
-   
-    <div class="login">
-      <button>LOGIN</button>
+      <div class="hamburger" id="hamburger">
+        <span></span> <!-- Line 1 of the hamburger menu -->
+        <span></span> <!-- Line 2 of the hamburger menu -->
+        <span></span> <!-- Line 3 of the hamburger menu -->
+      </div>
 
-    </div>
 
-   
-  </header>
+      <div class="search">
+        <input id="SearchInput" placeholder="Search movies, actors, genres..." />
+        <button class="search-icon" id="searchToggle">
+          <i class="fa fa-search" aria-hidden="true"></i>
+
+        </button>
+      </div>
+      <div class="profile-icon">
+        <a href="profile.html"><i class="fa-solid fa-circle-user"></i></a>
+      </div>
+
+    </header>
 <main>
   <div class="box1">
     <div class="booking">
@@ -81,7 +79,7 @@
             <button class="next" onclick="completeStep()">Submit Step 2</button>
         </div>
         <div class="step-content" id="step3">
-            <input type="date" id="dateselect">
+            <input type="date" id="dateselect" class="selectoptions">
             <select name="" id="timeselect" class="selectoptions">
                 <option value="1:00">1:00 pm</option>
                 <option value="3:00">3:00 pm</option>
@@ -127,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            <button class="next" onclick="completeStep()">Submit Step 4</button>          
+            <button class="next" id="reserveBtn" disabled onclick="completeStep()">Reserve</button>          
         </div>
         <div class="step-content" id="step5">
             <input type="text" id="Name" placeholder="Enter Full Name">
@@ -136,6 +134,7 @@
             <input type="text" id="CardNumber" placeholder="Enter your Card Number">
             <input type="text" id="CVV" placeholder="Enter your CVV">
             <button class="next" id="confirmbtn">Confirm</button>
+            <div id="TotalPrice"></div>
             <div id="confirmation"></div>
         </div>
   </div>
@@ -228,10 +227,9 @@
     <nav class="main-nav" id="footernav">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="watchlist.html">Watchlist</a></li>
         <li><a href="about.html">About Us</a></li>
-        <li><a href="">Bookings</a></li>
-        <li><a href="">Profile</a></li>
+        <li><a href="bookings.html">Bookings</a></li>
+        <li><a href="Profile.html">Profile</a></li>
       </ul>
     </nav>
     <h1>ReelTime</h1>

@@ -1,19 +1,18 @@
 //bookings
+let selectedSeats = new Set();
+const SEAT_PRICE = 7;  //7$ l price la el seat
+
 $(function(){
     function appendSeats(seats, rowType ){
         const row= $("." + rowType)
         for(let i=1;i<=seats;i++){
             const seat= $("<div>")
             seat.addClass("seat");
-            seat.appendTo(row);
+            seat.attr("data-seat-id", rowType + "-" +i)
+            row.append(seat);
         }
     }
-    function selectSeats(){
-        const seat = $(".seat");
-        seat.on("click", function(){
-            $(this).toggleClass("selected");
-            });
-    }
+
     function getRandomSeats(seats,count){
         let shuffledSeats = seats.toArray().sort(()=> 0.5-Math.random());
         return shuffledSeats.slice(0,count);
@@ -33,8 +32,30 @@ $(function(){
     appendSeats(14, "second-last-row");
     appendSeats(12, "first-last-row");
 
-    selectSeats();
+   
     markRandomSeats(SEATS_RESERVED);
+    //for selecting seats
+ 
+
+    $(document).on("click", ".seat:not(.reserved)", function () {
+        $(this).toggleClass("selected");
+
+        const id = $(this).data("seat-id");
+
+        if ($(this).hasClass("selected")) {
+            selectedSeats.add(id);
+        } else {
+            selectedSeats.delete(id);
+        }
+
+        updateReserveBtn();
+    });
+
+    function updateReserveBtn() {
+        $("#reserveBtn").prop("disabled", selectedSeats.size === 0);
+    }
+
+    updateReserveBtn(); // disable at start
 
 //login 
 
@@ -112,6 +133,20 @@ $(document).ready(function () {
     }
     function completeStep(){
         const next=current+1;
+        if (current === 4) {
+        const count = selectedSeats.size;
+        const total = count * SEAT_PRICE;
+
+        $("#TotalPrice").html(`
+            <p><strong>Seats Selected:</strong> ${count}</p>
+            <p><strong>Total Price:</strong> $${total}</p>
+            <hr>
+        `);
+
+        // Store totals so Step 5 can save them
+        sessionStorage.setItem("selectedSeats", JSON.stringify([...selectedSeats]));
+        sessionStorage.setItem("totalPrice", total);
+        }
         if(next<=5){
             const nextBtn=$("#btn"+next);
             nextBtn.addClass("enabled");
@@ -120,6 +155,7 @@ $(document).ready(function () {
             showStep(next);
         }
     }
+
 // confirm booing
 $("#confirmbtn").on("click", function () {
     let user = sessionStorage.getItem("loggedInUser");
@@ -128,6 +164,12 @@ $("#confirmbtn").on("click", function () {
     const date = $("#dateselect").val();
     const time = $("#timeselect").val();
     const name = $("#Name").val();
+    const card = $("#CardNumber").val();
+    const cvv = $("#CVV").val();
+    const phone =$("#PhoneNumber").val();
+    const seats = JSON.parse(sessionStorage.getItem("selectedSeats")) || [];
+    const price = sessionStorage.getItem("totalPrice") || 0;
+
     if (!user) {
         $("#confirmation").html(
             `<span>You must be logged in to confirm a booking.</span>`
@@ -135,10 +177,28 @@ $("#confirmbtn").on("click", function () {
         return;
     }
 
-    if (!name || !date) {
+    if (!name.trim()) {
+        $("#confirmation").html(`<span style="color:red">Please enter your full name.</span>`);
+        return;  
+    }
+    if(!phone.trim()){
+         $("#confirmation").html(`<span style="color:red">Please enter your Phone Number.</span>`);
+        return;  
+    }
+    if (!card.trim()) {
+        $("#confirmation").html(`<span style="color:red">Please enter your card number.</span>`);
+        return;  
+    }
+    if (!cvv.trim()) {
+        $("#confirmation").html(`<span style="color:red">Please enter your CVV.</span>`);
+        return;  
+    }
+    // byekhdo aa step 3
+    if (!date) {
         $("#confirmation").html(
-            `<span>Please enter your name and choose a date.</span>`
+            `<span style="color:red">Please choose a date. Returning to Step 3...</span>`
         );
+        setTimeout(() => showStep(3), 800);
         return;
     }
 
@@ -160,6 +220,8 @@ $("#confirmbtn").on("click", function () {
             <li><strong>Date:</strong> ${date}</li>
             <li><strong>Time:</strong> ${time}</li>
             <li><strong>Cinema:</strong> ${cinema}</li>
+            <li><strong>Seats:</strong> ${seats.join(", ")}</li>
+            <li><strong>Total Price:</strong> $${price}</li>
         </ul>
         <p style="color:#7a5cff;">Enjoy your movie!</p>
     `);
