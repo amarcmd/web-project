@@ -135,50 +135,9 @@ if (modal) {
   function nextImage() { setHero(heroIndex + 1); }
   function prevImage() { setHero(heroIndex - 1); }
 
-$('.add-watchlist-btn').on('click', function () {
-  let userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
-  if (!userData) {
-    alert("Please log in to add to your watchlist.");
-    return;
-  }
-
-  let movieTitle = $('#modal-title').text();
-
-  
-  let movieImage = $('.movie-card[data-title="' + movieTitle + '"] img').attr('src');
-
-  let movieRating = $('.movie-card[data-title="' + movieTitle + '"]').data('rating') || 0;
-
-  let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
-
-  let alreadyAdded = saved.some(
-    m => m.title === movieTitle && m.username === userData.username
-  );
 
 
-  let movieObj = {
-    username: userData.username,
-    title: movieTitle,
-    image: movieImage,
-    rating: movieRating
-  };
-
-  saved.push(movieObj);
-  localStorage.setItem('watchlist', JSON.stringify(saved));
-
-  /* Update sessionStorage*/
-  let updatedUser = { ...userData };
-  updatedUser.watchlist = saved.filter(m => m.username === userData.username);
-
-  sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-
-  alert(`"${movieTitle}" added to your watchlist.`);
-
-});
-
-
-
-
+//Search functionality 
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("SearchInput");
   const movieCards = document.querySelectorAll(".movie-card");
@@ -188,11 +147,10 @@ document.addEventListener("DOMContentLoaded", () => {
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase().trim();
 
-  
-    resultsContainer.innerHTML = "";
+     resultsContainer.innerHTML = "";
 
     if (query === "") {
-      overlay.style.display = ""; 
+      overlay.style.display = "none";
       return;
     }
 
@@ -203,19 +161,145 @@ document.addEventListener("DOMContentLoaded", () => {
       return title.includes(query) || description.includes(query);
     });
 
-    
+    // Display results
     if (matches.length > 0) {
       overlay.style.display = "flex";
+      
       matches.forEach(card => {
         const clone = card.cloneNode(true);
+        
+        clone.addEventListener('click', function() {
+          openMovieModal(this);
+        });
+        
         resultsContainer.appendChild(clone);
       });
     } else {
       overlay.style.display = "flex";
-      resultsContainer.innerHTML = `<p style="color:white; font-size:1.2em;">No movies found</p>`;
+      resultsContainer.innerHTML = `<div class="no-results">No movies found for "${query}"</div>`;
+    }
+  });
+overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.style.display = "none";
+      searchInput.value = "";
     }
   });
 
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.style.display === "flex") {
+      overlay.style.display = "none";
+      searchInput.value = "";
+    }
+  });
+});
+
+function openMovieModal(cardElement) {
+  let card = cardElement.closest('figure');
+  
+  if (!card) {
+    console.error("Could not find parent <figure> element for the clicked movie card.");
+    return;
+  }
+  
+  let titleEl = card.querySelector('figcaption');
+  let title = titleEl ? titleEl.textContent.trim() : card.getAttribute('data-title');
+  let text = card.getAttribute('data-description') || 'No movie description available yet.';
+  let rating = card.getAttribute('data-rating') || 'N/A';
+  
+  const youtubeEmbedUrl = TRAILER_URLS[title] || '';
+  
+ if (modalTitle) modalTitle.textContent = title;
+  if (modalText) modalText.textContent = text;
+ if (youtubeEmbedUrl && modalTrailer) {
+    const params = "?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1";
+    modalTrailer.src = youtubeEmbedUrl + params;
+    modalTrailer.style.display = 'block';
+  } else if (modalTrailer) {
+    modalTrailer.src = '';
+    modalTrailer.style.display = 'none';
+    console.warn(`No trailer link found for movie: ${title}. Displaying content only.`);
+  }
+ updateWatchlistButton(title);
+
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  
+  const searchOverlay = document.getElementById("searchOverlay");
+  if (searchOverlay) {
+    searchOverlay.style.display = "none";
+  }
+  
+  
+  const searchInput = document.getElementById("SearchInput");
+  if (searchInput) {
+    searchInput.value = "";
+  }
+}
+function updateWatchlistButton(movieTitle) {
+  const watchlistBtn = document.querySelector('.add-watchlist-btn');
+  if (watchlistBtn) {
+     const newWatchlistBtn = watchlistBtn.cloneNode(true);
+    watchlistBtn.parentNode.replaceChild(newWatchlistBtn, watchlistBtn);
+    
+    newWatchlistBtn.addEventListener('click', function() {
+      addToWatchlistFromModal(movieTitle);
+    });
+  }
+}
+function addToWatchlistFromModal(movieTitle) {
+  let userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  if (!userData) {
+    alert("Please log in to add to your watchlist.");
+    return;
+  }
+const originalCard = Array.from(document.querySelectorAll('.movie-card')).find(card => {
+    const titleEl = card.querySelector('figcaption');
+    const title = titleEl ? titleEl.textContent.trim() : card.getAttribute('data-title');
+    return title === movieTitle;
+  });
+
+  let movieImage = '';
+  let movieRating = '0';
+
+  if (originalCard) {
+    const imgElement = originalCard.querySelector('img');
+    movieImage = imgElement ? imgElement.src : '';
+    movieRating = originalCard.getAttribute('data-rating') || '0';
+  }
+
+  let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+
+  let alreadyAdded = saved.some(m => m.title === movieTitle && m.username === userData.username);
+  if (alreadyAdded) {
+    alert("This movie is already in your watchlist.");
+    return;
+  }
+
+  saved.push({
+    username: userData.username,
+    title: movieTitle,
+    image: movieImage,
+    rating: movieRating
+  });
+  localStorage.setItem('watchlist', JSON.stringify(saved));
+
+  let updatedUser = { ...userData };
+  updatedUser.watchlist = saved.filter(m => m.username === userData.username);
+  sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+
+  alert(`"${movieTitle}" added to your watchlist.`);
+ 
+  const watchlistBtn = document.querySelector('.add-watchlist-btn');
+  if (watchlistBtn) {
+    watchlistBtn.textContent = "✓ Added to Watchlist";
+    watchlistBtn.style.background = "#5f10a0";
+    watchlistBtn.disabled = true;
+  }
+}
   
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) {
@@ -223,13 +307,13 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.value = "";
     }
   });
-});
+
  
 const container = document.getElementById('watchlist-container');
 let currentUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
 
-// Filter only current user's watchlist
+// Filter bas ll user's watchlist
 let userWatchlist = saved.filter(movie => movie.username === currentUser.username);
 
 if (userWatchlist.length === 0) {

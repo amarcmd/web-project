@@ -55,14 +55,14 @@ $(function(){
         $("#reserveBtn").prop("disabled", selectedSeats.size === 0);
     }
 
-    updateReserveBtn(); // disable at start
+    updateReserveBtn(); 
 
 //login 
 
 let users = [
-    { username: "Tasneem", password: "AbdAlkareem" ,img:"https://robohash.org/Amar",email:"tasneem@gmail.com",id:2025001,watchlist:[]},
-    { username: "Amar", password: "444" ,img:"https://robohash.org/tasneem",email:"Amar444@gmail.com",id:2025002,watchlist:[]},
-    { username: "roaa", password: "soloh",img:"https://robohash.org/roaa",email:"roaasoloh@gmail.com",id:2025003,watchlist:[] },
+    { username: "Tasneem", password: "AbdAlkareem" ,img:"https://robohash.org/Amar",email:"tasneem@gmail.com",id:2025001,watchlist:[],booking:[],},
+    { username: "Amar", password: "444" ,img:"https://robohash.org/tasneem",email:"Amar444@gmail.com",id:2025002,watchlist:[],booking:[]},
+    { username: "roaa", password: "soloh",img:"https://robohash.org/roaa",email:"roaasoloh@gmail.com",id:2025003,watchlist:[],booking:[] },
 ];
 
 let currentUser = null;
@@ -102,16 +102,11 @@ $(document).ready(function () {
            
             if (typeof loadWatchlist === 'function') {
                 loadWatchlist();
-            } else {
-                console.log("Logged in as " + currentUser);
             }
         } else {
             alert("Invalid username or password");
 
 
-
-
-           
 
         }
     });
