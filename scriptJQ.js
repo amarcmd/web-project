@@ -79,37 +79,40 @@ $(document).ready(function () {
     } else {
         $loginPanel.css('display', 'flex');
     }
+$('.login-form').on('submit', function (e) {
+    e.preventDefault(); 
 
-    $('.login-form').on('submit', function (e) {
-        e.preventDefault(); 
+    const enteredUsername = $('#username').val().trim();
+    const enteredPassword = $('#password').val();
 
-        const enteredUsername = $('#username').val().trim();
-        const enteredPassword = $('#password').val();
+    const matchedUser = users.find(user =>
+        user.username === enteredUsername && user.password === enteredPassword
+    );
 
-        const matchedUser = users.find(user =>
-            user.username === enteredUsername && user.password === enteredPassword
-            
-        );
+    if (matchedUser) {
+        currentUser = matchedUser.username;
+        
+        // CRITICAL: Initialize the user's watchlist array from localStorage
+        let savedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+        let userWatchlist = savedWatchlist.filter(movie => movie.username === matchedUser.username);
+        
+        // Ensure the user object has the watchlist array
+        matchedUser.watchlist = userWatchlist;
+        
+        sessionStorage.setItem('loggedInUser', JSON.stringify(matchedUser));
 
-        if (matchedUser) {
-            currentUser = matchedUser.username;
-           sessionStorage.setItem('loggedInUser', JSON.stringify(matchedUser));
+        // Hide login panel
+        $loginPanel.fadeOut();
 
-            // Hide login panel
-            $loginPanel.fadeOut(); // Smooth hide
-
-
-           
-            if (typeof loadWatchlist === 'function') {
-                loadWatchlist();
-            }
-        } else {
-            alert("Invalid username or password");
-
-
-
+        console.log("User logged in with watchlist:", userWatchlist.length, "movies");
+        
+        if (typeof loadWatchlist === 'function') {
+            loadWatchlist();
         }
-    });
+    } else {
+        alert("Invalid username or password");
+    }
+});
 });
 
 });

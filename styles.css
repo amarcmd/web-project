@@ -1,5 +1,9 @@
 
 *{box-sizing:border-box}
+
+*::-webkit-scrollbar{
+    display:none;
+}
 :root {
     --dark-bg: #10101a; 
     --main-dark: #1e1e2d; 
@@ -75,6 +79,7 @@ header {
     background-color: var(--main-dark);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 10px 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     flex-wrap: wrap;
@@ -91,7 +96,7 @@ header {
     flex-shrink: 0;
 }
 
-.logo {
+/* .logo {
     width: 44px;
     height: 44px;
     border-radius: 8px;
@@ -100,7 +105,7 @@ header {
     align-items: center;
     justify-content: center;
     font-weight: 700;
-}
+} */
 
 
 
@@ -960,10 +965,10 @@ header {
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
-}
+} 
 
-.brand .logo {
-  font-size: 2em;
+.brand .logo img{
+  width: 70px;
 }
 
 .brand-name {
