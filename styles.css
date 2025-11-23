@@ -1535,7 +1535,7 @@ header {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: var(--accent-purple);
+    background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
     color: white;
     padding: 12px 20px;
     border-radius: 8px;
@@ -1549,6 +1549,7 @@ header {
 }
 
 #watchlist-toast.show {
+  background-color: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
     transform: translateY(0); /*tkon at the end of screen */
     opacity: 7;
 }

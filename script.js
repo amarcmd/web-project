@@ -26,14 +26,14 @@ let modalClose = document.getElementById('modal-close');
 
 
 const TRAILER_URLS = {
-     "Barbie": "https://www.youtube.com/embed/pBk4NYhWNMM",
+    "Barbie": "https://www.youtube.com/embed/pBk4NYhWNMM",
     "It Ends With Us": "https://www.youtube.com/embed/DLET_u31M4M", 
     "IT": "https://www.youtube.com/embed/xKJmEC5ieOk",
     "Jurassic World Rebirth": "https://www.youtube.com/embed/jan5CFWs9ic",
     "Split": "https://www.youtube.com/embed/Qsr6SgcKNiM",
     "White Chicks": "https://www.youtube.com/embed/aeVkbNka9HM",
     "SuperMan": "https://www.youtube.com/embed/Ox8ZLF6cGM0",
-    "The Conjuring": "https://www.youtube.com/embed/FSAz556s0fM",
+    "The conjuring 2": "https://www.youtube.com/embed/FSAz556s0fM",
     "Truth or Dare": "https://www.youtube.com/embed/BjRNY3u3bUw",
     "Avengers": "https://www.youtube.com/embed/eOrNdBpGMv8",
     "Countdown": "https://www.youtube.com/embed/t72R6wZ0zQ8",
@@ -42,12 +42,19 @@ const TRAILER_URLS = {
     "Avatar": "https://www.youtube.com/embed/nb_fFj_0rq8",
     "Extraction 2": "https://www.youtube.com/embed/Y274jZs5s7s",
     "The Discovery": "https://www.youtube.com/embed/z9j6WcdU-ts",
-    "The Running Man": "https://www.youtube.com/embed/TsZxBZN1PZQ",
     "Predator: Badlands": "https://www.youtube.com/embed/43R9l7EkJwE",
    "HardaBasht": "https://www.youtube.com/embed/Z2yUk7IaE9A",
     "Jujutsu Kaisen:Execution": "https://www.youtube.com/embed/oCIgbchrtu4",
     "Playdate": "https://www.youtube.com/embed/ooJ8bJt-Y9A",
-    "El Selem W El Thoban": "https://www.youtube.com/embed/NwlRuumdJEA"
+    "El Selem W El Thoban": "https://www.youtube.com/embed/NwlRuumdJEA",
+    "the litle stranger": "https://www.youtube.com/embed/iPDA7Z1c-Eg",
+    "Black Phone2": "https://www.youtube.com/embed/v0kqkRZHqk4",
+    "Turno nocturno":"https://www.youtube.com/embed/M7oU0ocIyrc",
+    "The Forest":"https://www.youtube.com/embed/lBgKi0XVn4A",
+    "Mirrors 2":"https://www.youtube.com/embed/5HZ9WM2W0pg",
+    "One Battle After Another":"https://www.youtube.com/embed/feOQFKv2Lw4",
+    "Countdown":"https://www.youtube.com/embed/t72R6wZ0zQ8",
+    "Sovereign":"https://www.youtube.com/embed/55tuwgvaMHY",
 };
 
 // Selecting all elements with the class 'movie-card'
