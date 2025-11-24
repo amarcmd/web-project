@@ -1562,7 +1562,48 @@ header {
     background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
 }
 
+/* for comments */
+.comments-section {
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+}
 
+.comments-section h4 {
+  margin-bottom: 0.75rem;
+}
+
+.comment {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.comment-user {
+  font-weight: 600;
+}
+
+.comment-rating {
+  font-family: system-ui, sans-serif;
+}
+
+.comment-text {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.no-comments {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
 
 
 

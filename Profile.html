@@ -5,43 +5,54 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Watchlist</title>
- <link rel="shortcut icon" href="imgs/movie.png" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="shortcut icon" href="imgs/movie.png" type="image/x-icon">
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="moviesData.js"></script>
   <script src="profile.js" defer></script>
   <script src="watchlist.js" defer></script>
 </head>
 <body>
-<header>
+ <header>
     
      <div class="brand">
         <div class="logo"><img src="imgs/movie.png" alt=""></div>
         <span class="brand-name">ReelTime</span>
       </div>
- <!-- lala-->
+
+
     <nav class="main-nav" id="mainNav">
       <ul>
-        <li><a  href="index.html">Home</a></li>
-         <li><a href="bookings.html">Bookings</a></li>
-        <li><a s href="about.html">About</a></li>
-       
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bookings.html">Bookings</a></li>   
+        <li><a href="about.html">About</a></li>
       </ul>
     </nav>
 
-    
-    <div class="hamburger" id="hamburger">
-            <span></span> <!-- Line 1 of the hamburger menu -->
-            <span></span> <!-- Line 2 of the hamburger menu -->
-            <span></span> <!-- Line 3 of the hamburger menu -->
-    </div>
-    
-     
 
-  
-   
+    <div class="hamburger" id="hamburger">
+      <span></span> <!-- Line 1 of the hamburger menu -->
+      <span></span> <!-- Line 2 of the hamburger menu -->
+      <span></span> <!-- Line 3 of the hamburger menu -->
+    </div>
+
+
+    <div class="search">
+      <input id="SearchInput" placeholder="Search movies, actors, genres..." />
+      <button class="search-icon" id="searchToggle">
+        <i class="fa fa-search" aria-hidden="true"></i>
+
+      </button>
+    </div>
+    <div class="profile-icon">
+      <a style="color: #895bf5; " href="profile.html"><i class="fa-solid fa-circle-user"></i></a>
+    </div>
+
   </header>
+
 
   <div class="Profile-container">
     
@@ -58,6 +69,15 @@
         </div>
         <div class="rated-grid-modern" id="modern-rated"></div>
     </div>
+    <!-- Booked Section -->
+    <div class="booked-section">
+      <div class="section-header">
+        <div class="section-title">My Booked Movies</div>
+        <div class="watchlist-count" id="booked-counter">0 bookings</div>
+      </div>
+      <div class="booked-grid-modern" id="booked-grid"></div>
+    </div>
+
 </main>
   
 

@@ -1,0 +1,503 @@
+{
+  "categories": [
+    {
+      "id": "new-releases",
+      "name": "New Releases",
+      "movies": [
+        {
+          "id": "jurassic-world-rebirth",
+          "title": "Jurassic World Rebirth",
+          "description": "The next chapter in the Jurassic saga brings humanity back to the brink.",
+          "rating": 4.0,
+          "trailerId": "YOUR_TRAILER_ID_4",
+          "image": "imgs/jurrasic%20world.jpg",
+          "comments": [
+            {
+              "user": "user1",
+              "rating": 5,
+              "text": "Great movie, def recommend!"
+            },
+            {
+              "user": "movieFan99",
+              "rating": 4,
+              "text": "Loved the dinos, story was solid."
+            },
+            {
+              "user": "dinoLover",
+              "rating": 5,
+              "text": "Best Jurassic movie in a while."
+            }
+          ]
+        },
+        {
+          "id": "superman",
+          "title": "SuperMan",
+          "description": "A new DC universe take that mixes epic action, humor and heart.",
+          "rating": 3.5,
+          "trailerId": "YOUR_TRAILER_ID_4",
+          "image": "imgs/superman.png",
+          "comments": [
+            {
+              "user": "kryptonite",
+              "rating": 4,
+              "text": "Fun to watch, not perfect but enjoyable."
+            },
+            {
+              "user": "heroFan",
+              "rating": 3,
+              "text": "Action was good, story could be better."
+            }
+          ]
+        },
+        {
+          "id": "bad-guys",
+          "title": "Bad Guys",
+          "description": "The now reformed Bad Guys get dragged into a globe-trotting heist led by a new crew.",
+          "rating": 3.8,
+          "trailerId": "YOUR_TRAILER_ID_4",
+          "image": "imgs/BadGuys.png",
+          "comments": [
+            {
+              "user": "cartoonFan",
+              "rating": 4,
+              "text": "Really funny and stylish animation."
+            },
+            {
+              "user": "kidsDad",
+              "rating": 4,
+              "text": "Kids loved it, I had fun too."
+            }
+          ]
+        },
+        {
+          "id": "split",
+          "title": "Split",
+          "description": "Three girls are kidnapped by a man with multiple distinct personalities.",
+          "rating": 4.5,
+          "trailerId": "YOUR_TRAILER_ID_5",
+          "image": "imgs/split.jpg",
+          "comments": [
+            {
+              "user": "thrillerAddict",
+              "rating": 5,
+              "text": "Super intense, acting was incredible."
+            },
+            {
+              "user": "nightOwl",
+              "rating": 4,
+              "text": "Creepy and interesting, ending was wild."
+            },
+            {
+                "user": "movieBuff",
+                "rating": 4,
+                "text": "Great psychological thriller, well done."
+            }
+
+          ]
+        },
+        {
+          "id": "white-chicks",
+          "title": "White Chicks",
+          "description": "Two disgraced FBI agents go deep undercover as two spoiled heiresses.",
+          "rating": 4.9,
+          "trailerId": "YOUR_TRAILER_ID_6",
+          "image": "imgs/white%20chicks.jpg",
+          "comments": [
+            {
+              "user": "comedyQueen",
+              "rating": 5,
+              "text": "I still laugh every time I watch this."
+            },
+            {
+              "user": "throwback",
+              "rating": 5,
+              "text": "Classic comedy, never gets old."
+            },
+            {
+              "user": "funnyGuy",
+              "rating": 4,
+              "text": "watched it again last weekend, still hilarious!"
+            }
+          ]
+        },
+        {
+          "id": "barbie",
+          "title": "Barbie",
+          "description": "Life in Barbie Land is perfect until a full-on existential crisis shakes everything.",
+          "rating": 4.6,
+          "trailerId": "GRm2_FzP1m0",
+          "image": "imgs/barbie.jpg",
+          "comments": [
+            {
+              "user": "pinkVibes",
+              "rating": 5,
+              "text": "Funny, smart and emotional at the same time."
+            },
+            {
+              "user": "existential",
+              "rating": 4,
+              "text": "Way deeper than I expected, loved the style."
+            },
+            {
+                "user": "movieLover",
+                "rating": 5,
+                "text": "A unique take on a classic character, highly recommend!"
+            }
+          ]
+        },
+        {
+          "id": "it-ends-with-us",
+          "title": "It Ends With Us",
+          "description": "A dramatic love story based on the best-selling novel.",
+          "rating": 3.7,
+          "trailerId": "--rV9wXzIeE",
+          "image": "imgs/it-ends-with-us.jpg",
+          "comments": [
+            {
+              "user": "bookFan",
+              "rating": 4,
+              "text": "Good adaptation, but the book still hits harder."
+            },
+            {
+              "user": "romanceLover",
+              "rating": 3,
+              "text": "Emotional but a bit rushed in parts."
+            }
+          ]
+        },
+        {
+          "id": "the-discovery",
+          "title": "The Discovery",
+          "description": "A story about exploring love, loss and what comes after.",
+          "rating": 3.1,
+          "trailerId": "",
+          "image": "imgs/the%20discovery.jpg",
+          "comments": [
+            {
+              "user": "deepThinker",
+              "rating": 3,
+              "text": "Interesting idea, pacing was slow though."
+            },
+            {
+              "user": "indieFan",
+              "rating": 4,
+              "text": "Not for everyone, but I liked the mood."
+            }
+          ]
+        },
+        {
+          "id": "interstellar",
+          "title": "Interstellar",
+          "description": "Explorers travel through a wormhole in space in a desperate mission to save humanity.",
+          "rating": 5.0,
+          "trailerId": "--rV9wXzIeE",
+          "image": "imgs/interstellar.jpg",
+          "comments": [
+            {
+              "user": "spaceNerd",
+              "rating": 5,
+              "text": "Masterpiece. Music, visuals, story, everything."
+            },
+            {
+              "user": "crybaby",
+              "rating": 5,
+              "text": "I cry at the father-daughter scenes every time."
+            }
+          ]
+        },
+        {
+          "id": "extraction-2",
+          "title": "Extraction 2",
+          "description": "A black ops mercenary attempts a dangerous rescue that uncovers a dark conspiracy.",
+          "rating": 2.9,
+          "trailerId": "",
+          "image": "imgs/extraction2.webp",
+          "comments": [
+            {
+              "user": "actionFan",
+              "rating": 3,
+              "text": "Action scenes were fire, story was ok."
+            },
+            {
+              "user": "casualViewer",
+              "rating": 2,
+              "text": "Good for background watching, nothing special."
+            }
+          ]
+        },
+        {
+          "id": "avengers",
+          "title": "Avengers",
+          "description": "Earth's mightiest heroes must work together to stop a global threat.",
+          "rating": 4.7,
+          "trailerId": "--rV9wXzIeE",
+          "image": "imgs/avengers.jpg",
+          "comments": [
+            {
+              "user": "marvelGeek",
+              "rating": 5,
+              "text": "One of the best superhero team-ups ever."
+            },
+            {
+              "user": "cinemaDude",
+              "rating": 4,
+              "text": "Huge moments, great fun in the theater."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horror",
+      "name": "Horror",
+      "movies": [
+        {
+          "id": "it",
+          "title": "IT",
+          "description": "A group of kids face an ancient shape-shifting evil that feeds on fear.",
+          "rating": 4.6,
+          "trailerId": "FnCdOQsN5ZE",
+          "image": "imgs/it.jpg",
+          "comments": [
+            {
+              "user": "spookyGal",
+              "rating": 5,
+              "text": "Actually scary, Pennywise is nightmare fuel."
+            },
+            {
+              "user": "losersClub",
+              "rating": 4,
+              "text": "Loved the kids, great cast and atmosphere."
+            }
+          ]
+        },
+        {
+          "id": "truth-or-dare",
+          "title": "Truth or Dare",
+          "description": "A simple game of truth or dare turns deadly for a group of friends.",
+          "rating": 4.9,
+          "trailerId": "",
+          "image": "imgs/truth%20or%20dare.jpg",
+          "comments": [
+            {
+              "user": "horrorFan",
+              "rating": 5,
+              "text": "Cheesy but fun, perfect with friends."
+            },
+            {
+              "user": "movieNight",
+              "rating": 4,
+              "text": "Not super deep, but entertaining."
+            }
+          ]
+        },
+        {
+          "id": "the-litle-stranger",
+          "title": "the litle stranger",
+          "description": "A country doctor becomes wrapped up in the dark history of a decaying estate.",
+          "rating": 2.9,
+          "trailerId": "",
+          "image": "imgs/the%20litle%20stranger.png",
+          "comments": [
+            {
+              "user": "gothicFan",
+              "rating": 3,
+              "text": "Slow burn gothic vibes, not very scary."
+            },
+            {
+              "user": "sleepy",
+              "rating": 2,
+              "text": "Too slow for me, but well shot."
+            }
+          ]
+        },
+        {
+          "id": "black-phone-2",
+          "title": "Black Phone2",
+          "description": "The Grabber torments his former victim and family from beyond the grave.",
+          "rating": 4.5,
+          "trailerId": "",
+          "image": "imgs/Black%20Phone2.png",
+          "comments": [
+            {
+              "user": "phoneRings",
+              "rating": 5,
+              "text": "Really tense, I jumped a few times."
+            },
+            {
+              "user": "scared",
+              "rating": 4,
+              "text": "Good sequel, creepy atmosphere."
+            }
+          ]
+        },
+        {
+          "id": "turno-nocturno",
+          "title": "Turno nocturno",
+          "description": "A new nurse faces the terrifying legend of a ghostly nurse in a haunted hospital.",
+          "rating": 3.7,
+          "trailerId": "",
+          "image": "imgs/Turno%20nocturno.png",
+          "comments": [
+            {
+              "user": "nightShift",
+              "rating": 4,
+              "text": "Cool premise, some really spooky scenes."
+            },
+            {
+              "user": "latinHorror",
+              "rating": 3,
+              "text": "Good atmosphere but some parts dragged."
+            }
+          ]
+        },
+        {
+          "id": "the-forest",
+          "title": "The Forest",
+          "description": "A woman searches Japan's infamous Suicide Forest for her missing sister.",
+          "rating": 4.0,
+          "trailerId": "",
+          "image": "imgs/Forest.png",
+          "comments": [
+            {
+              "user": "lostSoul",
+              "rating": 4,
+              "text": "Creepy setting, I liked the mystery."
+            },
+            {
+              "user": "forestWalker",
+              "rating": 3,
+              "text": "Had potential, ending was okay."
+            }
+          ]
+        },
+        {
+          "id": "the-conjuring-2",
+          "title": "The conjuring 2",
+          "description": "Ed and Lorraine Warren investigate a terrifying haunting in north London.",
+          "rating": 4.4,
+          "trailerId": "",
+          "image": "imgs/the%20conjuring%202.png",
+          "comments": [
+            {
+              "user": "valak",
+              "rating": 5,
+              "text": "One of the scariest in the series for me."
+            },
+            {
+              "user": "ghostHunter",
+              "rating": 4,
+              "text": "Great jumpscares, strong performances."
+            }
+          ]
+        },
+        {
+          "id": "mirrors-2",
+          "title": "Mirrors 2",
+          "description": "A night watchman is haunted by deadly visions in the mirrors of a department store.",
+          "rating": 2.5,
+          "trailerId": "",
+          "image": "imgs/Mirrors%202.png",
+          "comments": [
+            {
+              "user": "mirrorMirror",
+              "rating": 3,
+              "text": "Some cool ideas but not very scary."
+            },
+            {
+              "user": "horrorCasual",
+              "rating": 2,
+              "text": "Watchable once, nothing special."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "action-dramas",
+      "name": "Action Dramas",
+      "movies": [
+        {
+          "id": "one-battle-after-another",
+          "title": "One Battle After Another",
+          "description": "A former revolutionary and his daughter face the consequences of his past.",
+          "rating": 2.0,
+          "trailerId": "",
+          "image": "imgs/One%20Battle%20After%20Another.png",
+          "comments": [
+            {
+              "user": "dramaFan",
+              "rating": 2,
+              "text": "Interesting idea but kind of messy."
+            },
+            {
+              "user": "leoFan",
+              "rating": 3,
+              "text": "Cast did a good job even if story was weak."
+            }
+          ]
+        },
+        {
+          "id": "countdown",
+          "title": "Countdown",
+          "description": "A mysterious app counts down to its users' deaths, turning their lives into a race against time.",
+          "rating": 3.0,
+          "trailerId": "--rV9wXzIeE",
+          "image": "imgs/countdown.jpg",
+          "comments": [
+            {
+              "user": "appGuy",
+              "rating": 3,
+              "text": "Cool concept, decent execution."
+            },
+            {
+              "user": "horrorTech",
+              "rating": 3,
+              "text": "Fun if you don't think too hard about the logic."
+            }
+          ]
+        },
+        {
+          "id": "avatar",
+          "title": "Avatar",
+          "description": "A marine on Pandora becomes torn between following orders and protecting his new home.",
+          "rating": 5.0,
+          "trailerId": "--rV9wXzIeE",
+          "image": "imgs/avatar.jpg",
+          "comments": [
+            {
+              "user": "pandora",
+              "rating": 5,
+              "text": "Visuals are insane, still holds up."
+            },
+            {
+              "user": "3Dlover",
+              "rating": 5,
+              "text": "Best 3D experience I've had in a cinema."
+            }
+          ]
+        },
+        {
+          "id": "sovereign",
+          "title": "Sovereign",
+          "description": "A father and son who follow a radical belief system face the fallout after a violent confrontation.",
+          "rating": 4.8,
+          "trailerId": "--rV9wXzIeE",
+          "image": "imgs/Sovereign.png",
+          "comments": [
+            {
+              "user": "trueCrime",
+              "rating": 5,
+              "text": "Tense and thought-provoking, really stuck with me."
+            },
+            {
+              "user": "dramaWatcher",
+              "rating": 4,
+              "text": "Great acting and a heavy story."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

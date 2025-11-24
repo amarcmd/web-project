@@ -23,6 +23,7 @@ function loadModernProfile() {
     renderModernProfile(user);
     loadModernWatchlist(user);
     loadRatedMovies(user);
+    loadBookedMovies(user);
 }
 
 function renderModernProfile(user) {
@@ -44,6 +45,10 @@ function renderModernProfile(user) {
                         <div class="stat-item">
                             <span class="stat-number" id="rated-count">0</span>
                             <span class="stat-label">Movies Rated</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-bookings">0</span>
+                            <span class="stat-label">Total Bookings</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number" id="member-since">2024</span>
@@ -68,7 +73,17 @@ function renderModernProfile(user) {
                 </div>
                 <div class="rated-grid-modern" id="modern-rated"></div>
             </div>
+            <div class="booked-section">
+                <div class="section-header">
+                    <div class="section-title">My Booked Movies</div>
+                    <div class="watchlist-count" id="booked-counter">0 bookings</div>
+                </div>
+                <div class="booked-grid-modern" id="booked-grid"></div>
+            </div>
         </div>
+        </div>
+
+
     `;
     
     $('main').html(profileHTML);
@@ -199,8 +214,57 @@ function loadRatedMovies(user) {
         `);
     }
 }
+function loadBookedMovies(user) {
+    const allBookings = JSON.parse(localStorage.getItem('bookings')) || {};
+    const userBookings = allBookings[user.username] || [];
+
+    const $bookedGrid = $('#booked-grid');
+    const $bookedCounter = $('#booked-counter');
+    const bookedCount = userBookings.length;
+    $('#total-bookings').text(bookedCount);
+    $bookedCounter.text(
+        bookedCount + (bookedCount === 1 ? ' booking' : ' bookings')
+    );
+
+    if (userBookings.length === 0) {
+        $bookedGrid.html(`
+            <div class="empty-booked">
+                <div class="empty-rated-icon">🎟️</div>
+                <h3>No Bookings Yet</h3>
+                <p>Book a movie from the bookings page and it will appear here.</p>
+            </div>
+        `);
+        return;
+    }
+
+    const bookedHTML = userBookings.map(b => `
+        <div class="booked-card-modern">
+            <div class="booked-header">
+                <h3 class="booked-movie-title">${b.movie}</h3>
+                <span class="booked-cinema">${b.cinema}</span>
+            </div>
+            <div class="booked-meta">
+                <span><strong>Date:</strong> ${b.date}</span>
+                <span><strong>Time:</strong> ${b.time}</span>
+            </div>
+            <div class="booked-extra">
+                ${b.seats && b.seats.length ? `<div><strong>Seats:</strong> ${Array.isArray(b.seats) ? b.seats.join(', ') : b.seats}</div>` : ''}
+                ${b.price ? `<div><strong>Total:</strong> $${b.price}</div>` : ''}
+            </div>
+        </div>
+    `).join('');
+
+    $bookedGrid.html(bookedHTML);
+}
+
 
 function openLargeRatingModal(movieTitle, currentRating = 0) {
+    const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    const savedRatingsAll = JSON.parse(localStorage.getItem('movieRatings')) || {};
+    const userRatingsAll = userData ? (savedRatingsAll[userData.username] || {}) : {};
+    const existingRatingData = userRatingsAll[movieTitle];
+    const existingComment = existingRatingData ? (existingRatingData.comment || "") : "";
+
     const modalHTML = `
         <div class="rating-modal-overlay" id="largeRatingModal">
             <div class="rating-modal-large">
@@ -220,7 +284,11 @@ function openLargeRatingModal(movieTitle, currentRating = 0) {
                 <div class="rating-value-large" id="largeRatingValue">
                     ${currentRating > 0 ? `Current Rating: ${currentRating}/5` : 'Select your rating'}
                 </div>
-                
+                <div class="rating-comment-wrapper">
+                    <label for="largeRatingComment">Your comment (optional)</label>
+                    <textarea id="largeRatingComment" rows="3" placeholder="What did you think of this movie?">${existingComment}</textarea>
+                </div>
+
                 <div class="rating-actions-large">
                     <button class="btn-rating-large btn-cancel-large" id="cancelLargeRating">Cancel</button>
                     <button class="btn-rating-large btn-confirm-large" id="confirmLargeRating" 
@@ -264,11 +332,12 @@ function openLargeRatingModal(movieTitle, currentRating = 0) {
     });
     
     $('#confirmLargeRating').click(() => {
-        if (selectedRating > 0) {
-            saveMovieRating(movieTitle, selectedRating);
-            $('#largeRatingModal').remove();
-            showToast(`"${movieTitle}" rated ${selectedRating}/5 stars!`, 'rated');
-        }
+         if (selectedRating > 0) {
+        const commentText = $('#largeRatingComment').val().trim();  // 👈 get comment
+        saveMovieRating(movieTitle, selectedRating, commentText);   // 👈 pass it
+        $('#largeRatingModal').remove();
+        showToast(`"${movieTitle}" rated ${selectedRating}/5 stars!`, 'rated');
+    }
     });
     
     // Close modal when clicking outside
@@ -297,29 +366,49 @@ function highlightLargeStars(rating) {
     });
 }
 
-function saveMovieRating(movieTitle, rating) {
+function saveMovieRating(movieTitle, rating, commentText = "") {
     const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    if (!userData) return;
+
     let savedRatings = JSON.parse(localStorage.getItem('movieRatings')) || {};
-    
+
     if (!savedRatings[userData.username]) {
         savedRatings[userData.username] = {};
     }
-    
+
     // Get movie image from watchlist
     const savedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-    const movieFromWatchlist = savedWatchlist.find(m => m.title === movieTitle && m.username === userData.username);
+    const movieFromWatchlist = savedWatchlist.find(
+        m => m.title === movieTitle && m.username === userData.username
+    );
     const movieImage = movieFromWatchlist ? movieFromWatchlist.image : 'imgs/default-movie.jpg';
-    
-    // Save rating
+
+    // Save rating + comment for this user
     savedRatings[userData.username][movieTitle] = {
         rating: rating,
         image: movieImage,
-        dateRated: new Date().toISOString()
+        dateRated: new Date().toISOString(),
+        comment: commentText
     };
-    
+
     localStorage.setItem('movieRatings', JSON.stringify(savedRatings));
-    
-    // Refresh both sections
+
+    // Also store comment in a global per-movie store so the modal can show it
+    if (commentText) {
+        let extraComments = JSON.parse(localStorage.getItem('movieCommentsExtra')) || {};
+        if (!extraComments[movieTitle]) extraComments[movieTitle] = [];
+
+        extraComments[movieTitle].push({
+            user: userData.username,
+            rating: rating,
+            text: commentText,
+            date: new Date().toISOString()
+        });
+
+        localStorage.setItem('movieCommentsExtra', JSON.stringify(extraComments));
+    }
+
+    // Refresh profile UI
     loadModernWatchlist(userData);
     loadRatedMovies(userData);
 }
@@ -414,6 +503,7 @@ function initializeToastStyles() {
             </style>
         `);
     }
+
 }
 
 // Initialize when document is ready
