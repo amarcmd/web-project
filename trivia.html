@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Permissions-Policy" content="autoplay=(self),encrypted-media=(self)">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Movie Games - ReelTime</title>
+  <link rel="shortcut icon" href="imgs/movie.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="trivia.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo"><img src="imgs/movie.png" alt=""></div>
+      <span class="brand-name">ReelTime</span>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bookings.html">Bookings</a></li>   
+        <li><a href="trivia.html" style="background-color: blueviolet;">Games</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="search">
+      <input id="SearchInput" placeholder="Search movies, actors, genres..." />
+      <button class="search-icon" id="searchToggle">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="profile-icon">
+      <a href="profile.html"><i class="fa-solid fa-circle-user"></i></a>
+    </div>
+  </header>
+
+  <main class="trivia-main">
+    <div class="games-hero">
+      <h1>🎬 Movie Games & Trivia</h1>
+      <p>Test your movie knowledge and have fun!</p>
+    </div>
+
+    <!-- Login Required Message  -->
+    <div id="loginRequired" class="login-required" style="display: none;">
+      <div class="notlogin">
+        <div class="empty-icon">🎮</div>
+        <h3>Please Log In</h3>
+        <p>You need to be logged in to play movie games and track your scores.</p>
+        <a href="index.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Go to Login →</a>
+      </div>
+    </div>
+
+    <!-- Games Grid  -->
+    <div id="gamesContainer" class="games-container" style="display: none;">
+      <div class="games-grid">
+        <!-- Game 1: Emojis -->
+        <div class="game-card" data-game="guess">
+          <div class="game-icon">🎭</div>
+          <h3>Emoji Challenge</h3>
+          <p>Guess movies from emoji combinations</p>
+          <button class="play-btn" onclick="startGuessGame()">Play Now</button>
+        </div>
+
+        <!-- Game 2: Characters -->
+        <div class="game-card" data-game="character">
+          <div class="game-icon">👥</div>
+          <h3>Character Match</h3>
+          <p>Match characters to their movies</p>
+          <button class="play-btn" onclick="startCharacterGame()">Play Now</button>
+        </div>
+
+        <!-- Game 3: Quotes -->
+        <div class="game-card" data-game="quotes">
+          <div class="game-icon">💬</div>
+          <h3>Movie Quotes</h3>
+          <p>Identify movies from famous quotes</p>
+          <button class="play-btn" onclick="startQuotesGame()">Play Now</button>
+        </div>
+
+        <!-- Game 4: Scenes -->
+        <div class="game-card" data-game="scenes">
+          <div class="game-icon">🎬</div>
+          <h3>Movie Scenes</h3>
+          <p>Guess movies from scene descriptions</p>
+          <button class="play-btn" onclick="startScenesGame()">Play Now</button>
+        </div>
+      </div>
+
+      <!-- Leaderboard Section -->
+      <div class="leaderboard-section">
+        <h2>🏆 Top Players</h2>
+        <div class="leaderboard" id="leaderboard">
+          <!-- Dynamic content from JS -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Game Modals -->
+  <div id="triviaModal" class="game-modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeGame()">&times;</span>
+      <div id="game-content">
+        <!-- Dynamic game content -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="cinema-footer">
+    <div class="film-strip">
+      <div class="film-perfs">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    
+    <div class="footer-main">
+      <div class="footer-section">
+        <div class="brand">
+          <div class="logo"><img src="imgs/movie.png" alt=""></div>
+          <span class="brand-name">ReelTime</span>
+        </div>
+        <p class="tagline">Where stories come to life</p>
+      </div>
+      
+      <div class="footer-nav">
+        <div class="nav-column">
+          <strong>Movies</strong>
+          <a href="index.html">Home</a>
+          <a href="bookings.html">booking</a>
+          <a href="Profile.html">My profile</a>
+          <a href="about.html">About US</a>
+        </div>
+        <div class="nav-column">
+          <strong>Social media </strong>
+          <a href="#">instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">tiktok</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-credits">
+      <p>Made with ❤️ for movie lovers</p>
+      <p>&copy; 2024 ReelTime Cinemas</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="trivia.js"></script>
+</body>
+</html>

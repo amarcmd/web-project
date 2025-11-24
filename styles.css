@@ -924,7 +924,7 @@ header {
     color: var(--accent-purple);
 }
 .cinema-footer {
-  background: #0a0a0f;
+  background: var(--main-dark);
   color: white;
   position: relative;
   overflow: hidden;
