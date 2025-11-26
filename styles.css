@@ -161,12 +161,7 @@ header {
 }
 
 
-@media (max-width: 900px) {
-    .main-nav { display: none; }
-    .site-name { display: none; }
-    .hamburger { display: flex; }
-    .search { margin-left: 0; }
-}
+
 
 /* Burger menu open */
 .header-nav-open .main-nav {
@@ -185,18 +180,7 @@ header {
 }
 
 
-@media (max-width: 550px) {
-    header {
-        justify-content: space-between;
-        gap: 10px;
-    }
 
-    .search input {
-        width: 180px;
-    }
-
-   
-}
 /* Default - large screens */
 .search {
   position: relative;
@@ -222,34 +206,7 @@ header {
 }
 
 
-@media (max-width: 768px) {
-  .search {
-    position: relative;
-  }
 
-
- 
-
-  .search-icon {
-    display: inline-flex;
-    background: none;
-    border: none;
-    color: var(--text-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 5px;
-  }
-
-
-  .search.active input {
-    width: 180px;
-    opacity: 1;
-    padding: 8px 15px;
-    pointer-events: auto;
-    border-radius: 20px;
-    margin-left: 10px;
-  }
-}
 .welcome-message {
     font-size: 1rem;
     color: #a0a0a0; 
@@ -468,7 +425,7 @@ header {
 .hero-btn.next { right: 16px; }
 .hero-btn:hover { background: rgba(0,0,0,0.75); }
 
-/* tablet */
+
 @media (max-width: 900px) {
   .welcome-box{
     height:350px;
@@ -482,17 +439,8 @@ header {
 
 }
 
-/* phone */
-@media (max-width: 600px) {
- 
-  .Welcome2 {
-    left: 16px;
-    bottom: 24px;
-    max-width: 85%;
-  }
-  .hero-btn.prev { left: 8px; }
-  .hero-btn.next { right: 8px; }
-}
+
+
 .movies-cat{
   position: relative;
   width:100%;
@@ -1605,7 +1553,57 @@ header {
   opacity: 0.7;
 }
 
+@media (max-width: 978px) {
+  .main-nav { display: none; }
+  .hamburger { display: flex; }
+  .search { margin-left: 0; }
+  .brand .logo img {
+    width: 50px;       
+  }
+
+  .brand-name {
+    font-size: 19px; 
+  }
+
+}
+
+@media (max-width: 550px) {
+    header {
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+}
+
+@media (max-width: 768px) {
+ 
+  .search-icon {
+    display: inline-flex;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+  }
 
 
-/* for rating in profile */
+  .search input {
+    width: 0;
+    opacity: 0;
+    padding: 0;
+    border: none;
+    pointer-events: none;
+    transition: all 0.25s ease;
+  }
 
+
+  .search.active input {
+    width: 225px;
+    opacity: 1;
+    padding: 8px 15px;
+    pointer-events: auto;
+    border-radius: 20px;
+    margin-left: 10px;
+  }
+}

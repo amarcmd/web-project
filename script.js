@@ -7,17 +7,7 @@ menuToggle.addEventListener("click", () => {
   header.classList.toggle("header-nav-open");
 });
 
-const searchToggle = document.getElementById("searchToggle");
-const searchBox = document.querySelector(".search");
 
-if (searchToggle) {
-  searchToggle.addEventListener("click", () => {
-    searchBox.classList.toggle("active");
-  });
-}
-
-
-// --- Modal Elements ---
 let modal = document.getElementById('card-modal');
 let modalTrailer = document.getElementById('modal-trailer');
 let modalTitle = document.getElementById('modal-title');
@@ -128,8 +118,9 @@ if (modal) {
 const heroBox = document.getElementById("heroBox");
 const heroImages = [
   "imgs/welcome page.png",
-  "imgs/RT.png",
-  "imgs/ReelTime.png"
+  "imgs/Premiere.png",
+  "imgs/theatre.png"
+
 ];
 
 let heroIndex = 0;
@@ -147,12 +138,29 @@ function prevImage() { setHero(heroIndex - 1); }
 //Search functionality 
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("SearchInput");
+  const searchContainer = document.querySelector(".search");
+  const searchToggle = document.getElementById("searchToggle");
   const movieCards = document.querySelectorAll(".movie-card");
   const overlay = document.getElementById("searchOverlay");
   const resultsContainer = overlay.querySelector(".search-results");
 
+  if (searchContainer && searchInput && searchToggle) {
+    searchToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchContainer.classList.toggle("active");
+
+      if (searchContainer.classList.contains("active")) {
+        searchInput.focus();
+      } else {
+        searchInput.value = "";
+      }
+    });
+  }
+
+  if (!searchInput || !overlay || !resultsContainer) return;
+
   searchInput.addEventListener("input", () => {
-    const movieCards = document.querySelectorAll(".movie-card");
+    const allCards = document.querySelectorAll(".movie-card");
     const query = searchInput.value.toLowerCase().trim();
 
     resultsContainer.innerHTML = "";
@@ -161,32 +169,42 @@ document.addEventListener("DOMContentLoaded", () => {
       overlay.style.display = "none";
       return;
     }
+    let seenTitles = new Set();
+    let matches=[];
 
+  Array.from(allCards).forEach(card => {
+    const titleText =(card.dataset.title ||card.querySelector("figcaption")?.textContent ||"").toLowerCase();
+    const descText =(card.dataset.description || "").toLowerCase();
 
-    const matches = Array.from(movieCards).filter(card => {
-      const title = card.dataset.title.toLowerCase();
-      const description = card.dataset.description.toLowerCase();
-      return title.includes(query) || description.includes(query);
-    });
+    if (!titleText && !descText) return;
 
-    // Display results
-    if (matches.length > 0) {
-      overlay.style.display = "flex";
+    const isMatch = titleText.includes(query) || descText.includes(query);
 
-      matches.forEach(card => {
-        const clone = card.cloneNode(true);
-
-        clone.addEventListener('click', function () {
-          openMovieModal(this);
-        });
-
-        resultsContainer.appendChild(clone);
-      });
-    } else {
-      overlay.style.display = "flex";
-      resultsContainer.innerHTML = `<div class="no-results">No movies found for "${query}"</div>`;
+    if (isMatch && !seenTitles.has(titleText)) {
+      seenTitles.add(titleText);
+      matches.push(card); 
     }
   });
+
+  if (matches.length > 0) {
+    overlay.style.display = "flex";
+
+    matches.forEach(card => {
+      const clone = card.cloneNode(true);
+
+      clone.addEventListener("click", function () {
+        openMovieModal(this);
+      });
+
+      resultsContainer.appendChild(clone);
+    });
+  } else {
+    overlay.style.display = "flex";
+    resultsContainer.innerHTML =
+      `<div class="no-results">No movies found for "${query}"</div>`;
+  }
+  });
+
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) {
       overlay.style.display = "none";
@@ -200,7 +218,15 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.value = "";
     }
   });
-});
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.style.display === "flex") {
+      overlay.style.display = "none";
+      searchInput.value = "";
+    }
+  });
+
 //render comments
 function renderCommentsForMovie(title) {
     const commentsContainer = document.getElementById("comments-list");
