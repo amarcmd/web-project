@@ -132,7 +132,25 @@ function setHero(i) {
 
 function nextImage() { setHero(heroIndex + 1); }
 function prevImage() { setHero(heroIndex - 1); }
+// Auto-close burger menu on resize
+function handleResize() {
+    const header = document.querySelector("header");
+    if (window.innerWidth > 978 && header.classList.contains("header-nav-open")) {
+        header.classList.remove("header-nav-open");
+    }
+}
 
+// Add resize event listener
+window.addEventListener('resize', handleResize);
+
+// Also close menu when clicking on links (optional)
+document.addEventListener('click', function(e) {
+    const header = document.querySelector("header");
+    if (header.classList.contains("header-nav-open") && 
+        e.target.closest('.main-nav a')) {
+        header.classList.remove("header-nav-open");
+    }
+});
 
 
 //Search functionality 
