@@ -2,6 +2,12 @@
 $(document).ready(function() {
     console.log('🔄 Initializing profile page...');
     initializeProfile();
+     $(document).on('change', '#booked-sort', function () {
+        const userData = sessionStorage.getItem('loggedInUser');
+        if (!userData) return;
+        const user = JSON.parse(userData);
+        loadBookedMovies(user);
+    });
 });
 
 function initializeProfile() {
@@ -113,6 +119,11 @@ function renderModernProfile(user) {
                 <div class="section-header">
                     <div class="section-title">My Booked Movies</div>
                     <div class="watchlist-count" id="booked-counter">0 bookings</div>
+                    <select id="booked-sort">
+                    <option value="nearest">Nearest date first</option>
+                    <option value="latest">Farthest date first</option>
+                    <option value="original">Original order</option>
+                     </select>
                 </div>
                 <div class="booked-grid-modern" id="booked-grid">
                     <div class="loading-booked">Loading bookings...</div>
@@ -330,8 +341,9 @@ function loadBookedMovies(user) {
             `);
             return;
         }
-
-        const bookedHTML = userBookings.map((b, index) => `
+        const sortMode = $('#booked-sort').val() || 'nearest';
+        const sortedBookings = sortBookingsByMode(userBookings, sortMode);
+        const bookedHTML = sortedBookings.map((b, index) => `
             <div class="booked-card-modern">
                 <div class="booked-header">
                     <h3 class="booked-movie-title">${b.movie || 'Unknown Movie'}</h3>
@@ -360,6 +372,52 @@ function loadBookedMovies(user) {
             </div>
         `);
     }
+}
+function parseBookingDate(booking) {
+    if (!booking || !booking.date) return null;
+
+    // booking.date aam yethawwal la "YYYY-MM-DD"
+    const parts = booking.date.split("-");
+    if (parts.length !== 3) return null;
+
+    const year  = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // l JS months 0–11
+    const day   = parseInt(parts[2], 10);
+
+    const d = new Date(year, month, day);
+    if (isNaN(d.getTime())) return null;
+
+    return d;
+}
+
+function sortBookingsByMode(bookings, mode) {
+    // Keep original index in case we need to preserve order
+    const withMeta = bookings.map((b, idx) => ({
+        ...b,
+        _idx: idx,
+        _dateObj: parseBookingDate(b)
+    }));
+
+    if (mode === "nearest") {
+        // Ascending date (earliest first)
+        withMeta.sort((a, b) => {
+            if (!a._dateObj && !b._dateObj) return a._idx - b._idx;
+            if (!a._dateObj) return 1;   // no date => push to bottom
+            if (!b._dateObj) return -1;
+            return a._dateObj - b._dateObj;
+        });
+    } else if (mode === "latest") {
+        // Descending date (latest first)
+        withMeta.sort((a, b) => {
+            if (!a._dateObj && !b._dateObj) return a._idx - b._idx;
+            if (!a._dateObj) return 1;
+            if (!b._dateObj) return -1;
+            return b._dateObj - a._dateObj;
+        });
+    } else {
+        withMeta.sort((a, b) => a._idx - b._idx);
+    }
+    return withMeta.map(({ _idx, _dateObj, ...rest }) => rest);
 }
 
 // ===== RATING MODAL FUNCTIONS =====

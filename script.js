@@ -13,7 +13,9 @@ let modalTrailer = document.getElementById('modal-trailer');
 let modalTitle = document.getElementById('modal-title');
 let modalText = document.getElementById('modal-text');
 let modalClose = document.getElementById('modal-close');
-
+let modalCast = document.getElementById('modal-cast');
+let modalGenres = document.getElementById('modal-genres');
+let modalThisMovieIs = document.getElementById('modal-this-movie-is');
 
 const TRAILER_URLS = {
   "Barbie": "https://www.youtube.com/embed/pBk4NYhWNMM",
@@ -45,6 +47,24 @@ const TRAILER_URLS = {
   "One Battle After Another": "https://www.youtube.com/embed/feOQFKv2Lw4",
   "Countdown": "https://www.youtube.com/embed/t72R6wZ0zQ8",
   "Sovereign": "https://www.youtube.com/embed/55tuwgvaMHY",
+  "Insidious": "https://www.youtube.com/embed/zuZnRUcoWos",
+  "Insidious 2": "https://www.youtube.com/embed/fBbi4NeebAk",
+  "Insidious 3": "https://www.youtube.com/embed/3HxEXnVSr1w",
+  "WorldWar Z": "https://www.youtube.com/embed/Md6Dvxdr0AQ",
+  "Damsel": "https://www.youtube.com/embed/iM150ZWovZM",
+  "Mr. and Mrs. Smith": "https://www.youtube.com/embed/CZ0B22z22pI",
+  "Bullet Train": "https://www.youtube.com/embed/0IOsk2Vlc4o",
+  "The Lion King": "https://www.youtube.com/embed/7TavVZMewpY",
+  "Frozen": "https://www.youtube.com/embed/FLzfXQSPBOg",
+  "Frozen 2": "https://www.youtube.com/embed/bwzLiQZDw2I",
+  "Minions: The Rise of Gru": "https://www.youtube.com/embed/--rV9wXzIeE",
+  "Toy Story 4": "https://www.youtube.com/embed/wmiIUN-7qhE",
+  "Moana": "https://www.youtube.com/embed/LKFuXETZUsI",
+  "Coco": "https://www.youtube.com/embed/xlnPHQ3TLX8", // sar working
+  "Spider-Man: Into the Spider-Verse": "https://www.youtube.com/embed/g4Hbz2jLxvQ",
+  "Encanto": "https://www.youtube.com/embed/CaimKeDcudo",
+  "Minions: The Rise of Gru": "https://www.youtube.com/embed/6DxjJzmYsXo",//sar  working
+  "The Running Man": "https://www.youtube.com/embed/KD18ddeFuyM",
 };
 
 // Selecting all elements with the class 'movie-card'
@@ -300,11 +320,16 @@ function openMovieModal(cardElement) {
   let title = titleEl ? titleEl.textContent.trim() : card.getAttribute('data-title');
   let text = card.getAttribute('data-description') || 'No movie description available yet.';
   let rating = card.getAttribute('data-rating') || 'N/A';
-
+  let cast = card.getAttribute('data-cast') || 'N/A';
+  let genres = card.getAttribute('data-genres') || 'N/A';
+  let thisMovieIs = card.getAttribute('data-this-movie-is') || 'N/A';
   const youtubeEmbedUrl = TRAILER_URLS[title] || '';
 
   if (modalTitle) modalTitle.textContent = title;
   if (modalText) modalText.textContent = text;
+   if (modalCast) modalCast.textContent = cast;
+  if (modalGenres) modalGenres.textContent = genres;
+  if (modalThisMovieIs) modalThisMovieIs.textContent = thisMovieIs;
   if (youtubeEmbedUrl && modalTrailer) {
     const params = "?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1";
     modalTrailer.src = youtubeEmbedUrl + params;

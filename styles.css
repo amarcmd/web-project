@@ -154,7 +154,6 @@ header {
     gap: 4px;
     cursor: pointer;
     padding: 8px;
-    background: rgba(138, 43, 226, 0.1);
     border-radius: 8px;
     transition: all 0.3s ease;
 }
@@ -468,16 +467,42 @@ header {
 
 
 @media (max-width: 900px) {
-  .welcome-box{
-    height:350px;
-  }
-  .Welcome2 {
-    left: 24px;
-    bottom: 28px;
-    max-width: 100%;
-    font-size:smaller;
+.welcome-box {
+
+    width: 100vw;
+    height: 20vh;
+    margin: 20px 10px 10px 10px;
   }
 
+  .Welcome2 {
+    bottom: 12px;
+    left: 12px;
+    max-width: 70%;
+    gap: 4px;
+    padding: 0;
+  }
+
+  .Welcome2 h1 {
+    font-size: 12px ;
+    margin-bottom: 4px;
+  }
+
+  .Welcome2 p {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .Welcome2 a {
+    width: 90px;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .hero-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
 }
 
 
@@ -574,6 +599,7 @@ header {
   );                      /* makes nb cards fit exactly */
   max-width: 240px;       
   background: #141419;
+  background-size:cover ;
   border: 1px solid #22222b;
   border-radius: var(--card-radius);
   overflow: hidden;
@@ -599,10 +625,13 @@ header {
   :root { --cards-per-view: 5; --card-height: 230px; }
 }
 @media (max-width: 900px) {
-  :root { --cards-per-view: 3; --card-height: 230px; }
+  :root { --cards-per-view: 4; --card-height: 230px; }
   .arrow { display: none; } /* lal mobile */
 }
-@media (max-width: 560px) {
+@media (max-width: 700px) {
+  :root { --cards-per-view: 3; --card-height: 220px; }
+}
+@media (max-width: 500px) {
   :root { --cards-per-view: 2; --card-height: 210px; }
 }
 
@@ -874,7 +903,12 @@ header {
     max-width: 450px; 
     position: relative;
 }
-
+#movieinfo{
+  padding:5px;
+}
+#movieinfo p strong{
+  color: var(--accent-purple);
+}
 #trailer-container {
     position: relative;
     width: 100%;
@@ -1004,8 +1038,9 @@ header {
   color: #666;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 604px) {
   .footer-main {
+    align-items: center;
     flex-direction: column;
     gap: 30px;
     text-align: center;
@@ -1601,9 +1636,15 @@ header {
     .hamburger { 
         display: flex; 
     }
-    .search { 
-        margin-left: auto; 
-    }
+ 
+     .search { margin-left: 0; }
+  .brand .logo img {
+    width: 50px;       
+  }
+
+  .brand-name {
+    font-size: 19px; 
+  }
     
     /* Ensure search stays functional */
     .search.active {
