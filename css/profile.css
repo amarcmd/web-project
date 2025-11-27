@@ -17,7 +17,7 @@
 /* Hero Banner */
 .profile-hero {
     background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(95, 16, 160, 0.1)),
-                url('imgs/profile-bg.jpg') center/cover;
+                url('../imgs/profile-bg.jpg') center/cover;
     border-radius: 20px;
     padding: 40px;
     margin-bottom: 30px;

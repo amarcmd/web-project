@@ -137,9 +137,9 @@ if (modal) {
 
 const heroBox = document.getElementById("heroBox");
 const heroImages = [
-  "imgs/welcome page.png",
-  "imgs/Premiere.png",
-  "imgs/theatre.png"
+  "../imgs/welcome page.png",
+  "../imgs/Premiere.png",
+  "../imgs/theatre.png"
 
 ];
 
@@ -481,7 +481,7 @@ if (userWatchlist.length === 0) {
   userWatchlist.forEach(movie => {
     movieRow.innerHTML += `
       <figure class="watchlist-card" data-rating="${movie.rating}">
-        <img src="${movie.image}" alt="${movie.title}" onerror="this.src='imgs/default.jpg'">
+        <img src="${movie.image}" alt="${movie.title}" onerror="this.src='../imgs/default.jpg'">
         <figcaption>${movie.title}</figcaption>
         <span class="rating-overlay">${movie.rating} / 5 ★</span>
       </figure>

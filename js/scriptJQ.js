@@ -7,7 +7,7 @@ window.movieComments = {};
 $(function () {
     const $gallery = $("#gallery");
 
-    $.getJSON("movies.json")
+    $.getJSON("data/movies.json")
         .done(function (data) {
             if (!$gallery.length) return;
             $gallery.empty();

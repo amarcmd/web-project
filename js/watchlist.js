@@ -57,11 +57,11 @@ function handleWatchlistAdd($button) {
         
         if (!movieImage) {
             const $movieCard = $(`.movie-card[data-title="${movieTitle}"] img`).first();
-            movieImage = $movieCard.attr('src') || 'imgs/default-movie.jpg';
+            movieImage = $movieCard.attr('src') || '../imgs/default-movie.jpg';
         }
     } catch (error) {
         console.error('❌ Error getting movie image:', error);
-        movieImage = 'imgs/default-movie.jpg';
+        movieImage = '../imgs/default-movie.jpg';
     }
 
     const movieRating = $('.movie-card[data-title="' + movieTitle + '"]').first().data('rating') || '0';

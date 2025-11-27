@@ -68,7 +68,7 @@ function renderModernProfile(user) {
         <div class="profile-modern">
             <div class="profile-hero">
                 <div class="user-avatar-container">
-                    <img src="${user.img || 'imgs/default-avatar.jpg'}" alt="${user.username}" class="user-avatar" onerror="this.src='imgs/default-avatar.jpg'">
+                    <img src="${user.img || '../../imgs/default-avatar.jpg'}" alt="${user.username}" class="user-avatar" onerror="this.src='../../imgs/default-avatar.jpg'">
                     <div class="online-status"></div>
                 </div>
                 <div class="profile-info-modern">
@@ -182,11 +182,11 @@ function loadModernWatchlist(user) {
 
         const watchlistHTML = userWatchlist.map(movie => {
             const isRated = userRatings[movie.title];
-            const safeImage = movie.image || 'imgs/default-movie.jpg';
+            const safeImage = movie.image || '../../imgs/default-movie.jpg';
             
             return `
                 <div class="watchlist-card-modern">
-                    <img src="${safeImage}" alt="${movie.title}" class="card-image" onerror="this.src='imgs/default-movie.jpg'">
+                    <img src="${safeImage}" alt="${movie.title}" class="card-image" onerror="this.src='../../imgs/default-movie.jpg'">
                     
                     ${isRated ? `<div class="rated-badge">Rated ${userRatings[movie.title].rating}/5</div>` : ''}
                     
@@ -266,11 +266,11 @@ function loadRatedMovies(user) {
         }
 
         const ratedHTML = Object.entries(userRatings).map(([movieTitle, ratingData]) => {
-            const safeImage = ratingData.image || 'imgs/default-movie.jpg';
+            const safeImage = ratingData.image || '../imgs/default-movie.jpg';
             
             return `
                 <div class="rated-card-modern">
-                    <img src="${safeImage}" alt="${movieTitle}" class="card-image" onerror="this.src='imgs/default-movie.jpg'">
+                    <img src="${safeImage}" alt="${movieTitle}" class="card-image" onerror="this.src='../imgs/default-movie.jpg'">
                     <div class="rated-badge">${ratingData.rating}/5 ★</div>
                     <div class="card-content">
                         <h3 class="card-title">${movieTitle}</h3>
@@ -570,14 +570,14 @@ function saveMovieRating(movieTitle, rating, commentText = "") {
         }
 
         // Get movie image from watchlist
-        let movieImage = 'imgs/default-movie.jpg';
+        let movieImage = '../imgs/default-movie.jpg';
         try {
             const savedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
             const movieFromWatchlist = savedWatchlist.find(
                 m => m.title === movieTitle && m.username === userData.username
             );
             if (movieFromWatchlist) {
-                movieImage = movieFromWatchlist.image || 'imgs/default-movie.jpg';
+                movieImage = movieFromWatchlist.image || '../imgs/default-movie.jpg';
             }
         } catch (e) {
             console.error('Error getting movie image:', e);
