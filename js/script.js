@@ -67,10 +67,25 @@ const TRAILER_URLS = {
   "The Running Man": "https://www.youtube.com/embed/KD18ddeFuyM",
 };
 
-// Selecting all elements with the class 'movie-card'
-// let figure = document.querySelectorAll('.movie-card'); 
+// Auto-close burger menu on resize
+function handleResize() {
+    const header = document.querySelector("header");
+    if (window.innerWidth > 978 && header.classList.contains("header-nav-open")) {
+        header.classList.remove("header-nav-open");
+    }
+}
 
+// Add resize event listener
+window.addEventListener('resize', handleResize);
 
+// Also close menu when clicking on links (optional)
+document.addEventListener('click', function(e) {
+    const header = document.querySelector("header");
+    if (header.classList.contains("header-nav-open") && 
+        e.target.closest('.main-nav a')) {
+        header.classList.remove("header-nav-open");
+    }
+});
 function closeModal() {
   if (modal) {
     modal.classList.remove('open');
@@ -85,43 +100,6 @@ function closeModal() {
 
 let movieContainer = document.getElementById('movie');
 
-
-// /*lama yekbus aal card*/
-// figure.forEach(function (cardEl) {
-//     cardEl.onclick = function () {
-//         let card = cardEl.closest('figure');
-
-//         if (!card) {
-//             console.error("Could not find parent <figure> element for the clicked .movie-card element.");
-//             return; 
-//         }
-
-//         let titleEl = card.querySelector('figcaption');
-
-//         let title = titleEl ? titleEl.textContent.trim() : card.getAttribute('data-title');
-//         let text = card.getAttribute('data-description') || 'No movie description available yet.'; 
-
-//         const youtubeEmbedUrl = TRAILER_URLS[title] || ''; 
-
-//         if (modalTitle) modalTitle.textContent = title;
-//         if (modalText) modalText.textContent = text;
-
-//        if (youtubeEmbedUrl && modalTrailer) {
-//             const params = "?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1";
-//             modalTrailer.src = youtubeEmbedUrl + params;
-//             modalTrailer.style.display = 'block';
-//         } else if (modalTrailer) {
-//             modalTrailer.src = '';
-//             modalTrailer.style.display = 'none';
-//             console.warn(`No trailer link found for movie: ${title}. Displaying content only.`);
-//         }
-
-//         if (modal) { 
-//             modal.classList.add('open');
-//             document.body.style.overflow = 'hidden';
-//         }
-//     };
-// });
 
 if (modalClose) {
   modalClose.onclick = closeModal;
@@ -308,13 +286,12 @@ function renderCommentsForMovie(title) {
     commentsContainer.appendChild(div);
   });
 }
+
+// MAIN FUNCTION TO OPEN MODAL
 function openMovieModal(cardElement) {
   let card = cardElement.closest('figure');
 
-  if (!card) {
-    console.error("Could not find parent <figure> element for the clicked movie card.");
-    return;
-  }
+ 
 
   let titleEl = card.querySelector('figcaption');
   let title = titleEl ? titleEl.textContent.trim() : card.getAttribute('data-title');
@@ -327,18 +304,16 @@ function openMovieModal(cardElement) {
 
   if (modalTitle) modalTitle.textContent = title;
   if (modalText) modalText.textContent = text;
-   if (modalCast) modalCast.textContent = cast;
+  if (modalCast) modalCast.textContent = cast;
   if (modalGenres) modalGenres.textContent = genres;
   if (modalThisMovieIs) modalThisMovieIs.textContent = thisMovieIs;
+  
   if (youtubeEmbedUrl && modalTrailer) {
     const params = "?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1";
     modalTrailer.src = youtubeEmbedUrl + params;
     modalTrailer.style.display = 'block';
-  } else if (modalTrailer) {
-    modalTrailer.src = '';
-    modalTrailer.style.display = 'none';
-    console.warn(`No trailer link found for movie: ${title}. Displaying content only.`);
-  }
+  } 
+  
   renderCommentsForMovie(title);
   updateWatchlistButton(title);
 
@@ -359,135 +334,66 @@ function openMovieModal(cardElement) {
     searchInput.value = "";
   }
 }
+
+// WATCHLIST BUTTON THAT DOES NOTHING
+// In script.js - update the updateWatchlistButton function:
+// In script.js - REPLACE the updateWatchlistButton function with this:
+
+function updateWatchlistButton(movieTitle) {
+    const watchlistBtn = document.querySelector('.add-watchlist-btn');
+  
+
+    // Remove any existing button and create a fresh one
+    const newWatchlistBtn = watchlistBtn.cloneNode(true);
+    watchlistBtn.parentNode.replaceChild(newWatchlistBtn, watchlistBtn);
+
+    let userData;
+    
+        userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+   
+
+    if (!userData) {
+        newWatchlistBtn.textContent = "Log in to use Watchlist";
+        newWatchlistBtn.disabled = true;
+        newWatchlistBtn.style.opacity = "0.6";
+        return;
+    }
+
+    let saved = [];
+   
+        saved = JSON.parse(localStorage.getItem('watchlist')) || [];
+    
+
+    const inList = saved.some(m => m.title === movieTitle && m.username === userData.username);
+
+    if (inList) {
+        newWatchlistBtn.textContent = " Remove from Watchlist";
+        newWatchlistBtn.classList.add('added');
+        newWatchlistBtn.style.background = "#5f10a0";
+    } else {
+        newWatchlistBtn.textContent = "+ Add to Watchlist";
+        newWatchlistBtn.classList.remove('added');
+        newWatchlistBtn.style.background = "";
+    }
+    newWatchlistBtn.disabled = false;
+    newWatchlistBtn.style.opacity = "1";
+
+  }
+// Event listeners
 document.addEventListener("click", (e) => {
   const card = e.target.closest(".movie-card");
   if (!card) return;
   openMovieModal(card);
 });
 
-function updateWatchlistButton(movieTitle) {
-  const watchlistBtn = document.querySelector('.add-watchlist-btn');
-  if (!watchlistBtn) return;
-
-  const newWatchlistBtn = watchlistBtn.cloneNode(true);
-  watchlistBtn.parentNode.replaceChild(newWatchlistBtn, watchlistBtn);
-
-  let userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
-
-  // Not logged in ma fee button
-  if (!userData) {
-    newWatchlistBtn.textContent = "Log in to use Watchlist";
-    newWatchlistBtn.disabled = true;
-    return;
-  }
-
-  let saved = JSON.parse(localStorage.getItem('watchlist'));
-  let inList = saved.some(
-    m => m.title === movieTitle && m.username === userData.username
-  );
-
-  if (inList) {
-    newWatchlistBtn.textContent = "Remove from Watchlist";
-    newWatchlistBtn.style.background = "#5f10a0";
-    newWatchlistBtn.disabled = false;
-
-    newWatchlistBtn.addEventListener('click', function () {
-      removeFromWatchlistFromModal(movieTitle);
-      updateWatchlistButton(movieTitle); // refresh button state
-    });
-  } else {
-    newWatchlistBtn.textContent = "+ Add to Watchlist";
-    newWatchlistBtn.style.background = "";
-    newWatchlistBtn.disabled = false;
-
-    newWatchlistBtn.addEventListener('click', function () {
-      addToWatchlistFromModal(movieTitle);
-      updateWatchlistButton(movieTitle); // refresh button state
-    });
-  }
-}
-function addToWatchlistFromModal(movieTitle) {
-  let userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
-  if (!userData) {
-    alert("Please log in to add to your watchlist.");
-    return;
-  }
-  const originalCard = Array.from(document.querySelectorAll('.movie-card')).find(card => {
-    const titleEl = card.querySelector('figcaption');
-    const title = titleEl ? titleEl.textContent.trim() : card.getAttribute('data-title');
-    return title === movieTitle;
-  });
-
-  let movieImage = '';
-  let movieRating = '0';
-
-  if (originalCard) {
-    const imgElement = originalCard.querySelector('img');
-    movieImage = imgElement ? imgElement.src : '';
-    movieRating = originalCard.getAttribute('data-rating') || '0';
-  }
-
-  let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
-
-  let alreadyAdded = saved.some(m => m.title === movieTitle && m.username === userData.username);
-  if (alreadyAdded) {
-    alert("This movie is already in your watchlist.");
-    return;
-  }
-
-  saved.push({
-    username: userData.username,
-    title: movieTitle,
-    image: movieImage,
-    rating: movieRating
-  });
-  localStorage.setItem('watchlist', JSON.stringify(saved));
-
-  let updatedUser = { ...userData };
-  updatedUser.watchlist = saved.filter(m => m.username === userData.username);
-  sessionStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-
-
-
-  const watchlistBtn = document.querySelector('.add-watchlist-btn');
-  if (watchlistBtn) {
-    watchlistBtn.textContent = "Remove from Watchlist";
-    watchlistBtn.style.background = "#5f10a0";
-    watchlistBtn.disabled = true;
-  }
+if (modalClose) {
+  modalClose.onclick = closeModal;
 }
 
-// overlay.addEventListener("click", (e) => {
-//   if (e.target === overlay) {
-//     overlay.style.display = "none";
-//     searchInput.value = "";
-//   }
-// });
-
-
-const container = document.getElementById('watchlist-container');
-let currentUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
-let saved = JSON.parse(localStorage.getItem('watchlist')) || [];
-
-// Filter bas ll user's watchlist
-let userWatchlist = saved.filter(movie => movie.username === currentUser.username);
-
-if (userWatchlist.length === 0) {
-  container.innerHTML = "<p style='padding:20px;'>No movies added yet.</p>";
-} else {
-  container.innerHTML = `<div class="watchlist-grid"></div>`;
-  let movieRow = container.querySelector(".watchlist-grid");
-
-  userWatchlist.forEach(movie => {
-    movieRow.innerHTML += `
-      <figure class="watchlist-card" data-rating="${movie.rating}">
-        <img src="${movie.image}" alt="${movie.title}" onerror="this.src='../imgs/default.jpg'">
-        <figcaption>${movie.title}</figcaption>
-        <span class="rating-overlay">${movie.rating} / 5 ★</span>
-      </figure>
-    `;
-  });
+if (modal) {
+  modal.onclick = function (event) {
+    if (event.target === modal || event.target.hasAttribute('data-close-modal')) {
+      closeModal();
+    }
+  };
 }
-
-
-

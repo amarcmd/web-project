@@ -154,6 +154,7 @@ header {
     gap: 4px;
     cursor: pointer;
     padding: 8px;
+    background: rgba(138, 43, 226, 0.1);
     border-radius: 8px;
     transition: all 0.3s ease;
 }
@@ -218,6 +219,7 @@ header {
     border-color: var(--accent-purple);
     transform: translateY(-2px);
 }
+
 
 
 
