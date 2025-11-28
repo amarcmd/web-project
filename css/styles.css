@@ -831,14 +831,6 @@ header {
   }
 }
 
-header {
-  position: relative;
-  z-index: 10000;
-}
-
-
-
-
  
 .modal {
     position: fixed;
@@ -846,7 +838,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 11000;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
@@ -868,6 +860,7 @@ header {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9); 
+    z-index:11001;
 }
 
 .modal__dialog {
@@ -876,7 +869,7 @@ header {
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
-    z-index: 1001;
+    z-index: 11002;
     max-width: 900px; 
     width: 90%;
     max-height: 90vh;
@@ -948,6 +941,7 @@ header {
 .modal__close:hover {
     color: var(--accent-purple);
 }
+
 .cinema-footer {
   background: var(--main-dark);
   color: white;
@@ -1710,5 +1704,33 @@ body.menu-open {
     pointer-events: auto;
     border-radius: 20px;
     margin-left: 10px;
+  }
+}
+/* for modal */
+@media (max-width: 974px) {
+  .modal__media h3 {
+    color: var(--accent-purple);
+    margin-top: 0;
+    font-size: 2em;
+}
+  .modal__dialog {
+    flex-direction: column;      /* stack video+info on top, body under */
+    align-items: stretch;
+    max-height: 90vh;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .modal__media {
+    width: 100%;                 /* video + movieinfo full width */
+    max-width: 100%;
+  }
+
+  #movieinfo {
+    margin-top: 8px;             /* little space under the video */
+  }
+
+  .modal__body {
+    width: 100%;                 /* content full width under media */
   }
 }

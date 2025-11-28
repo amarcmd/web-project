@@ -191,10 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
   Array.from(allCards).forEach(card => {
     const titleText =(card.dataset.title ||card.querySelector("figcaption")?.textContent ||"").toLowerCase();
     const descText =(card.dataset.description || "").toLowerCase();
+    const castText   = (card.dataset.cast || "").toLowerCase();
+    const genresText = (card.dataset.genres || "").toLowerCase();
+    if (!titleText && !descText && !castText && !genresText) return;
 
-    if (!titleText && !descText) return;
-
-    const isMatch = titleText.includes(query) || descText.includes(query);
+    const isMatch = titleText.includes(query) || descText.includes(query) || castText.includes(query) || genresText.includes(query);
 
     if (isMatch && !seenTitles.has(titleText)) {
       seenTitles.add(titleText);
@@ -397,3 +398,28 @@ if (modal) {
     }
   };
 }
+//for modal to be responsive
+function repositionModalTitle() {
+  const modalTitle = document.getElementById("modal-title");
+  const modalMedia = document.querySelector(".modal__media");
+  const modalBody  = document.querySelector(".modal__body");
+  const movieInfo  = document.getElementById("movieinfo");
+
+  if (!modalTitle || !modalMedia || !modalBody) return;
+
+  if (window.innerWidth <= 974) {
+    if (modalTitle.parentElement !== modalMedia) {
+      // hatet l title after the trailer, before cast info
+      modalMedia.insertBefore(modalTitle, movieInfo);
+    }
+  } else {
+    // hatet l title metel ma kenet(old layout)
+    if (modalTitle.parentElement !== modalBody) {
+      modalBody.insertBefore(modalTitle, modalBody.firstChild);
+    }
+  }
+}
+
+// Run once on load w kel ma l window resizes
+window.addEventListener("load", repositionModalTitle);
+window.addEventListener("resize", repositionModalTitle);
