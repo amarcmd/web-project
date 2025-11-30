@@ -11,7 +11,7 @@ let modalCast = document.getElementById('modal-cast');
 let modalGenres = document.getElementById('modal-genres');
 let modalThisMovieIs = document.getElementById('modal-this-movie-is');
 
-const TRAILER_URLS = {
+let TRAILER_URLS = {
   "Barbie": "https://www.youtube.com/embed/pBk4NYhWNMM",
   "It Ends With Us": "https://www.youtube.com/embed/DLET_u31M4M",
   "IT": "https://www.youtube.com/embed/xKJmEC5ieOk",
@@ -63,7 +63,7 @@ const TRAILER_URLS = {
 
 // Auto-close burger menu on resize
 function handleResize() {
-    const header = document.querySelector("header");
+    let header = document.querySelector("header");
     if (window.innerWidth > 978 && header.classList.contains("header-nav-open")) {
         header.classList.remove("header-nav-open");
     }
@@ -74,7 +74,7 @@ window.addEventListener('resize', handleResize);
 
 // Also close menu when clicking on links (optional)
 document.addEventListener('click', function(e) {
-    const header = document.querySelector("header");
+    let header = document.querySelector("header");
     if (header.classList.contains("header-nav-open") && 
         e.target.closest('.main-nav a')) {
         header.classList.remove("header-nav-open");
@@ -85,20 +85,14 @@ function closeModal() {
     modal.classList.remove('open');
   }
   document.body.style.overflow = '';
-
-
   if (modalTrailer) {
     modalTrailer.src = '';
   }
 }
-
 let movieContainer = document.getElementById('movie');
-
-
 if (modalClose) {
   modalClose.onclick = closeModal;
 }
-
 if (modal) {
   modal.onclick = function (event) {
     if (event.target === modal || event.target.hasAttribute('data-close-modal')) {
@@ -108,8 +102,8 @@ if (modal) {
 }
 
 //for the welcome box to active the btns set indicator and trnsform to the next img every 3 sec
-const heroBox = document.getElementById("heroBox");
-const heroImages = [
+let heroBox = document.getElementById("heroBox");
+let heroImages = [
   "../imgs/welcome page.png",
   "../imgs/Premiere.png",
   "../imgs/theatre.png"
@@ -120,13 +114,13 @@ let isTransitioning = false;
 if(heroBox){
 
   // Create indicator container and circles
-  const indicatorsContainer = document.createElement('div');
+  let indicatorsContainer = document.createElement('div');
   indicatorsContainer.className = 'carousel-indicators';
   heroBox.appendChild(indicatorsContainer);
 
   // Create indicators
   heroImages.forEach((_, index) => {
-    const indicator = document.createElement('div');
+    let indicator = document.createElement('div');
     indicator.className = 'indicator';
     if (index === 0) indicator.classList.add('active');
     indicator.addEventListener('click', () => setHero(index));
@@ -177,41 +171,30 @@ function startAutoAdvance() {
 }
 
 
-
+//when the sceen become smaller the behavior of burger
 function handleResize() {
-    const header = document.querySelector("header");
+    let header = document.querySelector("header");
     if (window.innerWidth > 978 && header.classList.contains("header-nav-open")) {
         header.classList.remove("header-nav-open");
     }
 }
-
-// Add resize event listener
+//  event listener
 window.addEventListener('resize', handleResize);
-
-// Also close menu when clicking on links (optional)
-document.addEventListener('click', function(e) {
-    const header = document.querySelector("header");
-    if (header.classList.contains("header-nav-open") && 
-        e.target.closest('.main-nav a')) {
-        header.classList.remove("header-nav-open");
-    }
-});
 
 
 //Search functionality 
 document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.getElementById("SearchInput");
-  const searchContainer = document.querySelector(".search");
-  const searchToggle = document.getElementById("searchToggle");
-  const movieCards = document.querySelectorAll(".movie-card");
-  const overlay = document.getElementById("searchOverlay");
-  const resultsContainer = document.querySelector(".search-results");
+  let searchInput = document.getElementById("SearchInput");
+  let searchContainer = document.querySelector(".search");
+  let searchToggle = document.getElementById("searchToggle");
+  let movieCards = document.querySelectorAll(".movie-card");
+  let overlay = document.getElementById("searchOverlay");
+  let resultsContainer = document.querySelector(".search-results");
 
   if (searchContainer && searchInput && searchToggle) {
     searchToggle.addEventListener("click", (e) => {
       e.preventDefault();
       searchContainer.classList.toggle("active");
-
       if (searchContainer.classList.contains("active")) {
         searchInput.focus();
       } else {
@@ -223,10 +206,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!searchInput || !overlay || !resultsContainer) return;
 
   searchInput.addEventListener("input", () => {
-    const allCards = document.querySelectorAll(".movie-card");
-    const query = searchInput.value.toLowerCase().trim();
-
-    resultsContainer.innerHTML = "";
+  let allCards = document.querySelectorAll(".movie-card");
+  let query = searchInput.value.toLowerCase().trim();
+  resultsContainer.innerHTML = "";
 
     if (query === "") {
       overlay.style.display = "none";
@@ -236,13 +218,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let matches=[];
 
   Array.from(allCards).forEach(card => {
-    const titleText =(card.dataset.title ||card.querySelector("figcaption")?.textContent ||"").toLowerCase();
-    const descText =(card.dataset.description || "").toLowerCase();
-    const castText   = (card.dataset.cast || "").toLowerCase();
-    const genresText = (card.dataset.genres || "").toLowerCase();
+    let titleText =(card.dataset.title ||card.querySelector("figcaption")?.textContent ||"").toLowerCase();
+    let descText =(card.dataset.description || "").toLowerCase();
+    let castText   = (card.dataset.cast || "").toLowerCase();
+    let genresText = (card.dataset.genres || "").toLowerCase();
     if (!titleText && !descText && !castText && !genresText) return;
 
-    const isMatch = titleText.includes(query) || descText.includes(query) || castText.includes(query) || genresText.includes(query);
+    let isMatch = titleText.includes(query) || descText.includes(query) || castText.includes(query) || genresText.includes(query);
 
     if (isMatch && !seenTitles.has(titleText)) {
       seenTitles.add(titleText);
@@ -254,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.style.display = "flex";
 
     matches.forEach(card => {
-      const clone = card.cloneNode(true);
+      let clone = card.cloneNode(true);
 
       clone.addEventListener("click", function () {
         openMovieModal(this);
@@ -293,21 +275,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //render comments
 function renderCommentsForMovie(title) {
-    const commentsContainer = document.getElementById("comments-list");
+    let commentsContainer = document.getElementById("comments-list");
   if (!commentsContainer) return;
 
   commentsContainer.innerHTML = "";
 
   //comments from movies.json
-  const baseComments =
+  let baseComments =
     (window.movieComments && window.movieComments[title]) || [];
 
   // Extra comments users added (localStorage)
-  const extraStore = JSON.parse(localStorage.getItem("movieCommentsExtra")) || {};
-  const extraForMovie = extraStore[title] || [];
+let extraStore = JSON.parse(localStorage.getItem("movieCommentsExtra")) || {};
+  let extraForMovie = extraStore[title] || [];
 
   // jam3 el comments mn movies.json w el extra
-  const allComments = [...baseComments, ...extraForMovie];
+let allComments = [...baseComments, ...extraForMovie];
 
   if (!allComments.length) {
     commentsContainer.innerHTML =
@@ -316,11 +298,11 @@ function renderCommentsForMovie(title) {
   }
 
   allComments.forEach(c => {
-    const div = document.createElement("div");
+  let div = document.createElement("div");
     div.className = "comment";
 
-    const rating = c.rating || 0;
-    const stars =
+  let rating = c.rating || 0;
+  let stars =
       "★".repeat(rating) + "☆".repeat(5 - rating);
 
     div.innerHTML = `
@@ -330,7 +312,6 @@ function renderCommentsForMovie(title) {
       </div>
       <p class="comment-text">${c.text}</p>
     `;
-
     commentsContainer.appendChild(div);
   });
 }
@@ -348,7 +329,7 @@ function openMovieModal(cardElement) {
   let cast = card.getAttribute('data-cast') || 'N/A';
   let genres = card.getAttribute('data-genres') || 'N/A';
   let thisMovieIs = card.getAttribute('data-this-movie-is') || 'N/A';
-  const youtubeEmbedUrl = TRAILER_URLS[title] || '';
+  let youtubeEmbedUrl = TRAILER_URLS[title] || '';
 
   if (modalTitle) modalTitle.textContent = title;
   if (modalText) modalText.textContent = text;
@@ -357,7 +338,7 @@ function openMovieModal(cardElement) {
   if (modalThisMovieIs) modalThisMovieIs.textContent = thisMovieIs;
   
   if (youtubeEmbedUrl && modalTrailer) {
-    const params = "?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1";
+    let params = "?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1";
     modalTrailer.src = youtubeEmbedUrl + params;
     modalTrailer.style.display = 'block';
   } 
@@ -371,13 +352,13 @@ function openMovieModal(cardElement) {
   }
 
 
-  const searchOverlay = document.getElementById("searchOverlay");
+  let searchOverlay = document.getElementById("searchOverlay");
   if (searchOverlay) {
     searchOverlay.style.display = "none";
   }
 
 
-  const searchInput = document.getElementById("SearchInput");
+  let searchInput = document.getElementById("SearchInput");
   if (searchInput) {
     searchInput.value = "";
   }
@@ -385,8 +366,8 @@ function openMovieModal(cardElement) {
 
 
 function updateWatchlistButton(movieTitle) {
-    const watchlistBtn = document.querySelector('.add-watchlist-btn');
-    const newWatchlistBtn = watchlistBtn.cloneNode(true);
+    let watchlistBtn = document.querySelector('.add-watchlist-btn');
+    let newWatchlistBtn = watchlistBtn.cloneNode(true);
     watchlistBtn.parentNode.replaceChild(newWatchlistBtn, watchlistBtn);
 
     let userData;
@@ -406,7 +387,7 @@ function updateWatchlistButton(movieTitle) {
         saved = JSON.parse(localStorage.getItem('watchlist')) || [];
     
 
-    const inList = saved.some(m => m.title === movieTitle && m.username === userData.username);
+    let inList = saved.some(m => m.title === movieTitle && m.username === userData.username);
 
     if (inList) {
         newWatchlistBtn.textContent = " Remove from Watchlist";
@@ -423,7 +404,7 @@ function updateWatchlistButton(movieTitle) {
   }
 // Event listeners
 document.addEventListener("click", (e) => {
-  const card = e.target.closest(".movie-card");
+  let card = e.target.closest(".movie-card");
   if (!card) return;
   openMovieModal(card);
 });
@@ -441,10 +422,10 @@ if (modal) {
 }
 //for modal to be responsive
 function repositionModalTitle() {
-  const modalTitle = document.getElementById("modal-title");
-  const modalMedia = document.querySelector(".modal__media");
-  const modalBody  = document.querySelector(".modal__body");
-  const movieInfo  = document.getElementById("movieinfo");
+  let modalTitle = document.getElementById("modal-title");
+  let modalMedia = document.querySelector(".modal__media");
+  let modalBody  = document.querySelector(".modal__body");
+  let movieInfo  = document.getElementById("movieinfo");
 
   if (!modalTitle || !modalMedia || !modalBody) return;
 

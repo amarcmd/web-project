@@ -31,7 +31,7 @@ function showLoginRequired() {
                 <div class="empty-icon">🎬</div>
                 <h3>Please Log In</h3>
                 <p>You need to be logged in to view your profile and ratings.</p>
-                <a href="index.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Go to Login →</a>
+                <a href="../../index.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Go to Login →</a>
             </div>
         </div>
     `);

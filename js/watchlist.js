@@ -1,4 +1,4 @@
-// watchlist.js - COMPLETE WORKING VERSION
+
 $(document).ready(function() {
     initializeWatchlist();
     setupWatchlistEventHandlers();
@@ -6,9 +6,7 @@ $(document).ready(function() {
 
 function initializeWatchlist() {
     const userData = sessionStorage.getItem('loggedInUser');
-    if (!userData) {
-       return;
-    }
+   
     
     
         const user = JSON.parse(userData);
@@ -44,7 +42,7 @@ let movieImage = '';
 
     const $modalImage = $('.modal__media img');
     if ($modalImage.length) {
-        // DOM property → absolute URL
+        // DOM property absolute URL
         movieImage = $modalImage[0].src || '';
     }
 

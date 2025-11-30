@@ -1,5 +1,5 @@
-// Movie Trivia & Games JavaScript - jQuery Version
-$(document).ready(function() {
+
+$(function() {
     initializeGames();
 });
 
@@ -8,8 +8,8 @@ let currentQuestion = 0;
 let score = 0;
 let playerName = "";
 
-// Fixed game data based on YOUR movies
-const gameData = {
+
+let gameData = {
     guess: [
         {
             emoji: "👸🎀💖",
@@ -193,7 +193,7 @@ const gameData = {
 
 function initializeGames() {
     // Check login 
-    const userData = sessionStorage.getItem('loggedInUser');
+    let userData = sessionStorage.getItem('loggedInUser');
 
     if (userData) {
         // User is logged in - show games
@@ -206,46 +206,35 @@ function initializeGames() {
         $('#loginRequired').show();
     }
 }
-
+//guess game
 function startGuessGame() {
-    if (!checkLogin()) return;
     currentGame = 'guess';
     startGame();
 }
-
+//character game
 function startCharacterGame() {
-    if (!checkLogin()) return;
-    currentGame = 'character';
+   currentGame = 'character';
     startGame();
 }
-
+//quotes game
 function startQuotesGame() {
-    if (!checkLogin()) return;
-    currentGame = 'quotes';
+   currentGame = 'quotes';
     startGame();
 }
-
+//scenes game
 function startScenesGame() {
-    if (!checkLogin()) return;
     currentGame = 'scenes';
     startGame();
 }
 
-function checkLogin() {
-    const userData = sessionStorage.getItem('loggedInUser');
-    if (!userData) {
-        alert("Please log in to play games!");
-        return false;
-    }
-    return true;
-}
+
 
 function startGame() {
     currentQuestion = 0;
     score = 0;
     
     // Get player name
-    const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    let userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
     playerName = userData.username;
     
     showQuestion();
@@ -253,15 +242,13 @@ function startGame() {
 }
 
 function showQuestion() {
-    const questions = gameData[currentGame];
+    let questions = gameData[currentGame];
     if (currentQuestion >= questions.length) {
         endGame();
         return;
     }
-    
-    const question = questions[currentQuestion];
+    let question = questions[currentQuestion];
     let gameContent = '';
-    
     switch(currentGame) {
         case 'guess':
             gameContent = createGuessQuestion(question);
@@ -369,9 +356,9 @@ function createScenesQuestion(question) {
 }
 
 function checkAnswer(selectedIndex) {
-    const questions = gameData[currentGame];
-    const question = questions[currentQuestion];
-    const $options = $('.option-btn');
+    let questions = gameData[currentGame];
+    let question = questions[currentQuestion];
+    let $options = $('.option-btn');
     
     // Disable all buttons
     $options.prop('disabled', true);
@@ -391,12 +378,12 @@ function checkAnswer(selectedIndex) {
     setTimeout(() => {
         currentQuestion++;
         showQuestion();
-    }, 1500);
+    }, 1000);
 }
 
 function endGame() {
-    const totalQuestions = gameData[currentGame].length;
-    const percentage = (score / (totalQuestions * 10)) * 100;
+    let totalQuestions = gameData[currentGame].length;
+    let percentage = (score / (totalQuestions * 10)) * 100;
     
     let message = '';
     if (percentage >= 80) message = "🎉 Movie Master! You're a ReelTime expert!";
@@ -404,7 +391,7 @@ function endGame() {
     else if (percentage >= 40) message = "😊 Good effort! Time to watch more movies!";
     else message = "🎬 Keep exploring ReelTime movies!";
     
-    const resultsHTML = `
+    let resultsHTML = `
         <div class="results-screen">
             <h2 class="game-title">Game Complete!</h2>
             <div class="final-score">${score} Points</div>
@@ -415,9 +402,7 @@ function endGame() {
                 <button class="play-btn" onclick="closeGame()">Try Another Game</button>
                 <button class="play-btn" onclick="goToMovies()">Browse Movies</button>
             </div>
-            <button class="share-btn" onclick="shareScore()">
-                <i class="fab fa-twitter"></i> Share Score
-            </button>
+            
         </div>
     `;
     
@@ -433,7 +418,7 @@ function closeGame() {
 }
 
 function goToMovies() {
-    window.location.href = 'index.html';
+    window.location.href = "../../index.html";
 }
 
 function saveToLeaderboard(score) {
@@ -454,8 +439,8 @@ function saveToLeaderboard(score) {
 }
 
 function loadLeaderboard() {
-    const leaderboard = JSON.parse(localStorage.getItem('movieGamesLeaderboard')) || [];
-    const leaderboardHTML = leaderboard.map((entry, index) => `
+    let leaderboard = JSON.parse(localStorage.getItem('movieGamesLeaderboard')) || [];
+    let leaderboardHTML = leaderboard.map((entry, index) => `
         <div class="leaderboard-item">
             <span class="leaderboard-rank">#${index + 1}</span>
             <span class="leaderboard-name">${entry.name}</span>
@@ -467,28 +452,12 @@ function loadLeaderboard() {
     $('#leaderboard').html(leaderboardHTML || '<p>No scores yet. Be the first to play!</p>');
 }
 
-function shareScore() {
-    const text = `I scored ${score} points in ReelTime Movie Trivia! 🎬 Can you beat me? ${window.location.href}`;
-    
-    if (navigator.share) {
-        navigator.share({
-            title: 'My ReelTime Movie Trivia Score',
-            text: text,
-            url: window.location.href
-        });
-    } else {
-        
-        navigator.clipboard.writeText(text);
-        showToast('Score copied to clipboard! Share it with friends!', 'success');
-    }
-}
-
 function showToast(message, type) {
   
     $('.toast').remove();
     
     
-    const $toast = $('<div>').addClass(`toast toast-${type}`).text(message).css({
+    let $toast = $('<div>').addClass(`toast toast-${type}`).text(message).css({
         position: 'fixed',
         bottom: '20px',
         right: '20px',

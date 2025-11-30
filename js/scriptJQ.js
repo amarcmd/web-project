@@ -1,13 +1,13 @@
 
 //bookings
 let selectedSeats = new Set();
-const SEAT_PRICE = 7;  //7$ l price la el seat
+let SEAT_PRICE = 7;  //7$ l price la el seat
 //movie comments
 window.movieComments = {};
 $(function () {
     window.movieComments = window.movieComments || {};
     // comments lal movies in bookings
-const bookingMovieComments = {
+let bookingMovieComments = {
   "The Running Man": [
       {
         user: "user1",
@@ -69,11 +69,11 @@ const bookingMovieComments = {
     // Merge booking movie comments into global movieComments kermel el render te2dar testa3mela
     Object.entries(bookingMovieComments).forEach(([title, comments]) => {
     // if title already exists from movies.json, we append
-    const existing = window.movieComments[title] || [];
+    let existing = window.movieComments[title] || [];
     window.movieComments[title] = existing.concat(comments);
   });
 
-    const $gallery = $("#gallery");
+    let $gallery = $("#gallery");
 
     $.getJSON("../data/movies.json")
         .done(function (data) {
@@ -87,20 +87,20 @@ const bookingMovieComments = {
 
             data.categories.forEach(category => {
                 // Create the category section
-                const $section = $(`
+                let $section = $(`
           <section class="movies-cat">
             <h3>${category.name}</h3>
             <div class="movie"></div>
           </section>
         `);
 
-                const $row = $section.find(".movie");
+                let $row = $section.find(".movie");
 
                 // Add each movie card
                 (category.movies || []).forEach(movie => {
-                    const rating = movie.rating ?? "N/A";
+                    let rating = movie.rating ?? "N/A";
 
-                    const $card = $(`
+                    let $card = $(`
             <figure class="movie-card">
               <img src="${movie.image}" alt="${movie.title} poster">
               <figcaption>${movie.title}</figcaption>
@@ -121,7 +121,7 @@ const bookingMovieComments = {
                         window.movieComments[movie.title] = movie.comments;
                     }
                     // Rating overlay
-                    const $overlay = $(
+                    let $overlay = $(
                         `<span class="rating-overlay">${rating} / 5 ★</span>`
                     );
                     $card.append($overlay);
@@ -137,9 +137,9 @@ const bookingMovieComments = {
         });
     //seat selection
     function appendSeats(seats, rowType) {
-        const row = $("." + rowType)
+        let row = $("." + rowType)
         for (let i = 1; i <= seats; i++) {
-            const seat = $("<div>")
+            let seat = $("<div>")
             seat.addClass("seat");
             seat.attr("data-seat-id", rowType + "-" + i)
             row.append(seat);
@@ -151,13 +151,13 @@ const bookingMovieComments = {
         return shuffledSeats.slice(0, count);
     }
     function markRandomSeats(SEATS_RESERVED) {
-        const totalSeats = $(".seat");
-        const reservedSeats = getRandomSeats(totalSeats, SEATS_RESERVED);
+        let totalSeats = $(".seat");
+        let reservedSeats = getRandomSeats(totalSeats, SEATS_RESERVED);
         reservedSeats.forEach(seat => {
             $(seat).addClass("reserved");
         });
     }
-    const SEATS_RESERVED = 10;
+    let SEATS_RESERVED = 10;
     //instead of adding div aa kel wehde mennon
     appendSeats(10, "first-front-row");
     appendSeats(14, "second-front-row");
@@ -173,7 +173,7 @@ const bookingMovieComments = {
     $(document).on("click", ".seat:not(.reserved)", function () {
         $(this).toggleClass("selected");
 
-        const id = $(this).data("seat-id");
+        let id = $(this).data("seat-id");
 
         if ($(this).hasClass("selected")) {
             selectedSeats.add(id);
@@ -201,8 +201,8 @@ const bookingMovieComments = {
     let currentUser = null;
 
     $(document).ready(function () {
-        const $loginPanel = $('.login');
-        const loggedInUser = sessionStorage.getItem('loggedInUser');
+        let $loginPanel = $('.login');
+        let loggedInUser = sessionStorage.getItem('loggedInUser');
 
         if (loggedInUser) {
             $loginPanel.hide();
@@ -215,10 +215,10 @@ const bookingMovieComments = {
         $('.login-form').on('submit', function (e) {
             e.preventDefault();
 
-            const enteredUsername = $('#username').val().trim();
-            const enteredPassword = $('#password').val();
+            let enteredUsername = $('#username').val().trim();
+            let enteredPassword = $('#password').val();
 
-            const matchedUser = users.find(user =>
+            let matchedUser = users.find(user =>
                 user.username === enteredUsername && user.password === enteredPassword
             );
 
@@ -231,14 +231,9 @@ const bookingMovieComments = {
 
                 // Ensure the user object has the watchlist array
                 matchedUser.watchlist = userWatchlist;
-
                 sessionStorage.setItem('loggedInUser', JSON.stringify(matchedUser));
-
-                // Hide login panel
+                 // Hide login panel
                 $loginPanel.fadeOut();
-
-                console.log("User logged in with watchlist:", userWatchlist.length, "movies");
-
                 if (typeof loadWatchlist === 'function') {
                     loadWatchlist();
                 }
@@ -251,7 +246,7 @@ const bookingMovieComments = {
 });
 let current = 1;
 function showStep(n) {
-    const btn = $("#btn" + n);
+    let btn = $("#btn" + n);
     if (!btn.hasClass("enabled")) {
         return;
     }
@@ -263,10 +258,10 @@ function showStep(n) {
     current = n;
 }
 function completeStep() {
-    const next = current + 1;
+    let next = current + 1;
     if (current === 4) {
-        const count = selectedSeats.size;
-        const total = count * SEAT_PRICE;
+        let count = selectedSeats.size;
+        let total = count * SEAT_PRICE;
 
         $("#TotalPrice").html(`
             <p><strong>Seats Selected:</strong> ${count}</p>
@@ -279,7 +274,7 @@ function completeStep() {
         sessionStorage.setItem("totalPrice", total);
     }
     if (next <= 5) {
-        const nextBtn = $("#btn" + next);
+        let nextBtn = $("#btn" + next);
         nextBtn.addClass("enabled");
         nextBtn.css("cursor", "pointer");
 
@@ -289,20 +284,20 @@ function completeStep() {
 
 // confirm booing
 $("#confirmbtn").on("click", function () {
-    const userData = sessionStorage.getItem("loggedInUser");
+    let userData = sessionStorage.getItem("loggedInUser");
 
-    const userObj = JSON.parse(userData);
-    const username = userObj.username;
-    const cinema = $("#cinemasSelect").val();
-    const movie = $("#movieselect").val();
-    const date = $("#dateselect").val();
-    const time = $("#timeselect").val();
-    const name = $("#Name").val();
-    const card = $("#CardNumber").val();
-    const cvv = $("#CVV").val();
-    const phone = $("#PhoneNumber").val();
-    const seats = JSON.parse(sessionStorage.getItem("selectedSeats")) || [];
-    const price = sessionStorage.getItem("totalPrice") || 0;
+    let userObj = JSON.parse(userData);
+    let username = userObj.username;
+    let cinema = $("#cinemasSelect").val();
+    let movie = $("#movieselect").val();
+    let date = $("#dateselect").val();
+    let time = $("#timeselect").val();
+    let name = $("#Name").val();
+    let card = $("#CardNumber").val();
+    let cvv = $("#CVV").val();
+    let phone = $("#PhoneNumber").val();
+    let seats = JSON.parse(sessionStorage.getItem("selectedSeats")) || [];
+    let price = sessionStorage.getItem("totalPrice") || 0;
 
 
     if (!name.trim()) {
@@ -330,7 +325,7 @@ $("#confirmbtn").on("click", function () {
         return;
     }
 
-    const booking = { name, cinema, movie, date, time, seats, price };
+    let booking = { name, cinema, movie, date, time, seats, price };
     let allBookings = JSON.parse(localStorage.getItem("bookings")) || {};
 
     if (!allBookings[username]) {
@@ -343,7 +338,7 @@ $("#confirmbtn").on("click", function () {
 
     console.log(allBookings);
     // Disable l confirm button 
-    const $confirmBtn = $("#confirmbtn");
+    let $confirmBtn = $("#confirmbtn");
     $confirmBtn.prop("disabled", true);
     $confirmBtn.text("Processing...");
      $("#confirmation").html(`
