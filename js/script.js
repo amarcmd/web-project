@@ -117,20 +117,37 @@ const heroImages = [
 let heroIndex = 0;
 let autoAdvanceInterval;
 let isTransitioning = false;
-// Create indicator container and circles
-const indicatorsContainer = document.createElement('div');
-indicatorsContainer.className = 'carousel-indicators';
-heroBox.appendChild(indicatorsContainer);
-// Create indicators
-heroImages.forEach((_, index) => {
-  const indicator = document.createElement('div');
-  indicator.className = 'indicator';
-  if (index === 0) indicator.classList.add('active');
-  indicator.addEventListener('click', () => setHero(index));
-  indicatorsContainer.appendChild(indicator);
-});
+if(heroBox){
+
+  // Create indicator container and circles
+  const indicatorsContainer = document.createElement('div');
+  indicatorsContainer.className = 'carousel-indicators';
+  heroBox.appendChild(indicatorsContainer);
+
+  // Create indicators
+  heroImages.forEach((_, index) => {
+    const indicator = document.createElement('div');
+    indicator.className = 'indicator';
+    if (index === 0) indicator.classList.add('active');
+    indicator.addEventListener('click', () => setHero(index));
+    indicatorsContainer.appendChild(indicator);
+  });
+  //initialize
+  setHero(0);
+  startAutoAdvance();
+  //pasue when hover
+  heroBox.addEventListener('mouseenter', () => {
+    clearInterval(autoAdvanceInterval);
+  });
+  //resume when no hover
+  heroBox.addEventListener('mouseleave', () => {
+    startAutoAdvance();
+  });
+}
 function setHero(i) {
+  if(!heroBox) return; //la2an mafee hero box ella b index.html
   if (isTransitioning) return;
+
   isTransitioning = true;
   heroIndex = (i + heroImages.length) % heroImages.length;
   heroBox.style.backgroundImage = `url("${heroImages[heroIndex]}")`;
@@ -151,23 +168,13 @@ function prevImage() {
 }
 // Start auto-advancing every 3 seconds
 function startAutoAdvance() {
+  if(!heroBox) return; //la2an mafee hero box ella b index.html
   autoAdvanceInterval = setInterval(() => {
     if (!isTransitioning) {
       nextImage();
     }
   }, 3000);
 }
-// Initialize the carousel and start auto-advance
-setHero(0);
-startAutoAdvance();
-// Pause auto-advance when hovering over the hero box to show the content clear
-heroBox.addEventListener('mouseenter', () => {
-  clearInterval(autoAdvanceInterval);
-});
-// Resume auto-advance when mouse leaves
-heroBox.addEventListener('mouseleave', () => {
-  startAutoAdvance();
-});
 
 
 

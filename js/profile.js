@@ -16,6 +16,10 @@ function initializeProfile() {
         loadWatchlist(user);
         loadRatedMovies(user);
         loadBookedMovies(user);
+        //.off to remove previous handlers and .on to add new handler and rerender booked movies
+        $(document).off('change', '#booked-sort').on('change', '#booked-sort', function () {
+          loadBookedMovies(user);
+        });
 }
 
 

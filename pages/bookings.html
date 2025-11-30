@@ -9,7 +9,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- for search icon-->
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/bookings.css">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="../js/script.js" defer></script>
   <script src="../js/watchlist.js"></script>
   <script src="../js/scriptJQ.js" defer></script>
@@ -183,7 +183,7 @@
             data-genres="Action, Sci-Fi, Thriller"
             data-this-movie-is="Intense, Violent, Futuristic"
             data-rating="4.3">
-            <img src="../imgs/therunningman.jpg" alt="The Running Man poster">
+            <img src="../imgs/therunningman.jpg" alt="The Running Man">
             <figcaption>The Running Man</figcaption>
             <div class="showtimes">1:00pm • 3:00pm • 6:00pm • 9:00pm</div>
             </figure>
@@ -196,7 +196,7 @@
             data-genres="Action, Sci-Fi, Horror"
             data-this-movie-is="Gory, Suspenseful, Alien Hunt"
             data-rating="3.3">
-            <img src="../imgs/predator badlands.jpg" alt="Predator: Badlands poster">
+            <img src="../imgs/predator badlands.jpg" alt="Predator: Badlands">
             <figcaption>Predator: Badlands</figcaption>
             <div class="showtimes">1:00pm • 3:00pm • 6:00pm • 9:00pm</div>
            </figure>
@@ -346,7 +346,7 @@
     let rating = card.dataset.rating || "N/A";
 
     let overlay = document.createElement("span");
-    overlay.className = "rating-overlay";
+    overlay.className = "rating-overlay booking-rating-overlay";
     overlay.textContent = `${rating} / 5 ★`;
 
     card.appendChild(overlay);
