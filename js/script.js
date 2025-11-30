@@ -1,11 +1,5 @@
-let menuToggle = document.getElementById("hamburger");
-let header = document.querySelector("header");
-let gallery = document.querySelector(".gallery");
-
-
-menuToggle.addEventListener("click", () => {
-  header.classList.toggle("header-nav-open");
-});
+document.getElementById('hamburger').addEventListener("click", () => {
+document.querySelector("header").classList.toggle("header-nav-open");});
 
 
 let modal = document.getElementById('card-modal');
@@ -158,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchToggle = document.getElementById("searchToggle");
   const movieCards = document.querySelectorAll(".movie-card");
   const overlay = document.getElementById("searchOverlay");
-  const resultsContainer = overlay.querySelector(".search-results");
+  const resultsContainer = document.querySelector(".search-results");
 
   if (searchContainer && searchInput && searchToggle) {
     searchToggle.addEventListener("click", (e) => {

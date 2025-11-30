@@ -16,8 +16,7 @@
 
 /* Hero Banner */
 .profile-hero {
-    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(95, 16, 160, 0.1)),
-                url('../imgs/profile-bg.jpg') center/cover;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(95, 16, 160, 0.1));
     border-radius: 20px;
     padding: 40px;
     margin-bottom: 30px;
@@ -617,7 +616,11 @@
     color: var(--accent-purple);
     border: 1px solid rgba(138, 43, 226, 0.4);
 }
-
+.booked-details{
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 4px;
+}
 
 .booked-meta {
     display: flex;
@@ -663,10 +666,21 @@
 }
 
 #booked-sort {
-  background: rgba(20,20,35,0.95);
+  background: #181827;
   color: #fff;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 6px 10px;
+  border: 1px solid #555;
+  padding: 6px 12px;
   font-size: 0.85rem;
+  cursor: pointer;
+}
+
+
+#booked-sort:hover {
+  border-color: #8a2be2;
+}
+
+#booked-sort:focus {
+  outline: none;
+  border-color: #8a2be2;
 }

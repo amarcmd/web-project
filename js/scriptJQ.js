@@ -5,6 +5,74 @@ const SEAT_PRICE = 7;  //7$ l price la el seat
 //movie comments
 window.movieComments = {};
 $(function () {
+    window.movieComments = window.movieComments || {};
+    // comments lal movies in bookings
+const bookingMovieComments = {
+  "The Running Man": [
+      {
+        user: "user1",
+        rating: 5,
+        text: "Great movie, def recommend!"
+      },
+      {
+        user: "movieFan99",
+        rating: 4,
+        text: "Loved the show concept and action."
+      },
+      {
+        user: "retroAddict",
+        rating: 5,
+        text: "Pure 80s chaos in the best way."
+      }
+    ],
+
+  "Predator:Badlands": [
+      {
+        user: "sciFiNerd",
+        rating: 4,
+        text: "Cool expansion of the Predator universe."
+      }
+    ],
+
+  "HardaBasht": [
+      {
+        user: "beirutWatcher",
+        rating: 5,
+        text: "Hits hard. Really good Lebanese drama."
+      }
+    ],
+
+  "Jujutsu Kaisen:Execution": [
+      {
+        user: "animeFan",
+        rating: 5,
+        text: "Peak JJK energy, fights are insane."
+      }
+    ],
+
+  "Playdate": [
+      {
+        user: "dadJokes",
+        rating: 4,
+        text: "Weird but fun, loved the dynamic."
+      }
+    ],
+
+  "El Selem W El Thoban": [
+      {
+        user: "dramaQueen",
+        rating: 5,
+        text: "Beautiful story, really liked the chemistry."
+      }
+    ]
+};
+    // Merge booking movie comments into global movieComments kermel el render te2dar testa3mela
+    Object.entries(bookingMovieComments).forEach(([title, comments]) => {
+    // if title already exists from movies.json, we append
+    const existing = window.movieComments[title] || [];
+    window.movieComments[title] = existing.concat(comments);
+  });
+
     const $gallery = $("#gallery");
 
     $.getJSON("data/movies.json")
@@ -222,12 +290,7 @@ function completeStep() {
 // confirm booing
 $("#confirmbtn").on("click", function () {
     const userData = sessionStorage.getItem("loggedInUser");
-    if (!userData) {
-        $("#confirmation").html(
-            `<span>You must be logged in to confirm a booking.</span>`
-        );
-        return;
-    }
+
     const userObj = JSON.parse(userData);
     const username = userObj.username;
     const cinema = $("#cinemasSelect").val();

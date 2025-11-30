@@ -1,41 +1,26 @@
-// Enhanced profile.js - Fixed version
+
 $(document).ready(function() {
-    console.log('🔄 Initializing profile page...');
     initializeProfile();
-     $(document).on('change', '#booked-sort', function () {
-        const userData = sessionStorage.getItem('loggedInUser');
-        if (!userData) return;
-        const user = JSON.parse(userData);
-        loadBookedMovies(user);
-    });
-});
+    initializeToastStyles();
+   
+
 
 function initializeProfile() {
-    try {
-        const userData = sessionStorage.getItem('loggedInUser');
-        console.log('👤 User data found:', !!userData);
-        
+        let userData = sessionStorage.getItem('loggedInUser'); 
         if (!userData) {
             showLoginRequired();
             return;
         }
-
-        const user = JSON.parse(userData);
-        console.log('✅ User loaded:', user.username);
-        
-        renderModernProfile(user);
-        loadModernWatchlist(user);
+        let user = JSON.parse(userData);
+        renderProfile(user);
+        loadWatchlist(user);
         loadRatedMovies(user);
         loadBookedMovies(user);
-        
-    } catch (error) {
-        console.error('❌ Error initializing profile:', error);
-        showProfileError('Failed to load profile. Please refresh the page.');
-    }
 }
 
+
+//this function if no one login
 function showLoginRequired() {
-    console.log('🔒 Showing login required message');
     $('main').html(`
         <div class="profile-modern">
             <div class="empty-watchlist">
@@ -48,23 +33,9 @@ function showLoginRequired() {
     `);
 }
 
-function showProfileError(message) {
+//this function giv all part of DOM in html
+function renderProfile(user) {
     $('main').html(`
-        <div class="profile-modern">
-            <div class="empty-watchlist">
-                <div class="empty-icon">⚠️</div>
-                <h3>Something went wrong</h3>
-                <p>${message}</p>
-                <button onclick="location.reload()" class="retry-btn">Refresh Page</button>
-            </div>
-        </div>
-    `);
-}
-
-function renderModernProfile(user) {
-    console.log('🎨 Rendering profile for:', user.username);
-    
-    const profileHTML = `
         <div class="profile-modern">
             <div class="profile-hero">
                 <div class="user-avatar-container">
@@ -130,33 +101,17 @@ function renderModernProfile(user) {
                 </div>
             </div>
         </div>
-    `;
-    
-    $('main').html(profileHTML);
-    console.log('✅ Profile rendered successfully');
-}
+    `);
+     }
 
-function loadModernWatchlist(user) {
-    console.log('📋 Loading watchlist for:', user.username);
-    
-    try {
-        let saved;
-        try {
-            saved = JSON.parse(localStorage.getItem('watchlist')) || [];
-        } catch (e) {
-            console.error('❌ Error parsing watchlist:', e);
-            saved = [];
-            localStorage.setItem('watchlist', '[]');
-        }
 
-        const userWatchlist = saved.filter(movie => movie.username === user.username);
-        console.log('📊 Watchlist items:', userWatchlist.length);
-
-        $('#watchlist-count').text(userWatchlist.length);
+//this function load the movies in watch list and its rating if it has
+function loadWatchlist(user) {
+        let saved= JSON.parse(localStorage.getItem('watchlist')) || [];
+        let userWatchlist = saved.filter(movie => movie.username === user.username);
+       $('#watchlist-count').text(userWatchlist.length);
         $('#watchlist-counter').text(userWatchlist.length + ' movie' + (userWatchlist.length !== 1 ? 's' : ''));
-
-        const $modernWatchlist = $('#modern-watchlist');
-        
+        let $modernWatchlist = $('#modern-watchlist');
         if (userWatchlist.length === 0) {
             $modernWatchlist.html(`
                 <div class="empty-watchlist" style="grid-column: 1 / -1;">
@@ -168,28 +123,17 @@ function loadModernWatchlist(user) {
             `);
             return;
         }
-
         // Get user ratings
         let savedRatings = {};
-        try {
-            savedRatings = JSON.parse(localStorage.getItem('movieRatings')) || {};
-        } catch (e) {
-            console.error('❌ Error parsing ratings:', e);
-            savedRatings = {};
-        }
-        
+        savedRatings = JSON.parse(localStorage.getItem('movieRatings')) || {};
         const userRatings = savedRatings[user.username] || {};
-
         const watchlistHTML = userWatchlist.map(movie => {
-            const isRated = userRatings[movie.title];
-            const safeImage = movie.image || '../../imgs/default-movie.jpg';
-            
+        const isRated = userRatings[movie.title];
+        const safeImage = movie.image || '../../imgs/default-movie.jpg';
             return `
                 <div class="watchlist-card-modern">
                     <img src="${safeImage}" alt="${movie.title}" class="card-image" onerror="this.src='../../imgs/default-movie.jpg'">
-                    
                     ${isRated ? `<div class="rated-badge">Rated ${userRatings[movie.title].rating}/5</div>` : ''}
-                    
                     <div class="card-content">
                         <h3 class="card-title">${movie.title}</h3>
                         <div class="card-rating">⭐ ${movie.rating}/5</div>
@@ -205,55 +149,29 @@ function loadModernWatchlist(user) {
                 </div>
             `;
         }).join('');
-        
         $modernWatchlist.html(watchlistHTML);
-        
         // Add event handlers
         $modernWatchlist.off('click', '.btn-rate-large').on('click', '.btn-rate-large', function() {
             const title = $(this).data('title');
             const currentRating = userRatings[title] ? userRatings[title].rating : 0;
             openLargeRatingModal(title, currentRating);
         });
-        
         $modernWatchlist.off('click', '.btn-remove').on('click', '.btn-remove', function() {
             const title = $(this).data('title');
-            removeFromModernWatchlist(title);
+            removeFromWatchlist(title);
         });
-        
-    } catch (error) {
-        console.error('❌ Error loading watchlist:', error);
-        $('#modern-watchlist').html(`
-            <div class="error-state" style="grid-column: 1 / -1;">
-                <div class="error-icon">⚠️</div>
-                <h3>Error Loading Watchlist</h3>
-                <p>Please try refreshing the page.</p>
-            </div>
-        `);
-    }
 }
 
+
+//this function load the movies that is rated and we can edit the rate or remove
 function loadRatedMovies(user) {
-    console.log('⭐ Loading rated movies for:', user.username);
-    
-    try {
         let savedRatings = {};
-        try {
             savedRatings = JSON.parse(localStorage.getItem('movieRatings')) || {};
-        } catch (e) {
-            console.error('❌ Error parsing movie ratings:', e);
-            savedRatings = {};
-        }
-        
         const userRatings = savedRatings[user.username] || {};
         const ratedCount = Object.keys(userRatings).length;
-        
-        console.log('📊 Rated movies count:', ratedCount);
-
         $('#rated-count').text(ratedCount);
         $('#rated-counter').text(ratedCount + ' movie' + (ratedCount !== 1 ? 's' : '') + ' rated');
-        
         const $ratedGrid = $('#modern-rated');
-        
         if (ratedCount === 0) {
             $ratedGrid.html(`
                 <div class="empty-rated">
@@ -264,7 +182,6 @@ function loadRatedMovies(user) {
             `);
             return;
         }
-
         const ratedHTML = Object.entries(userRatings).map(([movieTitle, ratingData]) => {
             const safeImage = ratingData.image || '../imgs/default-movie.jpg';
             
@@ -282,48 +199,27 @@ function loadRatedMovies(user) {
                 </div>
             `;
         }).join('');
-        
         $ratedGrid.html(ratedHTML);
-        
         // Add event handlers
         $ratedGrid.off('click', '.btn-edit-rating').on('click', '.btn-edit-rating', function() {
             const title = $(this).data('title');
             const currentRating = userRatings[title].rating;
             openLargeRatingModal(title, currentRating);
         });
-        
         $ratedGrid.off('click', '.btn-remove-rated').on('click', '.btn-remove-rated', function() {
             const title = $(this).data('title');
             removeMovieRating(title);
         });
-        
-    } catch (error) {
-        console.error('❌ Error loading rated movies:', error);
-        $('#modern-rated').html(`
-            <div class="error-state">
-                <div class="error-icon">⚠️</div>
-                <h3>Error Loading Ratings</h3>
-                <p>Please try refreshing the page.</p>
-            </div>
-        `);
-    }
 }
 
+
 function loadBookedMovies(user) {
-    console.log('🎟️ Loading booked movies for:', user.username);
-    
-    try {
         let allBookings = {};
-        try {
+        
             allBookings = JSON.parse(localStorage.getItem('bookings')) || {};
-        } catch (e) {
-            console.error('❌ Error parsing bookings:', e);
-            allBookings = {};
-        }
-
-        const userBookings = allBookings[user.username] || [];
-        console.log('📊 User bookings:', userBookings.length);
-
+    
+     const userBookings = allBookings[user.username] || [];
+      
         const $bookedGrid = $('#booked-grid');
         const $bookedCounter = $('#booked-counter');
         const bookedCount = userBookings.length;
@@ -349,6 +245,9 @@ function loadBookedMovies(user) {
                     <h3 class="booked-movie-title">${b.movie || 'Unknown Movie'}</h3>
                     <span class="booked-cinema">${b.cinema || 'Unknown Cinema'}</span>
                 </div>
+                <div class="booked-details">
+                    <span><strong>Name:</strong> ${b.name || 'Not specified'}</span>
+                </div>
                 <div class="booked-meta">
                     <span><strong>Date:</strong> ${b.date || 'Not specified'}</span>
                     <span><strong>Time:</strong> ${b.time || 'Not specified'}</span>
@@ -361,33 +260,22 @@ function loadBookedMovies(user) {
         `).join('');
 
         $bookedGrid.html(bookedHTML);
-        
-    } catch (error) {
-        console.error('❌ Error loading booked movies:', error);
-        $('#booked-grid').html(`
-            <div class="error-state">
-                <div class="error-icon">⚠️</div>
-                <h3>Error Loading Bookings</h3>
-                <p>Please try refreshing the page.</p>
-            </div>
-        `);
-    }
 }
+
+
+
 function parseBookingDate(booking) {
     if (!booking || !booking.date) return null;
 
-    // booking.date aam yethawwal la "YYYY-MM-DD"
-    const parts = booking.date.split("-");
-    if (parts.length !== 3) return null;
-
-    const year  = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1; // l JS months 0–11
-    const day   = parseInt(parts[2], 10);
-
-    const d = new Date(year, month, day);
-    if (isNaN(d.getTime())) return null;
-
-    return d;
+    // booking.date aam yethawwal la "YYYY-MM-DD" wl time la "HH:MM"
+     const [year, month, day] = booking.date.split("-").map(Number);
+     let hour=0, minute=0;
+     if(booking.time){
+        const[h,m]=booking.time.split(":").map(Number);
+        hour=h;
+        minute=m;
+     }
+    return new Date(year, month - 1, day, hour, minute);
 }
 
 function sortBookingsByMode(bookings, mode) {
@@ -420,11 +308,9 @@ function sortBookingsByMode(bookings, mode) {
     return withMeta.map(({ _idx, _dateObj, ...rest }) => rest);
 }
 
-// ===== RATING MODAL FUNCTIONS =====
+//this function open RATING MODAL FUNCTIONS 
 function openLargeRatingModal(movieTitle, currentRating = 0) {
-    console.log('🎯 Opening rating modal for:', movieTitle);
-    
-    try {
+   
         const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
         if (!userData) {
             alert('Please log in to rate movies.');
@@ -432,12 +318,9 @@ function openLargeRatingModal(movieTitle, currentRating = 0) {
         }
 
         let savedRatingsAll = {};
-        try {
+      
             savedRatingsAll = JSON.parse(localStorage.getItem('movieRatings')) || {};
-        } catch (e) {
-            console.error('Error parsing ratings:', e);
-            savedRatingsAll = {};
-        }
+       
         
         const userRatingsAll = savedRatingsAll[userData.username] || {};
         const existingRatingData = userRatingsAll[movieTitle];
@@ -533,12 +416,9 @@ function openLargeRatingModal(movieTitle, currentRating = 0) {
                 $(document).off('keydown.ratingModal');
             }
         });
-        
-    } catch (error) {
-        console.error('❌ Error opening rating modal:', error);
-        alert('Error opening rating modal. Please try again.');
-    }
 }
+
+
 
 function highlightLargeStars(rating) {
     $('#largeRatingStars .rating-star-large').each(function() {
@@ -551,19 +431,13 @@ function highlightLargeStars(rating) {
 }
 
 function saveMovieRating(movieTitle, rating, commentText = "") {
-    console.log('💾 Saving rating for:', movieTitle);
-    
-    try {
         const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
         if (!userData) return;
 
         let savedRatings = {};
-        try {
+       
             savedRatings = JSON.parse(localStorage.getItem('movieRatings')) || {};
-        } catch (e) {
-            console.error('Error parsing ratings:', e);
-            savedRatings = {};
-        }
+      
 
         if (!savedRatings[userData.username]) {
             savedRatings[userData.username] = {};
@@ -571,7 +445,7 @@ function saveMovieRating(movieTitle, rating, commentText = "") {
 
         // Get movie image from watchlist
         let movieImage = '../imgs/default-movie.jpg';
-        try {
+     
             const savedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
             const movieFromWatchlist = savedWatchlist.find(
                 m => m.title === movieTitle && m.username === userData.username
@@ -579,10 +453,7 @@ function saveMovieRating(movieTitle, rating, commentText = "") {
             if (movieFromWatchlist) {
                 movieImage = movieFromWatchlist.image || '../imgs/default-movie.jpg';
             }
-        } catch (e) {
-            console.error('Error getting movie image:', e);
-        }
-
+       
         // Save rating
         savedRatings[userData.username][movieTitle] = {
             rating: rating,
@@ -596,12 +467,9 @@ function saveMovieRating(movieTitle, rating, commentText = "") {
         // Save comment to extra comments if provided
         if (commentText) {
             let extraComments = {};
-            try {
+            
                 extraComments = JSON.parse(localStorage.getItem('movieCommentsExtra')) || {};
-            } catch (e) {
-                console.error('Error parsing extra comments:', e);
-                extraComments = {};
-            }
+          
             
             if (!extraComments[movieTitle]) extraComments[movieTitle] = [];
 
@@ -616,19 +484,13 @@ function saveMovieRating(movieTitle, rating, commentText = "") {
         }
 
         // Refresh profile
-        loadModernWatchlist(userData);
+        loadWatchlist(userData);
         loadRatedMovies(userData);
         
-    } catch (error) {
-        console.error('❌ Error saving rating:', error);
-        alert('Error saving rating. Please try again.');
-    }
 }
 
 function removeMovieRating(movieTitle) {
-    console.log('🗑️ Removing rating for:', movieTitle);
-    
-    try {
+   
         const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
         let savedRatings = JSON.parse(localStorage.getItem('movieRatings')) || {};
         
@@ -636,21 +498,17 @@ function removeMovieRating(movieTitle) {
             delete savedRatings[userData.username][movieTitle];
             localStorage.setItem('movieRatings', JSON.stringify(savedRatings));
             
-            loadModernWatchlist(userData);
+            loadWatchlist(userData);
             loadRatedMovies(userData);
             
             showToast(`Rating for "${movieTitle}" removed`, 'removed');
         }
-    } catch (error) {
-        console.error('❌ Error removing rating:', error);
-        alert('Error removing rating. Please try again.');
-    }
+    
 }
 
-function removeFromModernWatchlist(title) {
-    console.log('🗑️ Removing from watchlist:', title);
-    
-    try {
+
+
+function removeFromWatchlist(title) {
         const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
         
         // Remove from watchlist
@@ -666,19 +524,16 @@ function removeFromModernWatchlist(title) {
         sessionStorage.setItem('loggedInUser', JSON.stringify(userData));
         
         // Reload
-        loadModernWatchlist(userData);
+        loadWatchlist(userData);
         loadRatedMovies(userData);
         
         showToast(`"${title}" removed from watchlist and ratings`, 'removed');
         
-    } catch (error) {
-        console.error('❌ Error removing from watchlist:', error);
-        alert('Error removing from watchlist. Please try again.');
-    }
+  
 }
 
 function showToast(message, type) {
-    try {
+    
         $('.toast').remove();
         
         const toast = $(`
@@ -695,9 +550,7 @@ function showToast(message, type) {
             toast.removeClass('show');
             setTimeout(() => toast.remove(), 300);
         }, 3000);
-    } catch (error) {
-        console.error('Error showing toast:', error);
-    }
+   
 }
 
 // Initialize toast styles
@@ -765,7 +618,81 @@ function initializeToastStyles() {
     }
 }
 
-// Initialize when document is ready
-$(document).ready(function() {
-    initializeToastStyles();
+   
+});
+//profile search 
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("SearchInput");
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", () => {
+    const q = searchInput.value.toLowerCase().trim();
+
+    const watchContainer = document.getElementById("modern-watchlist");
+    const ratedContainer = document.getElementById("modern-rated");
+    if (!watchContainer && !ratedContainer) return; 
+
+    const watchCards = watchContainer
+      ? watchContainer.querySelectorAll(".watchlist-card-modern"): [];
+    const ratedCards = ratedContainer
+      ? ratedContainer.querySelectorAll(".rated-card-modern"): [];
+
+    const filterCards = (cards) => {
+      cards.forEach((card) => {
+        const titleEl = card.querySelector(".card-title");
+        const ratingEl = card.querySelector(".rated-badge, .card-rating");
+
+        const titleText = (titleEl?.textContent || "").toLowerCase();
+        const ratingText = (ratingEl?.textContent || "").toLowerCase();
+
+        const matches =
+          !q || titleText.includes(q) || ratingText.includes(q);
+
+        card.style.display = matches ? "" : "none";
+      });
+    };
+
+   // to display msg eza ma mawjood l movie
+    const updateEmptyMessage = (container, cardsNodeList, sectionLabel) => {
+      if (!container) return;
+
+      const existingMsg = container.querySelector(".search-empty-msg");
+
+      // eza ma fi search, remove msg
+      if (!q) {
+        if (existingMsg) existingMsg.remove();
+        return;
+      }
+
+      // Count kam card
+      const visibleCount = Array.from(cardsNodeList).filter(
+        (card) => card.style.display !== "none"
+      ).length;
+
+      if (visibleCount === 0) {
+        // eza ma fi cards, add msg
+        if (!existingMsg) {
+          const msg = document.createElement("div");
+          msg.className = "search-empty-msg";
+          msg.style.gridColumn = "1 / -1";
+          msg.style.textAlign = "center";
+          msg.style.padding = "20px";
+          msg.style.opacity = "0.8";
+          msg.textContent = `No movies match your search in ${sectionLabel}.`;
+          container.appendChild(msg);
+        }
+      } else {
+        // cards mawjoodin remove msg
+        if (existingMsg) existingMsg.remove();
+      }
+    };
+
+    // filter cards
+    filterCards(watchCards);
+    filterCards(ratedCards);
+
+    // update empty msg
+    updateEmptyMessage(watchContainer, watchCards, "Watchlist");
+    updateEmptyMessage(ratedContainer, ratedCards, "Rated Movies");
+  });
 });
