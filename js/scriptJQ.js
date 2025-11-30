@@ -193,9 +193,9 @@ const bookingMovieComments = {
     //login 
 
     let users = [
-        { username: "Tasneem", password: "AbdAlkareem", img: "https://robohash.org/Amar", email: "tasneem@gmail.com", id: 2025001, watchlist: [], booking: [], },
-        { username: "Amar", password: "444", img: "https://robohash.org/tasneem", email: "Amar444@gmail.com", id: 2025002, watchlist: [], booking: [] },
-        { username: "roaa", password: "soloh", img: "https://robohash.org/roaa", email: "roaasoloh@gmail.com", id: 2025003, watchlist: [], booking: [] },
+        { username: "Tasneem", password: "AbdAlkareem", img: "https://robohash.org/Amar", email: "tasneem@gmail.com", id: 2025001, since: 2023, watchlist: [], booking: [], },
+        { username: "Amar", password: "444", img: "https://robohash.org/tasneem", email: "Amar444@gmail.com", id: 2025002, since: 2024, watchlist: [], booking: [] },
+        { username: "roaa", password: "soloh", img: "https://robohash.org/roaa", email: "roaasoloh@gmail.com", id: 2025003, since: 2024, watchlist: [], booking: [] },
     ];
 
     let currentUser = null;

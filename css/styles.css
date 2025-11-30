@@ -408,10 +408,12 @@ header {
   margin: 50px auto;
   border-radius: 20px;
   overflow: hidden;
-  background: url("../imgs/welcome page.png");
+  /* background: url("../imgs/welcome page.png"); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+   transition: background-image 0.5s ease-in-out ;
+   
   
 }
 
@@ -450,6 +452,32 @@ header {
   font-weight: 600;
   width: 130px;
 }
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    margin-top:150px;
+}
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .indicator.active {
+    background-color: #ffffff;
+    transform: scale(1.2);
+  }
+  .indicator:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
 
 /* ARROWS */
 .hero-btn {

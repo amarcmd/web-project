@@ -107,24 +107,70 @@ if (modal) {
   };
 }
 
+//for the welcome box to active the btns set indicator and trnsform to the next img every 3 sec
 const heroBox = document.getElementById("heroBox");
 const heroImages = [
   "../imgs/welcome page.png",
   "../imgs/Premiere.png",
   "../imgs/theatre.png"
-
 ];
-
 let heroIndex = 0;
-
+let autoAdvanceInterval;
+let isTransitioning = false;
+// Create indicator container and circles
+const indicatorsContainer = document.createElement('div');
+indicatorsContainer.className = 'carousel-indicators';
+heroBox.appendChild(indicatorsContainer);
+// Create indicators
+heroImages.forEach((_, index) => {
+  const indicator = document.createElement('div');
+  indicator.className = 'indicator';
+  if (index === 0) indicator.classList.add('active');
+  indicator.addEventListener('click', () => setHero(index));
+  indicatorsContainer.appendChild(indicator);
+});
 function setHero(i) {
+  if (isTransitioning) return;
+  isTransitioning = true;
   heroIndex = (i + heroImages.length) % heroImages.length;
   heroBox.style.backgroundImage = `url("${heroImages[heroIndex]}")`;
+  // Update active indicator
+  document.querySelectorAll('.indicator').forEach((indicator, index) => {
+    indicator.classList.toggle('active', index === heroIndex);
+  });
+  // Reset transitioning flag after transition completes
+  setTimeout(() => {
+    isTransitioning = false;
+  }, 800);
 }
+function nextImage() { 
+  setHero(heroIndex + 1); 
+}
+function prevImage() { 
+  setHero(heroIndex - 1); 
+}
+// Start auto-advancing every 3 seconds
+function startAutoAdvance() {
+  autoAdvanceInterval = setInterval(() => {
+    if (!isTransitioning) {
+      nextImage();
+    }
+  }, 3000);
+}
+// Initialize the carousel and start auto-advance
+setHero(0);
+startAutoAdvance();
+// Pause auto-advance when hovering over the hero box to show the content clear
+heroBox.addEventListener('mouseenter', () => {
+  clearInterval(autoAdvanceInterval);
+});
+// Resume auto-advance when mouse leaves
+heroBox.addEventListener('mouseleave', () => {
+  startAutoAdvance();
+});
 
-function nextImage() { setHero(heroIndex + 1); }
-function prevImage() { setHero(heroIndex - 1); }
-// Auto-close burger menu on resize
+
+
 function handleResize() {
     const header = document.querySelector("header");
     if (window.innerWidth > 978 && header.classList.contains("header-nav-open")) {
@@ -330,15 +376,9 @@ function openMovieModal(cardElement) {
   }
 }
 
-// WATCHLIST BUTTON THAT DOES NOTHING
-// In script.js - update the updateWatchlistButton function:
-// In script.js - REPLACE the updateWatchlistButton function with this:
 
 function updateWatchlistButton(movieTitle) {
     const watchlistBtn = document.querySelector('.add-watchlist-btn');
-  
-
-    // Remove any existing button and create a fresh one
     const newWatchlistBtn = watchlistBtn.cloneNode(true);
     watchlistBtn.parentNode.replaceChild(newWatchlistBtn, watchlistBtn);
 

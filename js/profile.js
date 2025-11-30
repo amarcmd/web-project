@@ -44,7 +44,8 @@ function renderProfile(user) {
                 </div>
                 <div class="profile-info-modern">
                     <h1>${user.username}</h1>
-                    <p style="color: #ccc; margin-bottom: 15px;">Movie Enthusiast</p>
+                    <p style="color: #ccc; margin-bottom: 15px;">${user.email}</p>
+                    <p style="color: #ccc; margin-bottom: 15px;">${user.id}</p>
                     <div class="profile-stats">
                         <div class="stat-item">
                             <span class="stat-number" id="watchlist-count">0</span>
@@ -59,7 +60,7 @@ function renderProfile(user) {
                             <span class="stat-label">Total Bookings</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number" id="member-since">2024</span>
+                            <span class="stat-number" id="member-since">${user.since}</span>
                             <span class="stat-label">Member Since</span>
                         </div>
                     </div>

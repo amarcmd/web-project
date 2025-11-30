@@ -35,23 +35,11 @@ function handleWatchlistAdd($button) {
     // Check if user is logged in
     let userData;
         userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
-        if (!userData) {
-            alert("Please log in to use the watchlist.");
-            return;
-        }
-        
-
-    // Get movie title from modal
-    let movieTitle = '';
+         let movieTitle = '';
    
         movieTitle = $('#modal-title').text().trim();
-        if (!movieTitle) {
-             return;
-        }
        
-
-    // Get movie image
-    // Get movie image safely
+       
 let movieImage = '';
 
     const $modalImage = $('.modal__media img');
@@ -89,7 +77,6 @@ let movieImage = '';
             saved = saved.filter(m => !(m.title === movieTitle && m.username === userData.username));
             $button.text('+ Add to Watchlist').removeClass('added');
             $button.css('background', '');
-            showToast(`"${movieTitle}" removed from your watchlist`, 'removed');
            } else {
             // ADD to watchlist
             const newMovie = {
@@ -102,7 +89,6 @@ let movieImage = '';
             saved.push(newMovie);
             $button.text('Remove from Watchlist').addClass('added');
             $button.css('background', '#5f10a0');
-            showToast(`"${movieTitle}" added to your watchlist!`, 'added');
            }
 
         // Save to localStorage
@@ -119,45 +105,3 @@ let movieImage = '';
 
     } 
 
-
-function showToast(message, type) {
-   
-    // Remove existing toasts
-    $('.watchlist-toast').remove();
-    
-    const backgroundColor = type === 'added' ? 
-        'linear-gradient(135deg, #8a2be2, #8662a3ff)' : 
-        'linear-gradient(135deg, #8a2be2, #8662a3ff)' 
-    
-    const $toast = $(`
-        <div class="watchlist-toast toast-${type}">
-            ${message}
-        </div>
-    `).css({
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        background: backgroundColor,
-        color: 'white',
-        padding: '12px 20px',
-        borderRadius: '8px',
-        fontWeight: '600',
-        zIndex: '10000',
-        transform: 'translateX(100%)',
-        transition: 'transform 0.3s ease',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-        maxWidth: '300px'
-        
-    });
-    
-    $('body').append($toast);
-    
-    // Animate in
-    setTimeout(() => $toast.css('transform', 'translateX(0)'), 10);
-    
-    // Remove after delay
-    setTimeout(() => {
-        $toast.css('transform', 'translateX(100%)');
-        setTimeout(() => $toast.remove(), 300);
-    }, 3000);
-}
