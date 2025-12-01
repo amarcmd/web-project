@@ -7,14 +7,14 @@
     --card-hover: #2a2a3e;
 }
 
-/* Modern Profile Container */
+
 .profile-modern {
     min-height: 100vh;
     background: var(--dark-bg);
     padding: 20px;
 }
 
-/* Hero Banner */
+
 .profile-hero {
     background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(95, 16, 160, 0.1));
     border-radius: 20px;
@@ -81,7 +81,7 @@
     color: #aaa;
 }
 
-/* Watchlist Section */
+
 .watchlist-section {
     background: rgba(30, 30, 45, 0.6);
     border-radius: 15px;
@@ -114,7 +114,6 @@
     margin: 50px;
 }
 
-/* Modern Watchlist Grid */
 /* .watchlist-grid-modern {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -135,7 +134,7 @@
     scrollbar-gutter: stable both-edges;
 }
 
-/* Scrollbar styling (WebKit) */
+/* scrollbar styling (WebKit) */
 .watchlist-grid-modern::-webkit-scrollbar,
 .rated-grid-modern::-webkit-scrollbar,
 .booked-grid-modern::-webkit-scrollbar {
@@ -194,14 +193,14 @@
     box-shadow: 0 15px 40px rgba(138, 43, 226, 0.3);
     border-color: var(--accent-purple);
 }
-/* Recommended: Purple for actions, red for remove */
+
 .card-actions {
     display: flex;
     gap: 8px;
     margin-top: 12px;
 }
 
-/* Action buttons (Rate, Update) - Purple */
+
 .btn-rate-large,
 .btn-edit-rating {
     flex: 1;
@@ -307,7 +306,6 @@
     border-color: var(--accent-purple);
 }
 
-/* Empty State */
 .empty-watchlist {
     text-align: center;
     padding: 60px 20px;
@@ -824,12 +822,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    /* Make them occupy the full width and a decent height
-       so the centering is visible */
     width: 100%;
     min-height: 180px;
 
     text-align: center;
-    padding: 20px; /* optional, just for breathing space */
+    padding: 20px;
 }

@@ -7,7 +7,7 @@
     --text-muted: #9a9ab5;
 }
 
-/* MAIN WRAPPER */
+
 .search-main {
     width: 100%;
     max-width: none;
@@ -17,7 +17,7 @@
     box-sizing: border-box;
 }
 
-/* HERO SECTION */
+
 .search-hero {
     text-align: center;
     max-width: 900px;
@@ -47,7 +47,7 @@
     color: var(--text-muted);
 }
 
-/* BIG SEARCH BAR */
+
 .search-bar-large {
     margin-top: 24px;
     max-width: 800px;
@@ -111,20 +111,19 @@
     box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.4);
 }
 
-/* RESULTS SECTION – FULL WIDTH */
+
 .search-results-section {
     width: 100%;
     margin-top: 32px;
     padding: 0 5vw 40px;
-    /* controls left/right spacing */
     box-sizing: border-box;
     margin-left: 0;
 }
 
-/* Header row above grid */
+
 .results-header {
     margin: 0 0 20px 0;
-    /* padding-inline: 1.5vw;   align header with grid */
+    /* padding-inline: 1.5vw;*/
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -157,7 +156,7 @@
     border-color: var(--accent-purple);
 }
 
-/* GRID */
+
 #searchResults {
     margin: 0;
     display: grid;
@@ -166,11 +165,11 @@
     justify-content: flex-start;
 }
 
-/* CARD */
+
 .movie-card {
     margin: 0;
     padding: 0;
-    height: 300px;
+    height: 262px;
 }
 
 #searchResults .movie-card {
@@ -186,7 +185,7 @@
 #searchResults .movie-card {
     width: 100%;
     background: #181827;
-    border-radius: 14px;
+    border-radius: 9px;
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
     cursor: pointer;
@@ -249,24 +248,23 @@
   top: 8px;
   right: 8px;
   cursor: pointer;
-  z-index: 5;
+  z-index: 1000;
 }
 
-/* Default: not in watchlist */
+/* not in watchlist */
 .watch-flag i {
   font-size: 20px;
-  color: #ffffff;                 /* red fill */
-  -webkit-text-stroke: 1px #000000;  /* black border (outline) */
+  color: #ffffff;              
+  -webkit-text-stroke: 1px #000000;  
   
 }
 
-/* When in watchlist – maybe a bit stronger + glow */
+/*in watchlist */
 .watch-flag.in-watchlist i {
-  color: #ff335f;                 /* brighter red */
+  color: #ff335f;                 
 }
-/* ===== RESPONSIVE TWEAKS ===== */
 
-/* ~870px / tablet-ish */
+
 @media (max-width: 900px) {
     .search-main {
         padding-top: 24px;
@@ -274,17 +272,16 @@
 
     .search-hero h1 {
         font-size: 1.9rem;
-        /* smaller title */
+  
     }
 
     .search-subtitle {
         font-size: 0.9rem;
-        /* smaller subtitle */
     }
 
     .search-bar-large {
         max-width: 600px;
-        /* narrower bar */
+
         padding: 6px 10px;
     }
 
@@ -302,7 +299,7 @@
         height: 36px;
     }
 
-    /* reduce left/right space for cards */
+
     .search-results-section {
         padding: 0 3vw 32px;
     }
@@ -312,7 +309,7 @@
     }
 }
 
-/* 770px and below: 3 cards per row (tablet-ish) */
+
 @media (max-width: 770px) and (min-width: 481px) {
     #searchResults {
 
@@ -320,14 +317,14 @@
     }
 }
 
-/* phones: override again for very small screens */
+
 @media (max-width: 703px) {
     #searchResults {
         grid-template-columns: repeat(2, minmax(0, 200px));
     }
 }
 
-/* extra small screens: 591px and below */
+
 @media (max-width: 591px) {
     .search-hero {
         margin-bottom: 24px;
@@ -346,14 +343,14 @@
 
     .search-subtitle {
         font-size: 0.8rem;
-        /* smaller subtitle */
+
         max-width: 90%;
         margin-inline: auto;
     }
 
     .search-bar-large {
         max-width: 90%;
-        /* narrower search bar */
+
         padding: 5px 8px;
     }
 
@@ -371,7 +368,7 @@
         height: 32px;
     }
 
-    /* optional: tighten results header a bit */
+
     .results-header h2 {
         font-size: 1.1rem;
     }

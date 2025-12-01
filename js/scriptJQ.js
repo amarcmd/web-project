@@ -106,7 +106,7 @@ let bookingMovieComments = {
                     let $card = $(`
             <figure class="movie-card">
               <img src="${movie.image}" alt="${movie.title} poster">
-              <figcaption>${movie.title}</figcaption>
+             
             </figure>`
                     );
 
@@ -124,9 +124,18 @@ let bookingMovieComments = {
                         window.movieComments[movie.title] = movie.comments;
                     }
                     // Rating overlay
-                    let $overlay = $(
-                        `<span class="rating-overlay">${rating} / 5 ★</span>`
-                    );
+                    let $overlay = $(`
+                    <div class="movie-overlay">
+                        <p class="movie-overlay-title">${movie.title || ""}</p>
+                        <p class="movie-overlay-desc">${movie.description || ""}</p>
+                        <div class="movie-overlay-bottom">
+                            <span class="film-overlay"> Movie </span>
+                            <span class="movie-overlay-rating">${rating} / 5 ★</span>
+                        </div>
+                    </div>
+                    `);
+
+                
                     $card.append($overlay);
 
                     $row.append($card);
@@ -284,7 +293,10 @@ function completeStep() {
         showStep(next);
     }
 }
-
+//checks eza number
+function isNumeric(value) {
+    return /^[0-9]+$/.test(value);
+}
 // confirm booing
 $("#confirmbtn").on("click", function () {
     let userData = sessionStorage.getItem("loggedInUser");
@@ -296,32 +308,59 @@ $("#confirmbtn").on("click", function () {
     let date = $("#dateselect").val();
     let time = $("#timeselect").val();
     let name = $("#Name").val();
+     let email=$("#Email").val();
     let card = $("#CardNumber").val();
     let cvv = $("#CVV").val();
     let phone = $("#PhoneNumber").val();
     let seats = JSON.parse(sessionStorage.getItem("selectedSeats")) || [];
     let price = sessionStorage.getItem("totalPrice") || 0;
-
-
+   
     if (!name.trim()) {
+        $("#confirmation").empty();
         $("#confirmation").html(`<span style="color:red">Please enter your full name.</span>`);
         return;
     }
+    if(!email.trim()){
+        $("#confirmation").empty();
+        $("#confirmation").html(`<span style="color:red">Please enter your email.</span>`); 
+        return;
+    }
     if (!phone.trim()) {
+        $("#confirmation").empty();
         $("#confirmation").html(`<span style="color:red">Please enter your Phone Number.</span>`);
         return;
     }
+    
+    if (!isNumeric(phone)) {
+        $("#confirmation").empty();
+        $("#confirmation").html(`<span style="color:red">Please enter a valid phone number.</span>`);
+        return;
+    }
     if (!card.trim()) {
+        $("#confirmation").empty();
         $("#confirmation").html(`<span style="color:red">Please enter your card number.</span>`);
         return;
     }
+    if (!isNumeric(card)) {
+        $("#confirmation").empty();
+        $("#confirmation").html(`<span style="color:red">Please enter a valid card number.</span>`);
+        return;
+    }
     if (!cvv.trim()) {
+        $("#confirmation").empty();
         $("#confirmation").html(`<span style="color:red">Please enter your CVV.</span>`);
+        return;
+    }
+        if (!isNumeric(cvv) || cvv.length!=3) {
+            $("#confirmation").empty();
+        $("#confirmation").html(`<span style="color:red">Please enter a valid CVV.</span>`);
         return;
     }
     // byekhdo aa step 3
     if (!date) {
+        $("#confirmation").empty();
         $("#confirmation").html(
+            
             `<span style="color:red">Please choose a date. Returning to Step 3...</span>`
         );
         setTimeout(() => showStep(3), 800);
@@ -399,5 +438,9 @@ $("#confirmbtn").on("click", function () {
         }, 10000); 
     }, 3000); // Simulate processing delay
 });
-
+$(".showShowTimes-btn").on("click", function(){
+    let card = e.target.closest(".movie-card");
+    openMovieModal(card);
+}
+)
 

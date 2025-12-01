@@ -121,14 +121,19 @@ $(function () {
                    
                 <img src="${imgSrc}" alt="${m.title}"
                     onerror="this.src='../imgs/default-movie.jpg'">
-                <figcaption>
-                <h3>${m.title}</h3>
-                </figcaption>
+                <div class="movie-overlay">
+                    <p class="movie-overlay-title">${m.title || ""}</p>
+                    <p class="movie-overlay-desc">${m.description || ""}</p>
+                    <div class="movie-overlay-bottom">
+                        <span class="film-overlay">Movie</span>
+                        <span class="movie-overlay-rating">${rating} / 5 ★</span>
+                    </div>
+                </div>
             </figure>
       `);
-            let $overlay = $('<span class="rating-overlay"></span>').text(`${rating} / 5 ★`);
+            
 
-            $card.append($overlay);
+          
             $grid.append($card);
 
         });
