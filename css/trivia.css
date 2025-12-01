@@ -29,9 +29,10 @@
 
 .games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
   gap: 25px;
   margin-bottom: 50px;
+  justify-content: center;
 }
 
 .game-card {
@@ -653,4 +654,21 @@
   color: #666;
   margin-bottom: 20px;
   font-size: 1.1em;
+}
+.search-empty-msg {
+  grid-column: 1 / -1;        /* take one row in the grid */
+  display: flex;
+  justify-content: center;    /* center the inner box */
+  margin-top: 10px;
+}
+
+.search-empty-msg-inner {
+  background: #141325;
+  border-radius: 16px;
+  padding: 20px 24px;
+  text-align: center;
+  max-width: 280px;           /* similar to a game card width */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  font-size: 0.95rem;
+  color: #ddd;
 }

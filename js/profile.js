@@ -1,4 +1,4 @@
-
+const MAX_COMMENT_CHARS = 100;
 $(document).ready(function() {
     initializeProfile();
     initializeToastStyles();
@@ -20,6 +20,7 @@ function initializeProfile() {
         $(document).off('change', '#booked-sort').on('change', '#booked-sort', function () {
           loadBookedMovies(user);
         });
+        setupProfileSearch();
 }
 
 
@@ -70,7 +71,9 @@ function renderProfile(user) {
                     </div>
                 </div>
             </div>
-            
+            <div class="search">
+                <input id="SearchInput" placeholder="Search movies in your watchlist..." />
+            </div>
             <div class="watchlist-section">
                 <div class="section-header">
                     <div class="section-title">My Watchlist</div>
@@ -120,10 +123,9 @@ function loadWatchlist(user) {
         if (userWatchlist.length === 0) {
             $modernWatchlist.html(`
                 <div class="empty-watchlist" style="grid-column: 1 / -1;">
-                    <div class="empty-icon">📽️</div>
                     <h3>Your Watchlist is Empty</h3>
                     <p>Start adding movies to build your personalized collection!</p>
-                    <a href="index.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Browse Movies →</a>
+                    <a href="../index.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Browse Movies →</a>
                 </div>
             `);
             return;
@@ -180,7 +182,6 @@ function loadRatedMovies(user) {
         if (ratedCount === 0) {
             $ratedGrid.html(`
                 <div class="empty-rated">
-                    <div class="empty-rated-icon">⭐</div>
                     <h3>No Movies Rated Yet</h3>
                     <p>Rate movies from your watchlist to see them here!</p>
                 </div>
@@ -235,9 +236,9 @@ function loadBookedMovies(user) {
         if (userBookings.length === 0) {
             $bookedGrid.html(`
                 <div class="empty-booked">
-                    <div class="empty-rated-icon">🎟️</div>
                     <h3>No Bookings Yet</h3>
                     <p>Book a movie from the bookings page and it will appear here.</p>
+                    <a href="../pages/bookings.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Book a Movie →</a>
                 </div>
             `);
             return;
@@ -352,8 +353,10 @@ function openLargeRatingModal(movieTitle, currentRating = 0) {
                     </div>
                     
                     <div class="rating-comment-wrapper">
-                        <label for="largeRatingComment">Your comment (optional)</label>
-                        <textarea id="largeRatingComment" rows="3" placeholder="What did you think of this movie?">${existingComment}</textarea>
+                        <label for="largeRatingComment">Your comment (optional)
+                        <span id="commentCounter" style="font-size: 0.8rem; opacity: 0.8;"> 0/${MAX_COMMENT_CHARS}</span>
+                        </label>
+                        <textarea id="largeRatingComment" rows="3" maxlength="${MAX_COMMENT_CHARS}" placeholder="What did you think of this movie?">${existingComment}</textarea>
                     </div>
 
                     <div class="rating-actions-large">
@@ -370,8 +373,20 @@ function openLargeRatingModal(movieTitle, currentRating = 0) {
         $('body').append(modalHTML);
         
         let selectedRating = currentRating;
-        const $confirmBtn = $('#confirmLargeRating');
+        let $confirmBtn = $('#confirmLargeRating');
         
+        let $comment = $('#largeRatingComment');
+        let $counter = $('#commentCounter');
+
+        if ($comment.length && $counter.length) {
+            let max = MAX_COMMENT_CHARS;
+            let updateCounter = () => {
+            let len = $comment.val().length;
+            $counter.text(`${len}/${max}`);
+            };
+            updateCounter();
+            $comment.on('input', updateCounter);
+        }
         // Initialize stars
         if (currentRating > 0) {
             highlightLargeStars(currentRating);
@@ -502,12 +517,26 @@ function removeMovieRating(movieTitle) {
         if (savedRatings[userData.username] && savedRatings[userData.username][movieTitle]) {
             delete savedRatings[userData.username][movieTitle];
             localStorage.setItem('movieRatings', JSON.stringify(savedRatings));
-            
+        }
+        
+        let extraComments = JSON.parse(localStorage.getItem('movieCommentsExtra')) || {};
+        if (extraComments[movieTitle]) {
+        extraComments[movieTitle] = extraComments[movieTitle].filter(
+            c => c.user !== userData.username
+        );
+
+        if (extraComments[movieTitle].length === 0) {
+            delete extraComments[movieTitle];
+        }
+
+        localStorage.setItem('movieCommentsExtra', JSON.stringify(extraComments));
+        }    
             loadWatchlist(userData);
             loadRatedMovies(userData);
             
             showToast(`Rating for "${movieTitle}" removed`, 'removed');
-        }
+        
+        
     
 }
 
@@ -626,21 +655,26 @@ function initializeToastStyles() {
    
 });
 //profile search 
-document.addEventListener("DOMContentLoaded", () => {
+function setupProfileSearch() {
   const searchInput = document.getElementById("SearchInput");
   if (!searchInput) return;
+
+  // To avoid adding multiple listeners if initializeProfile() is ever called again
+  searchInput.oninput = null;
 
   searchInput.addEventListener("input", () => {
     const q = searchInput.value.toLowerCase().trim();
 
     const watchContainer = document.getElementById("modern-watchlist");
     const ratedContainer = document.getElementById("modern-rated");
-    if (!watchContainer && !ratedContainer) return; 
+    if (!watchContainer && !ratedContainer) return;
 
     const watchCards = watchContainer
-      ? watchContainer.querySelectorAll(".watchlist-card-modern"): [];
+      ? watchContainer.querySelectorAll(".watchlist-card-modern")
+      : [];
     const ratedCards = ratedContainer
-      ? ratedContainer.querySelectorAll(".rated-card-modern"): [];
+      ? ratedContainer.querySelectorAll(".rated-card-modern")
+      : [];
 
     const filterCards = (cards) => {
       cards.forEach((card) => {
@@ -657,25 +691,22 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     };
 
-   // to display msg eza ma mawjood l movie
     const updateEmptyMessage = (container, cardsNodeList, sectionLabel) => {
       if (!container) return;
 
       const existingMsg = container.querySelector(".search-empty-msg");
 
-      // eza ma fi search, remove msg
+      // no query => remove message
       if (!q) {
         if (existingMsg) existingMsg.remove();
         return;
       }
 
-      // Count kam card
       const visibleCount = Array.from(cardsNodeList).filter(
         (card) => card.style.display !== "none"
       ).length;
 
       if (visibleCount === 0) {
-        // eza ma fi cards, add msg
         if (!existingMsg) {
           const msg = document.createElement("div");
           msg.className = "search-empty-msg";
@@ -687,17 +718,16 @@ document.addEventListener("DOMContentLoaded", () => {
           container.appendChild(msg);
         }
       } else {
-        // cards mawjoodin remove msg
         if (existingMsg) existingMsg.remove();
       }
     };
 
-    // filter cards
+    // apply filters
     filterCards(watchCards);
     filterCards(ratedCards);
 
-    // update empty msg
+    // empty messages
     updateEmptyMessage(watchContainer, watchCards, "Watchlist");
     updateEmptyMessage(ratedContainer, ratedCards, "Rated Movies");
   });
-});
+}

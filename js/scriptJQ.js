@@ -74,8 +74,11 @@ let bookingMovieComments = {
   });
 
     let $gallery = $("#gallery");
-
-    $.getJSON("../data/movies.json")
+//was getting errors when hosting
+    const basePath = window.location.pathname.includes("/pages/")
+        ? "../"
+        : "./";
+    $.getJSON(basePath + "data/movies.json")
         .done(function (data) {
             if (!$gallery.length) return;
             $gallery.empty();

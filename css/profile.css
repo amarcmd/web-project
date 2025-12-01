@@ -93,7 +93,6 @@
 
 .section-header {
     display: flex;
-    justify-content: between;
     align-items: center;
     margin-bottom: 25px;
 }
@@ -116,12 +115,71 @@
 }
 
 /* Modern Watchlist Grid */
-.watchlist-grid-modern {
+/* .watchlist-grid-modern {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));/*as for each screen*/
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
+} */
+/* 1 row maa scroll metel home*/
+.watchlist-grid-modern,
+.rated-grid-modern,
+.booked-grid-modern {
+    display: flex;
+    flex-wrap: nowrap;                 /* one row */
+    gap: var(--card-gap);              /* same spacing as home */
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.25rem 0 0.75rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable both-edges;
 }
 
+/* Scrollbar styling (WebKit) */
+.watchlist-grid-modern::-webkit-scrollbar,
+.rated-grid-modern::-webkit-scrollbar,
+.booked-grid-modern::-webkit-scrollbar {
+    height: 10px;
+}
+
+.watchlist-grid-modern::-webkit-scrollbar-track,
+.rated-grid-modern::-webkit-scrollbar-track,
+.booked-grid-modern::-webkit-scrollbar-track {
+    background: #18181c;
+    border-radius: 999px;
+}
+
+.watchlist-grid-modern::-webkit-scrollbar-thumb,
+.rated-grid-modern::-webkit-scrollbar-thumb,
+.booked-grid-modern::-webkit-scrollbar-thumb {
+    background: #3a3a44;
+    border-radius: 999px;
+}
+
+.watchlist-grid-modern::-webkit-scrollbar-thumb:hover,
+.rated-grid-modern::-webkit-scrollbar-thumb:hover,
+.booked-grid-modern::-webkit-scrollbar-thumb:hover {
+    background: #5a5a66;
+}
+
+/* Firefox scrollbar */
+.watchlist-grid-modern,
+.rated-grid-modern,
+.booked-grid-modern {
+    scrollbar-width: thin;
+    scrollbar-color: #3a3a44 #18181c;
+}
+
+/* Card width inside carousels */
+.watchlist-card-modern,
+.rated-card-modern {
+    flex: 0 0 calc(
+        (100% - (var(--cards-per-view) - 1) * var(--card-gap))
+        / var(--cards-per-view)
+    );
+    max-width: 240px;        /* same as home cards */
+    scroll-snap-align: start;
+}
 .watchlist-card-modern {
     background: linear-gradient(145deg, #2a2a3e, #1e1e2d);
     border-radius: 12px;
@@ -323,6 +381,7 @@
     border: 2px solid var(--accent-purple);
     box-shadow: 0 20px 60px rgba(138, 43, 226, 0.3);
     text-align: center;
+    overflow-y: auto;
 }
 
 .rating-modal-header {
@@ -424,10 +483,15 @@
 }
 
 .rated-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    display: flex;
+    flex-wrap: nowrap;                 /* one row */
+    gap: var(--card-gap);              /* same spacing as home */
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.25rem 0 0.75rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable both-edges;
 }
 
 .rated-card-modern {
@@ -437,6 +501,9 @@
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
+    flex: 0 0 calc((100% - (var(--cards-per-view) - 1) * var(--card-gap))/ var(--cards-per-view));
+    max-width: 240px;        /* same as home cards */
+    scroll-snap-align: start;
 }
 
 .rated-card-modern:hover {
@@ -535,7 +602,11 @@
 #largeRatingComment {
   width: 100%;
   min-height: 80px;
+  max-height: 120px;
   resize: vertical;
+  white-space: pre-wrap;
+  overflow-wrap:break-word;
+  word-break: break-word;
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -569,8 +640,6 @@
 }
 
 .booked-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
@@ -581,9 +650,10 @@
     padding: 16px 18px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
+    flex: 0 0 280px;
+    max-width: 280px;
     gap: 8px;
+
 }
 
 .booked-card-modern:hover {
@@ -615,6 +685,7 @@
     background: rgba(138, 43, 226, 0.2);
     color: var(--accent-purple);
     border: 1px solid rgba(138, 43, 226, 0.4);
+    width: fit-content;
 }
 .booked-details{
     font-size: 0.9rem;
@@ -683,4 +754,82 @@
 #booked-sort:focus {
   outline: none;
   border-color: #8a2be2;
+}
+.profile-modern .search {
+  margin: 0 auto 24px;
+  max-width: 720px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-modern #SearchInput {
+  width: 100%;
+  max-width: 720px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(10, 10, 20, 0.9);
+  color: #f5f5f5;
+  font-size: 0.95rem;
+}
+.profile-modern #SearchInput:hover {
+  border-color: blueviolet;
+}
+.profile-modern #SearchInput:focus {
+  border-color: blueviolet;
+}
+.profile-modern #SearchInput::placeholder {
+  color: #9a9ab5;
+}
+/* for select */
+@media (max-width: 511px) {
+
+  .booked-section .section-header {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    row-gap: 6px;
+    align-items: center;
+  }
+
+  /* row 1 - left */
+  .booked-section .section-title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* row 1 - right */
+  .booked-section #booked-counter {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;       /* keeps it aal right side */
+  }
+
+  /* row 2 full row under them te3 l selecte*/
+  .booked-section #booked-sort {
+    grid-column: 1 / span 2; /* take full width */
+    grid-row: 2;
+    justify-self: start;
+    width: 100%;
+    max-width: 220px;        
+    margin-top: 4px;
+  }
+}
+.empty-watchlist,
+.empty-rated,
+.empty-booked {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* Make them occupy the full width and a decent height
+       so the centering is visible */
+    width: 100%;
+    min-height: 180px;
+
+    text-align: center;
+    padding: 20px; /* optional, just for breathing space */
 }
