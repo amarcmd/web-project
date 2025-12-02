@@ -991,24 +991,24 @@ header {
 
 /*about page style*/
 
-.about-modern {
+.about {
     min-height: 100vh;
     background: var(--dark-bg);
+    padding: 20px;
 }
 
 /* Hero Section */
-.about-hero-modern {
+.about-hero,.cta-section {
+     text-align: center;
   padding: 40px 20px;
   background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(95, 16, 160, 0.1));
   border-radius: 20px;
   margin-bottom: 40px;
   border: 1px solid rgba(255,255,255,0.1);
-  text-align: center;
-  margin-top: 20px;
-  margin:20px;
+  
 }
 
-.about-hero-modern::before {
+.about-hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -1020,7 +1020,7 @@ header {
     pointer-events: none;
 }
 
-.hero-content {
+.hero-content,.cta-content {
     max-width: 800px;
     margin: 0 auto;
     position: relative;
@@ -1246,7 +1246,7 @@ header {
     background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(95, 16, 160, 0.05));
 }
 
-.stats-grid-modern {
+.stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
@@ -1254,7 +1254,7 @@ header {
     margin: 0 auto;
 }
 
-.stat-item-modern {
+.stat-item{
     text-align: center;
     padding: 30px;
 }
@@ -1274,7 +1274,7 @@ header {
     font-weight: 600;
 }
 
-.about-section-modern {
+.about-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -1282,9 +1282,10 @@ header {
     color: white;
     padding: 80px 20px;
     gap: 30px;
+    margin-bottom: 20px;
 }
 
-.about-block-modern {
+.about-block {
     flex: 1 1 300px;
     max-width: 350px;
     text-align: center;
@@ -1295,20 +1296,20 @@ header {
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-.about-block-modern:hover {
+.about-block:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 35px rgba(138, 43, 226, 0.2);
     border-color: var(--accent-purple);
 }
 
-.about-icon-modern {
+.about-icon {
     width: 70px;
     height: 70px;
     margin-bottom: 20px;
    opacity: 0.9;
 }
 
-.about-block-modern h3 {
+.about-block h3 {
     font-size: 1.4em;
     margin-bottom: 15px;
     color: white;
@@ -1320,21 +1321,14 @@ header {
 }
 
 
-.cta-section {
-    padding: 100px 20px;
-    background: linear-gradient(135deg, rgba(138, 43, 226, 0.9), rgba(95, 16, 160, 0.9));
-    color: white;
-    text-align: center;
-}
-
-.cta-content {
-    max-width: 600px;
-    margin: 0 auto;
-}
 
 .cta-content h2 {
-    font-size: 2.5em;
+    font-size: 3em;
     margin-bottom: 20px;
+    font-weight: 800;
+    color: #7a1fd1;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+
 }
 
 .cta-buttons {
@@ -1345,8 +1339,8 @@ header {
 }
 
 .btn-primary {
-    background: white;
-    color: var(--accent-purple);
+    background:#7a1fd1;
+    color:#ffffff;
     padding: 15px 30px;
     border-radius: 50px;
     font-weight: 600;
@@ -1354,8 +1348,8 @@ header {
 }
 
 .btn-secondary {
-    background: transparent;
-    color: white;
+   color: #ffffff;
+    border: 2px solid #7a1fd1;
     border: 2px solid white;
     padding: 15px 30px;
     border-radius: 50px;
@@ -1370,8 +1364,8 @@ header {
 }
 
 .btn-secondary:hover {
-    background: white;
-    color: var(--accent-purple);
+    background: #7a1fd1;
+    /* color: var(--accent-purple); */
 }
 
 /* Responsive */
@@ -1399,7 +1393,7 @@ header {
 }
 
 @media (max-width: 768px) {
-    .values-grid,.stats-grid-modern,.about-section-modern {
+    .values-grid,.stats-grid,.about-section-modern {
         grid-template-columns: 1fr;
     }
     
@@ -1431,7 +1425,7 @@ header {
 }
 
 @media (max-width: 480px) {
-    .about-hero-modern {
+    .about-hero {
         padding: 80px 20px;
     }
     
