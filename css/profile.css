@@ -114,11 +114,7 @@
     margin: 50px;
 }
 
-/* .watchlist-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-} */
+
 /* 1 row maa scroll metel home*/
 .watchlist-grid-modern,
 .rated-grid-modern,

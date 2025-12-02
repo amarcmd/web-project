@@ -102,17 +102,6 @@ header {
     flex-shrink: 0;
 }
 
-/* .logo {
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-} */
-
 
 
 .main-nav ul {
@@ -225,24 +214,6 @@ header {
     transform: translateY(-2px);
 }
 
-
-
-
-/* Default - large screens */
-/* .search {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.search input {
-  padding: 8px 15px;
-  border-radius: 20px;
-  background-color: #2a2a3e;
-  color: var(--text-color);
-  width: 250px;
-  transition: all 0.3s ease;
-} */
 
 
 .search-icon {
@@ -781,139 +752,6 @@ header {
   color: white ;
   cursor:pointer;
 }
-/* Search Overlay Styles */
-/* .search-overlay {
-  position: fixed;
-  top: 70px;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 70px);
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(8px);
-  display: none;
-  justify-content: center;
-  align-items: flex-start;
-  overflow-y: auto;
-  z-index: 9999;
-  padding: 40px 20px;
-} */
-
-/* .search-results {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 24px;
-  max-width: 1400px;
-  width: 100%;
-} */
-
-/* Search result cards - match home screen styling */
-/* .search-results .movie-card {
-  flex: 0 0 calc((100% - (var(--cards-per-view) - 1) * var(--card-gap)) / var(--cards-per-view));
-  max-width: 240px;
-  background: #141419;
-  border: 1px solid #22222b;
-  border-radius: var(--card-radius);
-  overflow: hidden;
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  cursor: pointer;
-  transition: transform .15s ease, box-shadow .15s ease;
-  margin: 0;
-}
-
-.search-results .movie-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-} */
-
-/* .search-results .movie-card img {
-  display: block;
-  width: 100%;
-  height: var(--card-height);
-  object-fit: cover;
-}
-
-.search-results .movie-card figcaption {
-  padding: 0.6rem 0.75rem 0.25rem;
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--text-color);
-  background: #141419;
-  font-size: 14px;
-  margin-top: auto;
-} */
-
-/* Rating overlay for search results */
-/* .search-results .rating-overlay {
-  position: absolute;
-  left: 0;
-  top: calc(var(--card-height) - 35px);
-  width: 100%;
-  height: 35px;
-  background: rgba(0, 0, 0, 0.7);
-  color: #ffd700;
-  text-align: center;
-  line-height: 35px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: all 0.25s ease-in-out;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.search-results .movie-card:hover .rating-overlay {
-  opacity: 1;
-  transform: translateY(0);
-} */
-
-/* Showtimes for search results */
-/* .search-results .showtimes {
-  background-color: #4f3cdf;
-  margin-top: 6px;
-  font-size: 15px;
-  color: #c9c4ff;
-  text-align: center;
-  letter-spacing: 0.5px;
-  padding: 4px 8px;
-} */
-
-/* No results message */
-/* .search-results .no-results {
-  color: white;
-  font-size: 1.5em;
-  text-align: center;
-  width: 100%;
-  padding: 50px;
-} */
-
-/* Responsive search results */
-/* @media (max-width: 1133px) {
-  .search-results .movie-card {
-    flex: 0 0 calc((100% - (4 * var(--card-gap))) / 5);
-  }
-}
-
-@media (max-width: 900px) {
-  .search-results .movie-card {
-    flex: 0 0 calc((100% - (2 * var(--card-gap))) / 3);
-  }
-}
-
-@media (max-width: 560px) {
-  .search-results .movie-card {
-    flex: 0 0 calc((100% - (1 * var(--card-gap))) / 2);
-  }
-  
-  .search-overlay {
-    padding: 20px 10px;
-  }
-} */
 
  
 .modal {
@@ -1728,23 +1566,7 @@ header {
     font-size: 19px; 
   }
     
-    /* Ensure search stays functional */
-    /* .search.active {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--main-dark);
-        padding: 15px;
-        margin-top: 10px;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-    
-    .search.active input {
-        width: 100% !important;
-        margin-left: 0 !important;
-    } */
+   
 }
 
 /* Prevent body scroll when menu is open */
