@@ -102,6 +102,9 @@ function renderProfile(user) {
                     <option value="nearest">Nearest date first</option>
                     <option value="latest">Farthest date first</option>
                     <option value="original">Original order</option>
+                     <option value="watched">Watched bookings</option>
+                     <option value="cancelled">Cancelled bookings</option>
+                    <option value="upcoming">Upcoming bookings</option>
                      </select>
                 </div>
                 <div class="booked-grid-modern" id="booked-grid">
@@ -245,27 +248,192 @@ function loadBookedMovies(user) {
         }
         const sortMode = $('#booked-sort').val() || 'nearest';
         const sortedBookings = sortBookingsByMode(userBookings, sortMode);
-        const bookedHTML = sortedBookings.map((b, index) => `
-            <div class="booked-card-modern">
-                <div class="booked-header">
-                    <h3 class="booked-movie-title">${b.movie || 'Unknown Movie'}</h3>
-                    <span class="booked-cinema">${b.cinema || 'Unknown Cinema'}</span>
-                </div>
-                <div class="booked-details">
-                    <span><strong>Name:</strong> ${b.name || 'Not specified'}</span>
-                </div>
-                <div class="booked-meta">
-                    <span><strong>Date:</strong> ${b.date || 'Not specified'}</span>
-                    <span><strong>Time:</strong> ${b.time || 'Not specified'}</span>
-                </div>
-                <div class="booked-extra">
-                    ${b.seats && b.seats.length ? `<div><strong>Seats:</strong> ${Array.isArray(b.seats) ? b.seats.join(', ') : b.seats}</div>` : ''}
-                    ${b.price ? `<div><strong>Total:</strong> $${b.price}</div>` : ''}
+        const bookedHTML = sortedBookings.map((b, index) => {
+            const originalIndex = userBookings.findIndex(booking => 
+        booking.movie === b.movie && 
+        booking.date === b.date && 
+        booking.time === b.time
+    );
+        
+    const status = b.status || 'upcoming';
+    const statusClass = status === 'cancelled' ? 'status-cancelled' : 
+                       status === 'watched' ? 'status-watched' : 'status-upcoming';
+    // here i used <i> tag which is used for icons
+    return `
+        <div class="booked-card-modern" data-index="${originalIndex}">
+            <div class="booked-header">
+                <h3 class="booked-movie-title">${b.movie || 'Unknown Movie'}</h3>
+                <div class="booked-status ${statusClass}">
+                    ${status === 'cancelled' ? ' Cancelled' : 
+                      status === 'watched' ? ' Watched' : 'Upcoming'}
                 </div>
             </div>
-        `).join('');
+            <div class="booked-meta">
+                <span><strong>Date:</strong> ${b.date || 'Not specified'}</span>
+                <span><strong>Time:</strong> ${b.time || 'Not specified'}</span>
+            </div>
+            <div class="booked-extra">
+                ${b.seats && b.seats.length ? `<div><strong>Seats:</strong> ${Array.isArray(b.seats) ? b.seats.join(', ') : b.seats}</div>` : ''}
+                ${b.price ? `<div><strong>Total:</strong> $${b.price}</div>` : ''}
+            </div>
+            ${status === 'upcoming' ? `
+            <div class="booking-actions-small">
+                <button class="btn-action-small btn-watch-small" data-index="${originalIndex}">
+                    <i class="fas fa-check"></i> Watched
+                </button>
+                <button class="btn-action-small btn-cancel-small" data-index="${originalIndex}">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+            ` : ''}
+        </div>
+    `;
+}).join('');
+
 
         $bookedGrid.html(bookedHTML);
+        // Add event handlers for booking actions
+$bookedGrid.off('click', '.btn-watch-small').on('click', '.btn-watch-small', function(e) {
+    e.stopPropagation();
+    const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    const index = $(this).data('index');
+    updateBookingStatus(userData, index, 'watched');
+});
+
+$bookedGrid.off('click', '.btn-cancel-small').on('click', '.btn-cancel-small', function(e) {
+    e.stopPropagation();
+    if (confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) {
+        const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+        const index = $(this).data('index');
+        updateBookingStatus(userData, index, 'cancelled');
+    }
+});
+
+$bookedGrid.off('click', '.booked-card-modern').on('click', '.booked-card-modern', function(e) {
+    if ($(e.target).closest('.btn-action-small').length) {
+        return;
+    }
+    
+    const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    const index = $(this).data('index');
+    const allBookings = JSON.parse(localStorage.getItem("bookings")) || {};
+    const userBookings = allBookings[userData.username] || [];
+    
+    if (index >= 0 && index < userBookings.length) {
+        openBookingDetailsModal(userBookings[index], index);
+    }
+});
+}
+// Add after loadBookedMovies function in profile.js
+
+function updateBookingStatus(user, bookingIndex, status) {
+    let allBookings = JSON.parse(localStorage.getItem("bookings")) || {};
+    const userBookings = allBookings[user.username] || [];
+    
+    if (bookingIndex >= 0 && bookingIndex < userBookings.length) {
+        userBookings[bookingIndex].status = status;
+        if (status === 'cancelled') {
+            userBookings[bookingIndex].cancelledDate = new Date().toISOString();
+        } else if (status === 'watched') {
+            userBookings[bookingIndex].watchedDate = new Date().toISOString();
+        }
+        
+        localStorage.setItem("bookings", JSON.stringify(allBookings));
+        loadBookedMovies(user);
+        const movieTitle = userBookings[bookingIndex].movie || 'Booking';
+        showToast(`${movieTitle} marked as ${status}`, status === 'cancelled' ? 'removed' : 'rated');
+    }
+}
+
+function openBookingDetailsModal(booking, bookingIndex) {
+    const modalHTML = `
+        <div class="booking-modal-overlay" id="bookingDetailsModal">
+            <div class="booking-modal-large">
+                <div class="booking-modal-header">
+                    <h3>Booking Details</h3>
+                    <button class="modal-close-btn" id="closeBookingModal">×</button>
+                </div>
+                <div class="booking-details-content">
+                <div class="booking-detail-row">
+                        <span class="detail-label">Name:</span>
+                        <span class="detail-value">${booking.name || 'Unknown Cinema'}</span>
+                    </div>
+                    <div class="booking-detail-row">
+                        <span class="detail-label">Movie:</span>
+                        <span class="detail-value">${booking.movie || 'Unknown Movie'}</span>
+                    </div>
+                    <div class="booking-detail-row">
+                        <span class="detail-label">Cinema:</span>
+                        <span class="detail-value">${booking.cinema || 'Unknown Cinema'}</span>
+                    </div>
+                    <div class="booking-detail-row">
+                        <span class="detail-label">Date:</span>
+                        <span class="detail-value">${booking.date || 'Not specified'}</span>
+                    </div>
+                    <div class="booking-detail-row">
+                        <span class="detail-label">Time:</span>
+                        <span class="detail-value">${booking.time || 'Not specified'}</span>
+                    </div>
+                    ${booking.seats && booking.seats.length ? `
+                    <div class="booking-detail-row">
+                        <span class="detail-label">Seats:</span>
+                        <span class="detail-value">${Array.isArray(booking.seats) ? booking.seats.join(', ') : booking.seats}</span>
+                    </div>` : ''}
+                    ${booking.price ? `
+                    <div class="booking-detail-row">
+                        <span class="detail-label">Total:</span>
+                        <span class="detail-value">$${booking.price}</span>
+                    </div>` : ''}
+                    ${booking.status ? `
+                    <div class="booking-detail-row">
+                        <span class="detail-label">Status:</span>
+                        <span class="detail-value status-${booking.status}">${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}</span>
+                    </div>` : ''}
+                </div>
+                <div class="booking-actions" id="bookingActions">
+                    ${booking.status !== 'cancelled' && booking.status !== 'watched' ? `
+                    <button class="btn-booking-action btn-watch" data-index="${bookingIndex}">
+                        <i class="fas fa-check-circle"></i> Mark as Watched
+                    </button>
+                    <button class="btn-booking-action btn-cancel" data-index="${bookingIndex}">
+                        <i class="fas fa-times-circle"></i> Cancel Booking
+                    </button>
+                    ` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    $('body').append(modalHTML);
+    
+    $('#closeBookingModal, #bookingDetailsModal').click(function(e) {
+        if (e.target === this || $(e.target).hasClass('modal-close-btn')) {
+            $('#bookingDetailsModal').remove();
+        }
+    });
+    
+    $('#bookingActions').on('click', '.btn-watch', function() {
+        const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+        const index = $(this).data('index');
+        updateBookingStatus(userData, index, 'watched');
+        $('#bookingDetailsModal').remove();
+    });
+    
+    $('#bookingActions').on('click', '.btn-cancel', function() {
+        if (confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) {
+            const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+            const index = $(this).data('index');
+            updateBookingStatus(userData, index, 'cancelled');
+            $('#bookingDetailsModal').remove();
+        }
+    });
+    
+    $(document).on('keydown.bookingModal', function(e) {
+        if (e.key === 'Escape') {
+            $('#bookingDetailsModal').remove();
+            $(document).off('keydown.bookingModal');
+        }
+    });
 }
 
 
@@ -292,6 +460,16 @@ function sortBookingsByMode(bookings, mode) {
         _dateObj: parseBookingDate(b)
     }));
 
+    // First filter based on status if needed
+    let filteredBookings = withMeta;
+    if (mode === "watched") {
+        filteredBookings = withMeta.filter(b => b.status === "watched");
+    } else if (mode === "cancelled") {
+        filteredBookings = withMeta.filter(b => b.status === "cancelled");
+    } else if (mode === "upcoming") {
+        filteredBookings = withMeta.filter(b => b.status === "upcoming" || !b.status);
+    }
+
     if (mode === "nearest") {
         // Ascending date (earliest first)
         withMeta.sort((a, b) => {
@@ -302,16 +480,17 @@ function sortBookingsByMode(bookings, mode) {
         });
     } else if (mode === "latest") {
         // Descending date (latest first)
-        withMeta.sort((a, b) => {
+        filteredBookings.sort((a, b) => {
             if (!a._dateObj && !b._dateObj) return a._idx - b._idx;
             if (!a._dateObj) return 1;
             if (!b._dateObj) return -1;
             return b._dateObj - a._dateObj;
         });
     } else {
-        withMeta.sort((a, b) => a._idx - b._idx);
+        //not all bookings only the filtered ones for that i use filterBooking
+        filteredBookings.sort((a, b) => a._idx - b._idx);
     }
-    return withMeta.map(({ _idx, _dateObj, ...rest }) => rest);
+    return filteredBookings.map(({ _idx, _dateObj, ...rest }) => rest);
 }
 
 //this function open RATING MODAL FUNCTIONS 

@@ -367,7 +367,8 @@ $("#confirmbtn").on("click", function () {
         return;
     }
 
-    let booking = { name, cinema, movie, date, time, seats, price };
+    let booking = { name, cinema, movie, date, time, seats, price, status: 'upcoming' };//by default upcoming
+  
     let allBookings = JSON.parse(localStorage.getItem("bookings")) || {};
 
     if (!allBookings[username]) {
