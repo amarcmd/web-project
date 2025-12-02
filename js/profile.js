@@ -291,7 +291,7 @@ function loadBookedMovies(user) {
 }).join('');
 
 
-        $bookedGrid.html(bookedHTML);
+$bookedGrid.html(bookedHTML);
         // Add event handlers for booking actions
 $bookedGrid.off('click', '.btn-watch-small').on('click', '.btn-watch-small', function(e) {
     e.stopPropagation();
@@ -302,11 +302,8 @@ $bookedGrid.off('click', '.btn-watch-small').on('click', '.btn-watch-small', fun
 
 $bookedGrid.off('click', '.btn-cancel-small').on('click', '.btn-cancel-small', function(e) {
     e.stopPropagation();
-    if (confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) {
-        const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
-        const index = $(this).data('index');
-        updateBookingStatus(userData, index, 'cancelled');
-    }
+    const index = $(this).data('index');
+    openCancelConfirmModal(index);
 });
 
 $bookedGrid.off('click', '.booked-card-modern').on('click', '.booked-card-modern', function(e) {
@@ -417,21 +414,75 @@ function openBookingDetailsModal(booking, bookingIndex) {
         const index = $(this).data('index');
         updateBookingStatus(userData, index, 'watched');
         $('#bookingDetailsModal').remove();
-    });
-    
+    })
+
     $('#bookingActions').on('click', '.btn-cancel', function() {
-        if (confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) {
-            const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
-            const index = $(this).data('index');
-            updateBookingStatus(userData, index, 'cancelled');
-            $('#bookingDetailsModal').remove();
-        }
-    });
-    
+        const index = $(this).data('index');
+        $('#bookingDetailsModal').remove();
+        openCancelConfirmModal(index);
+    })
+
     $(document).on('keydown.bookingModal', function(e) {
         if (e.key === 'Escape') {
             $('#bookingDetailsModal').remove();
             $(document).off('keydown.bookingModal');
+        }
+    });
+}
+function openCancelConfirmModal(bookingIndex) {
+    const userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    if (!userData) return;
+
+    const modalHTML = `
+        <div class="booking-modal-overlay" id="cancelBookingModal">
+            <div class="booking-modal-large">
+                <div class="booking-modal-header">
+                    <h3 style="color: #8a2be2">Cancel this booking?</h3>
+                    <button class="modal-close-btn" id="closeCancelBookingModal">×</button>
+                </div>
+                <div class="booking-details-content">
+                    <p style="margin-bottom: 10px;">
+                        Are you sure you want to cancel this booking?<br>
+                        <span style="opacity: 0.8;">This action cannot be undone.</span>
+                    </p>
+                </div>
+                <div class="booking-actions">
+                    <button class="btn-booking-action btn-cancel-keep" type="button">
+                        Keep Booking
+                    </button>
+                    <button class="btn-booking-action btn-cancel-confirm" type="button">
+                        Cancel Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    $('body').append(modalHTML);
+
+    // Close handlers
+    $('#closeCancelBookingModal, .btn-cancel-keep').on('click', function () {
+        $('#cancelBookingModal').remove();
+    });
+
+    // Confirm cancel
+    $('.btn-cancel-confirm').on('click', function () {
+        updateBookingStatus(userData, bookingIndex, 'cancelled');
+        $('#cancelBookingModal').remove();
+    });
+
+    // Close by clicking backdrop
+    $('#cancelBookingModal').on('click', function (e) {
+        if (e.target === this) {
+            $('#cancelBookingModal').remove();
+        }
+    });
+
+    // Close with ESC
+    $(document).on('keydown.cancelBooking', function(e) {
+        if (e.key === 'Escape') {
+            $('#cancelBookingModal').remove();
+            $(document).off('keydown.cancelBooking');
         }
     });
 }

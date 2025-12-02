@@ -4,6 +4,10 @@
 *::-webkit-scrollbar{
     display:none;
 }
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 :root {
     --dark-bg: #10101a; 
     --main-dark: #1e1e2d; 
@@ -259,7 +263,12 @@ header {
 .login {
   animation: fadeIn 0.5s ease-in-out;
 }
-
+.login-error {
+    margin-top: 8px;
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    min-height: 1em;  
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -993,6 +1002,8 @@ header {
 
 .about {
     min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
     background: var(--dark-bg);
     padding: 20px;
 }
@@ -1046,6 +1057,7 @@ header {
 /* Story Section with Image on Right */
 .story-section {
     padding: 100px 20px;
+    border-radius: 10px;
     background: var(--main-dark);
 }
 
@@ -1369,6 +1381,23 @@ header {
 }
 
 /* Responsive */
+@media (max-width: 1088px){
+    .stats-section {
+    padding: 60px 20px; 
+  }
+
+  .stats-section .stat-item {
+    padding: 20px; 
+  }
+/* font size asghar */
+  .stats-section .stat-number {
+    font-size: 2.4em; 
+  }
+
+  .stats-section .stat-label {
+    font-size: 0.95em;  
+  }
+}
 @media (max-width: 968px) {
     .values-grid,.stats-grid-modern {
         grid-template-columns: repeat(2, 1fr);
@@ -1392,7 +1421,7 @@ header {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 782px) {
     .values-grid,.stats-grid,.about-section-modern {
         grid-template-columns: 1fr;
     }

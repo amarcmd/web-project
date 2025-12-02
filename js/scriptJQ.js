@@ -237,7 +237,7 @@ let bookingMovieComments = {
             if (matchedUser) {
                 currentUser = matchedUser.username;
 
-                // CRITICAL: Initialize the user's watchlist array from localStorage
+                // the user's watchlist array from localStorage
                 let savedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
                 let userWatchlist = savedWatchlist.filter(movie => movie.username === matchedUser.username);
 
@@ -250,7 +250,7 @@ let bookingMovieComments = {
                     loadWatchlist();
                 }
             } else {
-                alert("Invalid username or password");
+                 $('#loginError').text('Invalid username or password. Please try again.');
             }
         });
     });
@@ -317,43 +317,43 @@ $("#confirmbtn").on("click", function () {
    
     if (!name.trim()) {
         $("#confirmation").empty();
-        $("#confirmation").html(`<span style="color:red">Please enter your full name.</span>`);
+        $("#confirmation").html(`<span style=" color: #ff6b6b;">Please enter your full name.</span>`);
         return;
     }
     if(!email.trim()){
         $("#confirmation").empty();
-        $("#confirmation").html(`<span style="color:red">Please enter your email.</span>`); 
+        $("#confirmation").html(`<span style=" color: #ff6b6b;">Please enter your email.</span>`); 
         return;
     }
     if (!phone.trim()) {
         $("#confirmation").empty();
-        $("#confirmation").html(`<span style="color:red">Please enter your Phone Number.</span>`);
+        $("#confirmation").html(`<span style=" color: #ff6b6b;">Please enter your Phone Number.</span>`);
         return;
     }
     
     if (!isNumeric(phone)) {
         $("#confirmation").empty();
-        $("#confirmation").html(`<span style="color:red">Please enter a valid phone number.</span>`);
+        $("#confirmation").html(`<span style=" color: #ff6b6b;">Please enter a valid phone number.</span>`);
         return;
     }
     if (!card.trim()) {
         $("#confirmation").empty();
-        $("#confirmation").html(`<span style="color:red">Please enter your card number.</span>`);
+        $("#confirmation").html(`<span style=" color: #ff6b6b;">Please enter your card number.</span>`);
         return;
     }
     if (!isNumeric(card)) {
         $("#confirmation").empty();
-        $("#confirmation").html(`<span style="color:red">Please enter a valid card number.</span>`);
+        $("#confirmation").html(`<span style=" color: #ff6b6b;">Please enter a valid card number.</span>`);
         return;
     }
     if (!cvv.trim()) {
         $("#confirmation").empty();
-        $("#confirmation").html(`<span style="color:red">Please enter your CVV.</span>`);
+        $("#confirmation").html(`<span style=" color: #ff6b6b;">Please enter your CVV.</span>`);
         return;
     }
         if (!isNumeric(cvv) || cvv.length!=3) {
             $("#confirmation").empty();
-        $("#confirmation").html(`<span style="color:red">Please enter a valid CVV.</span>`);
+        $("#confirmation").html(`<span style=" color: #ff6b6b;">Please enter a valid 3-character CVV.</span>`);
         return;
     }
     // byekhdo aa step 3
@@ -361,7 +361,7 @@ $("#confirmbtn").on("click", function () {
         $("#confirmation").empty();
         $("#confirmation").html(
             
-            `<span style="color:red">Please choose a date. Returning to Step 3...</span>`
+            `<span style=" color: #ff6b6b;">Please choose a date. Returning to Step 3...</span>`
         );
         setTimeout(() => showStep(3), 800);
         return;
@@ -405,7 +405,7 @@ $("#confirmbtn").on("click", function () {
     `); 
          //small msg tahet l confirm
     $("#confirmation").append(`
-        <p style="margin-top:8px;font-size:0.9rem;opacity:0.8; color:red;">
+        <p style="margin-top:8px;font-size:0.9rem;opacity:0.8;  color: #ff6b6b;;">
         Going back to Step 1 so you can make another booking in 10 seconds...
         </p>
     `);

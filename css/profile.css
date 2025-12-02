@@ -320,6 +320,25 @@
 }
 
 /* Responsive Design */
+@media (max-width: 600px) {
+ 
+ .profile-info-modern h1{
+        text-align: center;
+    }
+  .profile-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:0px;
+    margin-top:0px;
+    text-align: center;
+  }
+  .stat-item{
+   text-align: center;
+   padding:10px;
+  }
+}
+
 @media (max-width: 768px) {
     .profile-hero {
         flex-direction: column;
@@ -958,15 +977,20 @@
 
 .btn-watch {
     background: rgba(40, 167, 69, 0.2);
-    color: #28a745;
+    color:  #28a745;
     border: 1px solid rgba(40, 167, 69, 0.3);
 }
 
-.btn-watch:hover {
+.btn-watch:hover  {
     background: rgba(40, 167, 69, 0.3);
     border-color: #28a745;
 }
-
+.btn-cancel-keep:hover{
+     background-color:  #28a745;
+}
+.btn-cancel-confirm:hover {
+    background-color: #dc3545;
+}
 .btn-cancel {
     background: rgba(220, 53, 69, 0.2);
     color: #dc3545;
@@ -984,4 +1008,11 @@
     color: #aaa;
     font-size: 1.5em;
     cursor: pointer;
+}
+@media (max-width: 1434px) {
+  .watchlist-card-modern,
+  .rated-card-modern {
+    flex: 0 0 173px;
+    max-width: 173px;
+  }
 }
