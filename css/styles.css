@@ -1576,30 +1576,6 @@ body.menu-open {
 
 }
 
-/* @media (max-width: 768px) {
- 
-
-
-
-  .search input {
-    width: 0;
-    opacity: 0;
-    padding: 0;
-    border: none;
-    pointer-events: none;
-    transition: all 0.25s ease;
-  }
-
-
-  .search.active input {
-    width: 225px;
-    opacity: 1;
-    padding: 8px 15px;
-    pointer-events: auto;
-    border-radius: 20px;
-    margin-left: 10px;
-  }
-} */
 /* for modal */
 @media (max-width: 974px) {
   .modal__media h3 {

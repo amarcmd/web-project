@@ -23,8 +23,11 @@
 }
 
 .games-hero p {
-  font-size: 1.2em;
-  color: #ccc;
+   font-size: 1.4em;
+    opacity: 0.9;
+    margin-bottom: 30px;
+    color: #888;
+  font-style: italic;
 }
 
 .games-grid {

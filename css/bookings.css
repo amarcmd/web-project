@@ -312,14 +312,7 @@ main{
     border: 2px solid #7a5cff !important;
     outline: none;
 }
-/* .showtimes {
-    background-color: #4f3cdf;
-    margin-top: 6px;
-    font-size: 15px;
-    color: #c9c4ff;
-    text-align: center;
-    letter-spacing: 0.5px;
-} */
+
 .showtimes {
   display: flex;
   flex-wrap: wrap;
