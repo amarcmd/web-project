@@ -125,7 +125,7 @@ function loadWatchlist(user) {
                 <div class="empty-watchlist" style="grid-column: 1 / -1;">
                     <h3>Your Watchlist is Empty</h3>
                     <p>Start adding movies to build your personalized collection!</p>
-                    <a href="../index.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Browse Movies →</a>
+                    <a href="../pages/search.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Browse Movies →</a>
                 </div>
             `);
             return;
