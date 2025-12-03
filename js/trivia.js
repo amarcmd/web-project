@@ -117,13 +117,13 @@ let gameData = {
         },
         {
             quote: "The broken are the more evolved.",
-            options: ["Split", "IT", "Black Phone2", "The Conjuring 2"],
-            correct: 0
+            options: ["Black Phone2", "IT", "Split", "The Conjuring 2"],
+            correct: 2
         },
         {
             quote: "A simple game of truth or dare turns deadly for a group of friends.",
-            options: ["Truth or Dare", "Split", "Countdown", "The Forest"],
-            correct: 0
+            options: [ "Countdown","Split","Truth or Dare", "The Forest"],
+            correct: 2
         },
         {
             quote: "The now reformed Bad Guys get dragged into a globe-trotting heist.",
@@ -132,8 +132,8 @@ let gameData = {
         },
         {
             quote: "A mysterious app counts down to its users' deaths.",
-            options: ["Countdown", "Split", "Truth or Dare", "Black Phone2"],
-            correct: 0
+            options: ["Black Phone2", "Split", "Truth or Dare", "Countdown"],
+            correct: 3
         },
         {
             quote: "A young Predator outcast from his clan finds an unlikely ally.",
@@ -142,21 +142,21 @@ let gameData = {
         },
         {
             quote: "Ed and Lorraine Warren investigate a terrifying haunting in north London.",
-            options: ["The Conjuring 2", "IT", "Black Phone2", "Truth or Dare"],
-            correct: 0
+            options: ["IT", "The Conjuring 2", "Black Phone2", "Truth or Dare"],
+            correct: 1
         }
     ],
     
     scenes: [
         {
             scene: "A group of kids in a small town face their fears when an ancient evil clown returns to feed on their terror every 27 years.",
-            options: ["IT", "The Conjuring 2", "Truth or Dare", "The Forest"],
-            correct: 0
+            options: ["Truth or Dare", "The Conjuring 2", "IT", "The Forest"],
+            correct: 2
         },
         {
             scene: "Two FBI agents go undercover as wealthy white heiresses, leading to hilarious misunderstandings and cultural clashes.",
-            options: ["White Chicks", "Bad Guys", "Barbie", "Split"],
-            correct: 0
+            options: ["Bad Guys", "White Chicks", "Barbie", "Split"],
+            correct: 1
         },
         {
             scene: "A team of explorers travel through a wormhole in search of a new habitable planet to save humanity from extinction.",
@@ -165,18 +165,18 @@ let gameData = {
         },
         {
             scene: "A perfect doll living in a perfect world suddenly starts having thoughts about death and the meaning of existence.",
-            options: ["Barbie", "White Chicks", "Mean Girls", "The Princess Diaries"],
-            correct: 0
+            options: ["The Princess Diaries", "White Chicks", "Mean Girls", "Barbie"],
+            correct: 3
         },
         {
             scene: "A man with 24 distinct personalities kidnaps three teenage girls, each personality having its own agenda and abilities.",
-            options: ["Split", "IT", "Black Phone2", "The Conjuring 2"],
-            correct: 0
+            options: ["IT", "Split", "Black Phone2", "The Conjuring 2"],
+            correct: 1
         },
         {
             scene: "Reformed animal criminals are forced back into their old ways when they're framed for a crime they didn't commit.",
-            options: ["Bad Guys", "White Chicks", "The Running Man", "Predator: Badlands"],
-            correct: 0
+            options: ["Predator: Badlands", "White Chicks", "The Running Man", "Bad Guys"],
+            correct: 3
         },
         {
             scene: "A marine becomes emotionally connected to the alien world of Pandora and must choose between orders and protecting his new home.",
@@ -185,8 +185,8 @@ let gameData = {
         },
         {
             scene: "A deadly competition where contestants must survive being hunted on live television for a chance at freedom and riches.",
-            options: ["The Running Man", "Countdown", "Truth or Dare", "Split"],
-            correct: 0
+            options: ["Split", "Countdown", "Truth or Dare", "The Running Man"],
+            correct: 3
         }
     ]
 };

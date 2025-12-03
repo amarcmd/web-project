@@ -80,6 +80,18 @@ document.addEventListener('click', function(e) {
         header.classList.remove("header-nav-open");
     }
 });
+
+document.querySelectorAll(".movie-card").forEach(card => {
+    let rating = card.dataset.rating || "N/A";
+    let description = card.dataset.description || "N/A"
+    console.log(description);
+    let overlay = document.createElement("span");
+    overlay.className = "rating-overlay";
+    overlay.textContent = `${description} `;
+    overlay.textContent = `${rating} / 5 ★`;
+
+    card.appendChild(overlay);
+});
 function closeModal() {
   if (modal) {
     modal.classList.remove('open');

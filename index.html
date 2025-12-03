@@ -8,13 +8,13 @@
   <title>ReelTime - Discover, Rate & Watch</title>
   <link rel="shortcut icon" href="imgs/movie.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/script.js" defer></script>
   <script src="js/scriptJQ.js" defer></script>
  <script src="js/watchlist.js" defer></script>
   <!-- for search icon-->
-  <link rel="stylesheet" href="css/styles.css">
-
+  
 </head>
 
 <body>
@@ -56,52 +56,52 @@
 
   <main>
     
-    <div class="login">
-      <div class="login-background">
+          <div class="login">
+                <div class="login-background">
   
-    <div class="login-content-panel">
-        <div class="login-header">
-            <div class="logo-text">Log In</div>
-            <p class="welcome-message">Welcome back! Please enter your details</p>
-        </div>
+              <div class="login-content-panel">
+                  <div class="login-header">
+                      <div class="logo-text">Log In</div>
+                      <p class="welcome-message">Welcome back! Please enter your details</p>
+                  </div>
 
-        <form class="login-form">
-            <label >User name</label>
-            <input id="username"  placeholder=" " required>
+                  <form class="login-form">
+                      <label >User name</label>
+                      <input id="username"  placeholder=" " required>
 
-            <label for="password">Password</label>
-            <div class="password-group">
-                <input type="password" id="password" name="password" required>
+                      <label for="password">Password</label>
+                      <div class="password-group">
+                          <input type="password" id="password" name="password" required>
                 
-            </div>
+                      </div>
             
             
-            <button type="submit" class="login-button">Log In</button>
-            <p id="loginError" class="login-error" aria-live="polite"></p>
-        </form>
-      </div>
+                      <button type="submit" class="login-button">Log In</button>
+                      <p id="loginError" class="login-error" aria-live="polite"></p>
+                  </form>
+                </div>
 
 
       
 
-</div>
-</div>
-
-
-
-
-    <div class="welcome-box" id="heroBox">
-      <button class="hero-btn prev" onclick="prevImage()">&#10094;</button>
-      <button class="hero-btn next" onclick="nextImage()">&#10095;</button>
-
-      <div class="Welcome2">
-        <p style="font-style: italic;">YOUR MOVIES IN ONE PLACE</p>
-        <h1>Welcome to ReelTime</h1>
-        <a href="pages/about.html">Learn More</a>
+              </div>
       </div>
-    </div>
 
-  <section class="gallery" id="gallery"></section>
+
+
+
+          <div class="welcome-box" id="heroBox">
+            <button class="hero-btn prev" onclick="prevImage()">&#10094;</button>
+            <button class="hero-btn next" onclick="nextImage()">&#10095;</button>
+
+            <div class="Welcome2">
+              <p style="font-style: italic;">YOUR MOVIES IN ONE PLACE</p>
+              <h1>Welcome to ReelTime</h1>
+              <a href="pages/about.html">Learn More</a>
+            </div>
+          </div>
+
+        <section class="gallery" id="gallery"></section>
   </main>
 
   <div class="modal" id="card-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -180,20 +180,6 @@
   </div>
 </footer>
 
-
-  <script>
-document.querySelectorAll(".movie-card").forEach(card => {
-    let rating = card.dataset.rating || "N/A";
-    let description = card.dataset.description || "N/A"
-    console.log(description);
-    let overlay = document.createElement("span");
-    overlay.className = "rating-overlay";
-    overlay.textContent = `${description} `;
-    overlay.textContent = `${rating} / 5 ★`;
-
-    card.appendChild(overlay);
-});
-</script>
 </body>
 
 </html>
