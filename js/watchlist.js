@@ -1,26 +1,44 @@
 
 $(function() {
-    initializeWatchlist();
+    $(function() {
+    // Only initialize if user is logged in
+    if (sessionStorage.getItem('loggedInUser')) {
+        initializeWatchlist();
+    }
+    setupWatchlistEventHandlers();  
+});
     setupWatchlistEventHandlers();
 });
 
 function initializeWatchlist() {
     const userData = sessionStorage.getItem('loggedInUser');
-   
     
     
+    if (!userData) {
+        return;
+    }
+    
+    try {
         const user = JSON.parse(userData);
-       if (!user.watchlist) {
+        
+        
+        if (!user) {
+           return;
+        }
+        
+        if (!user.watchlist) {
             const saved = JSON.parse(localStorage.getItem('watchlist')) || [];
             user.watchlist = saved.filter(movie => movie.username === user.username);
             sessionStorage.setItem('loggedInUser', JSON.stringify(user));
-       }
-    
+        }
+    } catch (error) {
+        console.error('Error parsing user data:', error);
+    }
 }
 
 function setupWatchlistEventHandlers() {
    
-    // Remove any existing handlers and add fresh ones
+   
     $(document).off('click', '.add-watchlist-btn').on('click', '.add-watchlist-btn', function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -40,6 +58,9 @@ function handleWatchlistAdd($button) {
     let userData;
         userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
          let movieTitle = '';
+         if (!userData) {
+       return;
+    }
    
         movieTitle = $('#modal-title').text().trim();
        
