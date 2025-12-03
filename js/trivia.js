@@ -19,8 +19,8 @@ let gameData = {
         },
         {
             emoji: "🚀🌌⏰",
-            options: ["Interstellar", "Avatar", "The Martian", "Gravity"],
-            correct: 0,
+            options: ["The Martian", "Avatar", "Interstellar", "Gravity"],
+            correct: 2,
             hint: "Explorers travel through a wormhole to save humanity"
         },
         {
@@ -31,14 +31,14 @@ let gameData = {
         },
         {
             emoji: "👯‍♀️👸🏼🕵️‍♀️",
-            options: ["White Chicks", "Barbie", "Mean Girls", "Split"],
-            correct: 0,
+            options: ["Barbie", "White Chicks", "Mean Girls", "Split"],
+            correct: 1,
             hint: "FBI agents undercover as heiresses"
         },
         {
             emoji: "🦖🌴⚡",
-            options: ["Jurassic World Rebirth", "Avatar", "Predator: Badlands", "The Forest"],
-            correct: 0,
+            options: ["The Forest", "Avatar", "Predator: Badlands", "Jurassic World Rebirth"],
+            correct: 3,
             hint: "Next chapter in the dinosaur saga"
         },
         {
@@ -49,8 +49,8 @@ let gameData = {
         },
         {
             emoji: "👺🦊🔓",
-            options: ["Bad Guys", "Split", "Truth or Dare", "The Running Man"],
-            correct: 0,
+            options: ["Split", "Bad Guys", "Truth or Dare", "The Running Man"],
+            correct: 1,
             hint: "Reformed animal outlaws on a globe-trotting heist"
         },
         {
@@ -69,8 +69,8 @@ let gameData = {
         },
         {
             character: "Cooper",
-            options: ["Interstellar", "Avatar", "The Martian", "Gravity"],
-            correct: 0
+            options: ["The Martian", "Avatar", "Interstellar", "Gravity"],
+            correct: 2
         },
         {
             character: "Kevin Wendell Crumb",
@@ -79,13 +79,13 @@ let gameData = {
         },
         {
             character: "Marcus Copeland",
-            options: ["White Chicks", "Bad Guys", "Split", "Barbie"],
-            correct: 0
+            options: ["Bad Guys","White Chicks", "Split", "Barbie"],
+            correct: 1
         },
         {
             character: "Mr. Wolf",
-            options: ["Bad Guys", "White Chicks", "The Running Man", "Predator: Badlands"],
-            correct: 0
+            options: ["Predator: Badlands", "White Chicks", "The Running Man", "Bad Guys"],
+            correct: 3
         },
         {
             character: "Barbie",
@@ -94,12 +94,12 @@ let gameData = {
         },
         {
             character: "The Grabber",
-            options: ["Black Phone2", "IT", "The Conjuring 2", "Truth or Dare"],
-            correct: 0
+            options: ["IT", "Black Phone2", "The Conjuring 2", "Truth or Dare"],
+            correct: 1
         },
         {
             character: "Jake Sully",
-            options: ["Avatar", "Interstellar", "The Martian", "Predator: Badlands"],
+            options: ["Interstellar", "Avatar", "The Martian", "Predator: Badlands"],
             correct: 0
         }
     ],
@@ -107,8 +107,8 @@ let gameData = {
     quotes: [
         {
             quote: "Life in Barbie Land is to be a perfect being in a perfect place. Unless you have a full-on existential crisis.",
-            options: ["Barbie", "White Chicks", "Mean Girls", "The Princess Diaries"],
-            correct: 0
+            options: ["The Princess Diaries", "White Chicks", "Mean Girls", "Barbie"],
+            correct: 3
         },
         {
             quote: "We used to look up at the sky and wonder at our place in the stars.",
