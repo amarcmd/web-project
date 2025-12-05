@@ -8,6 +8,14 @@ let currentQuestion = 0;
 let score = 0;
 let playerName = "";
 
+// Add this shuffle function
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
 let gameData = {
     guess: [
@@ -236,6 +244,27 @@ function startGame() {
     // Get player name
     let userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
     playerName = userData.username;
+    // Shuffle questions for this game
+    gameData[currentGame] = shuffleArray([...gameData[currentGame]]);
+    
+    // Also shuffle options for each question
+    gameData[currentGame] = gameData[currentGame].map(question => {
+        let options = [...question.options];
+        let correctAnswer = options[question.correct];
+        
+        // Shuffle options
+        options = shuffleArray(options);
+        
+        // Find new correct index
+        let newCorrect = options.indexOf(correctAnswer);
+        
+        return {
+            ...question,
+            options: options,
+            correct: newCorrect
+        };
+    });
+    
     
     showQuestion();
     $('#triviaModal').addClass('active');
@@ -424,15 +453,39 @@ function goToMovies() {
 function saveToLeaderboard(score) {
     let leaderboard = JSON.parse(localStorage.getItem('movieGamesLeaderboard')) || [];
     
-    leaderboard.push({
-        name: playerName,
-        score: score,
-        game: currentGame,
-        date: new Date().toISOString()
-    });
+    // Check if player already exists (any game)
+    let existingPlayerIndex = leaderboard.findIndex(entry => entry.name === playerName);
     
-    // Sort by score (descending) and keep top 10
-    leaderboard.sort((a, b) => b.score - a.score);
+    if (existingPlayerIndex !== -1) {
+        // Player exists - update their total score
+        leaderboard[existingPlayerIndex].totalScore = (leaderboard[existingPlayerIndex].totalScore || 0) + score;
+        
+        // Store individual game scores
+        if (!leaderboard[existingPlayerIndex].games) {
+            leaderboard[existingPlayerIndex].games = {};
+        }
+        
+        // Add or update the game score (keep highest score for each game)
+        if (!leaderboard[existingPlayerIndex].games[currentGame] || 
+            score > leaderboard[existingPlayerIndex].games[currentGame]) {
+            leaderboard[existingPlayerIndex].games[currentGame] = score;
+        }
+        
+        leaderboard[existingPlayerIndex].lastPlayed = new Date().toISOString();
+    } else {
+        // New player
+        leaderboard.push({
+            name: playerName,
+            totalScore: score,
+            games: {
+                [currentGame]: score
+            },
+            lastPlayed: new Date().toISOString()
+        });
+    }
+    
+    // Sort by totalScore (descending) and keep top 10
+    leaderboard.sort((a, b) => b.totalScore - a.totalScore);
     leaderboard = leaderboard.slice(0, 10);
     
     localStorage.setItem('movieGamesLeaderboard', JSON.stringify(leaderboard));
@@ -440,14 +493,24 @@ function saveToLeaderboard(score) {
 
 function loadLeaderboard() {
     let leaderboard = JSON.parse(localStorage.getItem('movieGamesLeaderboard')) || [];
-    let leaderboardHTML = leaderboard.map((entry, index) => `
-        <div class="leaderboard-item">
-            <span class="leaderboard-rank">#${index + 1}</span>
-            <span class="leaderboard-name">${entry.name}</span>
-            <span class="leaderboard-score">${entry.score} pts</span>
-            <span class="leaderboard-game">${entry.game}</span>
-        </div>
-    `).join('');
+    
+    // Sort by totalScore (descending)
+    leaderboard.sort((a, b) => b.totalScore - a.totalScore);
+    
+    let leaderboardHTML = leaderboard.map((entry, index) => {
+        // Create game badges string
+        let gamesBadges = '';
+        
+        
+        return `
+            <div class="leaderboard-item">
+                <span class="leaderboard-rank">#${index + 1}</span>
+                <span class="leaderboard-name">${entry.name}</span>
+                <span class="leaderboard-score">${entry.totalScore} pts</span>
+                <div class="leaderboard-games">${gamesBadges}</div>
+            </div>
+        `;
+    }).join('');
     
     $('#leaderboard').html(leaderboardHTML || '<p>No scores yet. Be the first to play!</p>');
 }

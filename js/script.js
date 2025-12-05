@@ -211,13 +211,22 @@ let extraStore = JSON.parse(localStorage.getItem("movieCommentsExtra")) || {};
   // jam3 el comments mn movies.json w el extra
 let allComments = [...baseComments, ...extraForMovie];
 
-  if (!allComments.length) {
+let uniqueComments = [];
+let userMap = new Map();
+allComments.reverse().forEach(c => {
+    if (!userMap.has(c.user)) {
+        userMap.set(c.user, c);
+        uniqueComments.unshift(c); // Add to beginning to maintain order
+    }
+});
+
+  if (!uniqueComments.length) {
     commentsContainer.innerHTML =
       `<p class="no-comments">No comments yet.</p>`;
     return;
   }
 
-  allComments.forEach(c => {
+  uniqueComments.forEach(c => {
   let div = document.createElement("div");
     div.className = "comment";
 

@@ -715,13 +715,19 @@ function saveMovieRating(movieTitle, rating, commentText = "") {
         localStorage.setItem('movieRatings', JSON.stringify(savedRatings));
 
         // Save comment to extra comments if provided
-        if (commentText) {
-            let extraComments = {};
+        if (commentText.trim()) {
             
-                extraComments = JSON.parse(localStorage.getItem('movieCommentsExtra')) || {};
+            
+               let extraComments = JSON.parse(localStorage.getItem('movieCommentsExtra')) || {};
           
             
-            if (!extraComments[movieTitle]) extraComments[movieTitle] = [];
+            if (!extraComments[movieTitle]){
+                
+            }extraComments[movieTitle] = [];
+
+             extraComments[movieTitle] = extraComments[movieTitle].filter(
+        c => c.user !== userData.username
+    ); 
 
             extraComments[movieTitle].push({
                 user: userData.username,
@@ -732,6 +738,21 @@ function saveMovieRating(movieTitle, rating, commentText = "") {
 
             localStorage.setItem('movieCommentsExtra', JSON.stringify(extraComments));
         }
+         else {
+    // If comment is empty, remove user's comment if exists
+    let extraComments = JSON.parse(localStorage.getItem('movieCommentsExtra')) || {};
+    if (extraComments[movieTitle]) {
+        extraComments[movieTitle] = extraComments[movieTitle].filter(
+            c => c.user !== userData.username
+        );
+        
+        if (extraComments[movieTitle].length === 0) {
+            delete extraComments[movieTitle];
+        }
+        
+        localStorage.setItem('movieCommentsExtra', JSON.stringify(extraComments));
+    }
+}
 
         // Refresh profile
         loadWatchlist(userData);
