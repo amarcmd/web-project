@@ -2,6 +2,21 @@ document.getElementById('hamburger').addEventListener("click", () => {
 document.querySelector("header").classList.toggle("header-nav-open");});
 
 
+// Auto-close burger menu on resize
+function handleResize() {
+    let header = document.querySelector("header");
+    if (window.innerWidth > 978 && header.classList.contains("header-nav-open")) {
+        header.classList.remove("header-nav-open");
+         if (header.classList.contains("header-nav-open") && 
+        e.target.closest('.main-nav a')) {
+        header.classList.remove("header-nav-open");
+    }
+    }
+}
+
+// Add resize event listener
+window.addEventListener('resize', handleResize);
+
 let modal = document.getElementById('card-modal');
 let modalTrailer = document.getElementById('modal-trailer');
 let modalTitle = document.getElementById('modal-title');
@@ -61,25 +76,8 @@ let TRAILER_URLS = {
   "The Running Man": "https://www.youtube.com/embed/KD18ddeFuyM",
 };
 
-// Auto-close burger menu on resize
-function handleResize() {
-    let header = document.querySelector("header");
-    if (window.innerWidth > 978 && header.classList.contains("header-nav-open")) {
-        header.classList.remove("header-nav-open");
-    }
-}
 
-// Add resize event listener
-window.addEventListener('resize', handleResize);
 
-// Also close menu when clicking on links (optional)
-document.addEventListener('click', function(e) {
-    let header = document.querySelector("header");
-    if (header.classList.contains("header-nav-open") && 
-        e.target.closest('.main-nav a')) {
-        header.classList.remove("header-nav-open");
-    }
-});
 
 document.querySelectorAll(".movie-card").forEach(card => {
     let rating = card.dataset.rating || "N/A";
@@ -182,17 +180,6 @@ function startAutoAdvance() {
   }, 3000);
 }
 
-
-//when the sceen become smaller the behavior of burger
-function handleResize() {
-    let header = document.querySelector("header");
-    if (window.innerWidth > 978 && header.classList.contains("header-nav-open")) {
-        header.classList.remove("header-nav-open");
-    }
-}
-//  event listener
-window.addEventListener('resize', handleResize);
-
 //render comments
 function renderCommentsForMovie(title) {
     let commentsContainer = document.getElementById("comments-list");
@@ -283,20 +270,7 @@ function openMovieModal(cardElement) {
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
-
-  let searchOverlay = document.getElementById("searchOverlay");
-  if (searchOverlay) {
-    searchOverlay.style.display = "none";
-  }
-
-
-  let searchInput = document.getElementById("SearchInput");
-  if (searchInput) {
-    searchInput.value = "";
-  }
 }
-
 
 function updateWatchlistButton(movieTitle) {
     let watchlistBtn = document.querySelector('.add-watchlist-btn');
@@ -308,13 +282,6 @@ function updateWatchlistButton(movieTitle) {
         userData = JSON.parse(sessionStorage.getItem('loggedInUser'));
    
 
-    if (!userData) {
-        newWatchlistBtn.textContent = "Log in to use Watchlist";
-        newWatchlistBtn.disabled = true;
-        newWatchlistBtn.style.opacity = "0.6";
-        return;
-    }
-
     let saved = [];
    
         saved = JSON.parse(localStorage.getItem('watchlist')) || [];
@@ -325,11 +292,11 @@ function updateWatchlistButton(movieTitle) {
     if (inList) {
         newWatchlistBtn.textContent = " Remove from Watchlist";
         newWatchlistBtn.classList.add('added');
-        newWatchlistBtn.style.background = "#5f10a0";
+        // newWatchlistBtn.style.background = "#5f10a0";
     } else {
         newWatchlistBtn.textContent = "+ Add to Watchlist";
         newWatchlistBtn.classList.remove('added');
-        newWatchlistBtn.style.background = "";
+        // newWatchlistBtn.style.background = "";
     }
     newWatchlistBtn.disabled = false;
     newWatchlistBtn.style.opacity = "1";
@@ -345,17 +312,9 @@ document.addEventListener("click", (e) => {
   openMovieModal(card);
 });
 
-if (modalClose) {
-  modalClose.onclick = closeModal;
-}
 
-if (modal) {
-  modal.onclick = function (event) {
-    if (event.target === modal || event.target.hasAttribute('data-close-modal')) {
-      closeModal();
-    }
-  };
-}
+  
+
 //for modal to be responsive
 function repositionModalTitle() {
   let modalTitle = document.getElementById("modal-title");
