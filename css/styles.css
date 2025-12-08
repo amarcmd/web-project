@@ -700,7 +700,7 @@ header {
 }
 /* Film Type (it shows movie we can change it later if we expand to series) */
 .film-overlay{
-  font-size:1em;
+  font-size:0.9em;
   color:grey;
 
 }

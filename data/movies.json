@@ -9,6 +9,7 @@
                     "title": "Jurassic World Rebirth",
                     "description": "The next chapter in the Jurassic saga brings humanity back to the brink.",
                     "rating": 4.0,
+                    "time": "165 min",
                     "trailerId": "YOUR_TRAILER_ID_4",
                     "image": "imgs/jurrasic world-min.png",
                     "cast": [
@@ -48,6 +49,7 @@
                     "title": "SuperMan",
                     "description": "A new DC universe take that mixes epic action, humor and heart.",
                     "rating": 3.5,
+                    "time": "125 min",
                     "trailerId": "YOUR_TRAILER_ID_4",
                     "image": "imgs/superman.png",
                     "cast": [
@@ -82,6 +84,7 @@
                     "title": "Split",
                     "description": "Three girls are kidnapped by a man with multiple distinct personalities.",
                     "rating": 4.5,
+                    "time": "130 min",
                     "trailerId": "YOUR_TRAILER_ID_5",
                     "image": "imgs/split-min.png",
                     "cast": [
@@ -121,6 +124,7 @@
                     "title": "White Chicks",
                     "description": "Two disgraced FBI agents go deep undercover as two spoiled heiresses.",
                     "rating": 4.9,
+                    "time": "178 min",
                     "trailerId": "YOUR_TRAILER_ID_6",
                     "image": "imgs/white chicks-min.png",
                     "cast": [
@@ -159,6 +163,7 @@
                     "title": "Barbie",
                     "description": "Life in Barbie Land is perfect until a full-on existential crisis shakes everything.",
                     "rating": 4.6,
+                    "time": "145 min",
                     "trailerId": "GRm2_FzP1m0",
                     "image": "imgs/barbie-min.png",
                     "cast": [
@@ -197,6 +202,7 @@
                     "title": "It Ends With Us",
                     "description": "A dramatic love story based on the best-selling novel.",
                     "rating": 3.7,
+                    "time": "180 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/it-ends-with-us-min.png",
                     "cast": [
@@ -231,6 +237,7 @@
                     "title": "The Discovery",
                     "description": "A story about exploring love, loss and what comes after.",
                     "rating": 3.1,
+                    "time": "125 min",
                     "trailerId": "",
                     "image": "imgs/the discovery-min.png",
                     "cast": [
@@ -265,6 +272,7 @@
                     "title": "Interstellar",
                     "description": "Explorers travel through a wormhole in space in a desperate mission to save humanity.",
                     "rating": 5.0,
+                    "time": "145 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/interstellar-min.png",
                     "cast": [
@@ -299,6 +307,7 @@
                     "title": "Extraction 2",
                     "description": "A black ops mercenary attempts a dangerous rescue that uncovers a dark conspiracy.",
                     "rating": 2.9,
+                    "time": "175 min",
                     "trailerId": "",
                     "image": "imgs/extraction2-min.png",
                     "cast": [
@@ -332,6 +341,7 @@
                     "title": "Avengers",
                     "description": "Earth's mightiest heroes must work together to stop a global threat.",
                     "rating": 4.7,
+                    "time": "160 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/avengers-min.png",
                     "cast": [
@@ -372,6 +382,7 @@
                     "title": "IT",
                     "description": "A group of kids face an ancient shape-shifting evil that feeds on fear.",
                     "rating": 4.6,
+                    "time": "145 min",
                     "trailerId": "FnCdOQsN5ZE",
                     "image": "imgs/it-min.png",
                     "cast": [
@@ -406,6 +417,7 @@
                     "title": "Truth or Dare",
                     "description": "A simple game of truth or dare turns deadly for a group of friends.",
                     "rating": 4.9,
+                    "time": "180 min",
                     "trailerId": "",
                     "image": "imgs/truth or dare-min.png",
                     "cast": [
@@ -440,6 +452,7 @@
                     "title": "the litle stranger",
                     "description": "A country doctor becomes wrapped up in the dark history of a decaying estate.",
                     "rating": 2.9,
+                    "time": "105 min",
                     "trailerId": "",
                     "image": "imgs/the%20litle%20stranger.png",
                     "cast": [
@@ -474,6 +487,7 @@
                     "title": "Black Phone2",
                     "description": "The Grabber torments his former victim and family from beyond the grave.",
                     "rating": 4.5,
+                    "time": "160 min",
                     "trailerId": "",
                     "image": "imgs/Black%20Phone2.png",
                     "cast": [
@@ -508,6 +522,7 @@
                     "title": "Turno nocturno",
                     "description": "A new nurse faces the terrifying legend of a ghostly nurse in a haunted hospital.",
                     "rating": 3.7,
+                    "time": "155 min",
                     "trailerId": "",
                     "image": "imgs/Turno%20nocturno.png",
                     "cast": [
@@ -541,6 +556,7 @@
                     "title": "The Forest",
                     "description": "A woman searches Japan's infamous Suicide Forest for her missing sister.",
                     "rating": 4.0,
+                    "time": "118 min",
                     "trailerId": "",
                     "image": "imgs/Forest.png",
                     "cast": [
@@ -575,6 +591,7 @@
                     "title": "The conjuring 2",
                     "description": "Ed and Lorraine Warren investigate a terrifying haunting in north London.",
                     "rating": 4.4,
+                    "time": "155 min",
                     "trailerId": "",
                     "image": "imgs/the%20conjuring%202.png",
                     "cast": [
@@ -606,6 +623,7 @@
                 {
                     "id": "mirrors-2",
                     "title": "Mirrors 2",
+                    "time": "175 min",
                     "description": "A night watchman is haunted by deadly visions in the mirrors of a department store.",
                     "rating": 2.5,
                     "trailerId": "",
@@ -641,6 +659,7 @@
                     "title": "Insidious",
                     "description": "A family looks to prevent evil spirits from trapping their comatose child in a realm called The Further.",
                     "rating": 4.3,
+                    "time": "125 min",
                     "trailerId": "",
                     "image": "imgs/insidious1-min.png",
                     "cast": [
@@ -674,6 +693,7 @@
                     "title": "Insidious 2",
                     "description": "The haunted Lambert family seeks to uncover the mysterious childhood secret that has left them connected to the spirit world.",
                     "rating": 4.1,
+                    "time": "135 min",
                     "trailerId": "",
                     "image": "imgs/insidious2-min.png",
                     "cast": [
@@ -707,6 +727,7 @@
                     "title": "Insidious 3",
                     "description": "A prequel where a teenage girl with a psychic ability tries to contact her deceased mother, but instead attracts a malevolent entity.",
                     "rating": 3.8,
+                    "time": "165 min",
                     "trailerId": "",
                     "image": "imgs/insidious3-min.png",
                     "cast": [
@@ -746,6 +767,7 @@
                     "title": "One Battle After Another",
                     "description": "A former revolutionary and his daughter face the consequences of his past.",
                     "rating": 2.0,
+                    "time": "145 min",
                     "trailerId": "",
                     "image": "imgs/One%20Battle%20After%20Another.png",
                     "cast": [
@@ -780,6 +802,7 @@
                     "title": "Countdown",
                     "description": "A mysterious app counts down to its users' deaths, turning their lives into a race against time.",
                     "rating": 3.0,
+                    "time": "165 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/countdown-min.png",
                     "cast": [
@@ -813,6 +836,7 @@
                     "title": "Avatar",
                     "description": "A marine on Pandora becomes torn between following orders and protecting his new home.",
                     "rating": 5.0,
+                    "time": "170 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/avatar-min.png",
                     "cast": [
@@ -847,6 +871,7 @@
                     "title": "Sovereign",
                     "description": "A father and son who follow a radical belief system face the fallout after a violent confrontation.",
                     "rating": 4.8,
+                    "time": "180 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/Sovereign.png",
                     "cast": [
@@ -880,6 +905,7 @@
                     "title": "WorldWar Z",
                     "description": "A former UN investigator traverses the world to find a way to stop a zombie pandemic.",
                     "rating": 4.2,
+                    "time": "145 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/worldwarz-min.png",
                     "cast": [
@@ -914,6 +940,7 @@
                     "title": "Damsel",
                     "description": "Stranger things star Millie Bobbie Brown turns the fairy tale upside down as she tries to escape a dragon's lair.",
                     "rating": 3.3,
+                    "time": "135 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/damsel-min.png",
                     "cast": [
@@ -948,6 +975,7 @@
                     "title": "Mr. and Mrs. Smith",
                     "description": "A bored married couple is surprised to learn that they are both assassins hired by competing agencies to kill each other.",
                     "rating": 4.3,
+                    "time": "125 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/mr.andmrs.smith-min.png",
                     "cast": [
@@ -982,6 +1010,7 @@
                     "title": "Bullet Train",
                     "description": "Five assassins aboard a fast-moving train discover their missions are interconnected.",
                     "rating": 4.1,
+                    "time": "112 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/bullettrain-min.png",
                     "cast": [
@@ -1022,6 +1051,7 @@
                     "title": "The Lion King",
                     "description": "A young lion prince flees his kingdom after the death of his father, only to learn the true meaning of responsibility and bravery.",
                     "rating": 4.9,
+                    "time": "134 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/lionking.jpeg",
                     "cast": [
@@ -1056,6 +1086,7 @@
                     "title": "Frozen",
                     "description": "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister Anna teams up with a rugged iceman, his loyal reindeer, and a naive snowman to change the weather condition.",
                     "rating": 4.8,
+                    "time": "155 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/Frozen-min.png",
                     "cast": [
@@ -1090,6 +1121,7 @@
                     "title": "Frozen 2",
                     "description": "Elsa, Anna, Kristoff, and Olaf embark on a journey beyond Arendelle to discover the origin of Elsa's magical powers.",
                     "rating": 4.5,
+                    "time": "136 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/Frozen2-min.png",
                     "cast": [
@@ -1124,6 +1156,7 @@
                     "title": "Toy Story 4",
                     "description": "Woody, Buzz, and the gang embark on a road trip with a new toy named Forky.",
                     "rating": 4.8,
+                    "time": "167 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/toystory4-min.png",
                     "cast": [
@@ -1158,6 +1191,7 @@
                     "title": "Moana",
                     "description": "A spirited teenager sets sail on a daring mission to save her people.",
                     "rating": 4.7,
+                    "time": "113 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/moana.jpeg",
                     "cast": [
@@ -1192,6 +1226,7 @@
                     "title": "Coco",
                     "description": "A young boy embarks on a journey to the Land of the Dead to uncover his family's history.",
                     "rating": 4.9,
+                    "time": "108 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/coco.jpeg",
                     "cast": [
@@ -1226,6 +1261,7 @@
                     "title": "Bad Guys",
                     "description": "The now reformed Bad Guys get dragged into a globe-trotting heist led by a new crew.",
                     "rating": 3.8,
+                    "time": "119 min",
                     "trailerId": "YOUR_TRAILER_ID_4",
                     "image": "imgs/BadGuys.png",
                     "cast": [
@@ -1260,6 +1296,7 @@
                     "title": "Spider-Man: Into the Spider-Verse",
                     "description": "Teenager Miles Morales becomes Spider-Man of his reality, crossing paths with five counterparts from other dimensions to stop a threat to all realities.",
                     "rating": 4.9,
+                    "time": "178 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/spidermanverse-min.png",
                     "cast": [
@@ -1294,6 +1331,7 @@
                     "title": "Encanto",
                     "description": "A magical family in Colombia faces challenges when their powers start to fade.",
                     "rating": 4.6,
+                    "time": "167 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/encanto.jpeg",
                     "cast": [
@@ -1328,6 +1366,7 @@
                     "title": "Minions: The Rise of Gru",
                     "description": "A young Gru teams up with the Minions to become a supervillain.",
                     "rating": 4.2,
+                    "time": "114 min",
                     "trailerId": "--rV9wXzIeE",
                     "image": "imgs/minions-min.png",
                     "cast": [

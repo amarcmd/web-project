@@ -87,8 +87,8 @@ document.querySelectorAll(".movie-card").forEach(card => {
     console.log(description);
     let overlay = document.createElement("span");
     overlay.className = "rating-overlay";
-    overlay.textContent = `${description} `;
-    overlay.textContent = `${rating} / 5 ★`;
+    // overlay.textContent = `${description} `;
+    // overlay.textContent = `${rating} / 5 ★`;
 
     card.appendChild(overlay);
 });
