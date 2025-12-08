@@ -228,11 +228,37 @@ function loadBookedMovies(user) {
         
             allBookings = JSON.parse(localStorage.getItem('bookings')) || {};
     
-     const userBookings = allBookings[user.username] || [];
-      
-        const $bookedGrid = $('#booked-grid');
-        const $bookedCounter = $('#booked-counter');
-        const bookedCount = userBookings.length;
+    let userBookings = allBookings[user.username] || [];
+    let $bookedGrid = $('#booked-grid');
+    let $bookedCounter = $('#booked-counter');
+
+    let now = new Date();
+    let changed = false;
+
+    userBookings.forEach((b)=> {
+        let dateObj = parseBookingDate(b);
+
+        // Only change if aana a valid date and eza mara2 w its not already cancelled
+        if (dateObj && dateObj < now && b.status !== 'cancelled') {
+            if (b.status !== 'watched') {
+                b.status = 'watched';
+                b.watchedDate = new Date().toISOString();
+                changed = true;
+            }
+        } else if (!b.status) {
+            // upcoming
+            b.status = 'upcoming';
+            changed = true;
+        }
+    });
+
+    if (changed){
+        allBookings[user.username] =userBookings;
+        localStorage.setItem('bookings', JSON.stringify(allBookings));
+    }
+
+
+        let bookedCount = userBookings.length;
         
         $('#total-bookings').text(bookedCount);
         $bookedCounter.text(bookedCount + (bookedCount === 1 ? ' booking' : ' bookings'));
@@ -248,17 +274,17 @@ function loadBookedMovies(user) {
             `);
             return;
         }
-        const sortMode = $('#booked-sort').val() || 'nearest';
-        const sortedBookings = sortBookingsByMode(userBookings, sortMode);
-        const bookedHTML = sortedBookings.map((b, index) => {
-            const originalIndex = userBookings.findIndex(booking => 
+        let sortMode = $('#booked-sort').val() || 'nearest';
+        let sortedBookings = sortBookingsByMode(userBookings, sortMode);
+        let bookedHTML = sortedBookings.map((b, index) => {
+        let originalIndex = userBookings.findIndex(booking => 
         booking.movie === b.movie && 
         booking.date === b.date && 
         booking.time === b.time
     );
         
-    const status = b.status || 'upcoming';
-    const statusClass = status === 'cancelled' ? 'status-cancelled' : 
+    let status = b.status || 'upcoming';
+    let statusClass = status === 'cancelled' ? 'status-cancelled' : 
                        status === 'watched' ? 'status-watched' : 'status-upcoming';
     // here i used <i> tag which is used for icons
     return `
@@ -280,16 +306,12 @@ function loadBookedMovies(user) {
             </div>
             ${status === 'upcoming' ? `
             <div class="booking-actions-small">
-                <button class="btn-action-small btn-watch-small" data-index="${originalIndex}">
-                    <i class="fas fa-check"></i> Watched
-                </button>
                 <button class="btn-action-small btn-cancel-small" data-index="${originalIndex}">
                     <i class="fas fa-times"></i> Cancel
                 </button>
             </div>
             ` : ''}
-        </div>
-    `;
+        </div>`;
 }).join('');
 
 
@@ -391,9 +413,7 @@ function openBookingDetailsModal(booking, bookingIndex) {
                 </div>
                 <div class="booking-actions" id="bookingActions">
                     ${booking.status !== 'cancelled' && booking.status !== 'watched' ? `
-                    <button class="btn-booking-action btn-watch" data-index="${bookingIndex}">
-                        <i class="fas fa-check-circle"></i> Mark as Watched
-                    </button>
+                   
                     <button class="btn-booking-action btn-cancel" data-index="${bookingIndex}">
                         <i class="fas fa-times-circle"></i> Cancel Booking
                     </button>

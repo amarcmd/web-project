@@ -85,7 +85,7 @@ $(function () {
         if (!list.length) {
             $count.text("0 results");
             if ($empty.length) $empty.show();
-            $grid.html(`<p class="search-empty">No movies found.</p>`);
+          
             return;
         }
 
