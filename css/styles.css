@@ -1,6 +1,6 @@
 /* style for each header and overall display in all pages */
 *{box-sizing:border-box;
-  font-family:'Times New Roman', Times, serif;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
 *::-webkit-scrollbar{
@@ -882,6 +882,7 @@ main{
   color: #ccc;
   margin-bottom: 8px;
   transition: color 0.3s;
+   text-decoration: none;
 }
 
 .nav-column a:hover {
