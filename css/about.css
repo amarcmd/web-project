@@ -56,7 +56,7 @@
 
 /* Story Section with Image on Right */
 .story-section {
-    padding: 100px 20px;
+    padding: 50px 20px;
     border-radius: 10px;
     background: var(--main-dark);
 }
@@ -172,7 +172,7 @@
 
 /* Values Section */
 .values-section {
-    padding: 100px 20px;
+    padding: 50px 20px;
     background: var(--dark-bg);
 }
 
