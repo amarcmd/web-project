@@ -30,14 +30,16 @@ let bookingMovieComments = {
       {
         user: "sciFiNerd",
         rating: 4,
+        time: "155 min",
         text: "Cool expansion of the Predator universe."
-      }
+      } 
     ],
 
   "HardaBasht": [
       {
         user: "beirutWatcher",
         rating: 5,
+        time: "169 min",
         text: "Hits hard. Really good Lebanese drama."
       }
     ],
@@ -46,6 +48,7 @@ let bookingMovieComments = {
       {
         user: "animeFan",
         rating: 5,
+        time: "175 min",
         text: "Peak JJK energy, fights are insane."
       }
     ],
@@ -54,6 +57,7 @@ let bookingMovieComments = {
       {
         user: "dadJokes",
         rating: 4,
+        time: "135 min",
         text: "Weird but fun, loved the dynamic."
       }
     ],
@@ -62,6 +66,7 @@ let bookingMovieComments = {
       {
         user: "dramaQueen",
         rating: 5,
+        time: "125 min",
         text: "Beautiful story, really liked the chemistry."
       }
     ]
@@ -129,7 +134,7 @@ let bookingMovieComments = {
                         <p class="movie-overlay-title">${movie.title || ""}</p>
                         <p class="movie-overlay-desc">${movie.description || ""}</p>
                         <div class="movie-overlay-bottom">
-                            <span class="film-overlay"> Movie </span>
+                            <span class="film-overlay"> ${movie.time} </span>
                             <span class="movie-overlay-rating">${rating} / 5 ★</span>
                         </div>
                     </div>

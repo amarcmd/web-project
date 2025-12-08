@@ -125,7 +125,7 @@ $(function () {
                     <p class="movie-overlay-title">${m.title || ""}</p>
                     <p class="movie-overlay-desc">${m.description || ""}</p>
                     <div class="movie-overlay-bottom">
-                        <span class="film-overlay">Movie</span>
+                        <span class="film-overlay">${m.time}</span>
                         <span class="movie-overlay-rating">${rating} / 5 ★</span>
                     </div>
                 </div>

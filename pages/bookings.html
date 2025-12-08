@@ -182,7 +182,8 @@
             data-cast="Arnold Schwarzenegger, Maria Conchita Alonso, Richard Dawson"
             data-genres="Action, Sci-Fi, Thriller"
             data-this-movie-is="Intense, Violent, Futuristic"
-            data-rating="4.3">
+            data-rating="4.3"
+            data-time="115 min">
             <img src="../imgs/therunningman-min.png" alt="The Running Man">
             <button class="showShowTimes-btn">
               Show ShowTimes
@@ -196,7 +197,8 @@
             data-cast="Elle Fanning, ravi Narayan, Micheal Homik"
             data-genres="Action, Sci-Fi, Horror"
             data-this-movie-is="Gory, Suspenseful, Alien Hunt"
-            data-rating="3.3">
+            data-rating="3.3"
+            data-time="125 min">
             <img src="../imgs/predator badlands-min.png" alt="Predator: Badlands">
             <button class="showShowTimes-btn">
               Show ShowTimes
@@ -211,7 +213,8 @@
             data-cast="Randa Kaady, Alexandra Kahwagi, Hussein Kaouk"
             data-genres="Drama, Family, Crime"
             data-this-movie-is="Emotional, Lebanese, Gritty"
-            data-rating="4.1">
+            data-rating="4.1"
+            data-time="155 min">
             <img src="../imgs/hardabsht-min.png" alt="HardaBasht poster">
             <button class="showShowTimes-btn">
               Show ShowTimes
@@ -226,7 +229,8 @@
             data-cast="Adam McArthur, Jun'ya Enoki, Yuchi Nakamura"
             data-genres="Action, Fantasy, Anime"
             data-this-movie-is="Exciting, Supernatural, Intense"
-            data-rating="4.7">
+            data-rating="4.7"
+            data-time="175 min">
             <img src="../imgs/jujutsu kaisen-min.png" alt="Jujutsu Kaisen:Execution poster">
             <button class="showShowTimes-btn">
               Show ShowTimes
@@ -241,7 +245,8 @@
             data-cast="Alan Ritchson, Kevin James, Banks Peirce"
             data-genres="Comedy, Action, Thriller"
             data-this-movie-is="Funny, Suspenseful, Action-Packed"
-            data-rating="4.2">
+            data-rating="4.2"
+            data-time="185 min">
             <img src="../imgs/playdate-min.png" alt="Playdate poster">
             <button class="showShowTimes-btn">
               Show ShowTimes
@@ -255,7 +260,8 @@
             data-cast="Amr Youssef, Asmaa Galal, Dhafer L'Abidine"
             data-genres="Romance, Drama"
             data-this-movie-is="Emotional, Romantic, Thought-Provoking"
-            data-rating="2.3">
+            data-rating="2.3"
+            data-time="168 min">
             <img src="../imgs/El Selem W El Thoban-min.png" alt="El Selem W El Thoban">
             <button class="showShowTimes-btn">
               Show ShowTimes
@@ -357,20 +363,20 @@
 </footer>
 <script>
  document.querySelectorAll(".gallery2 .movie-card").forEach(card => {
-    const title = card.dataset.title 
+    let title = card.dataset.title 
       || card.querySelector("figcaption")?.textContent.trim() 
       || "";
-    const desc   = card.dataset.description || "";
-    const rating = card.dataset.rating || "N/A";
-
-    const overlay = document.createElement("div");
+    let desc   = card.dataset.description || "";
+    let rating = card.dataset.rating || "N/A";
+    let time = card.dataset.time || "N/A";
+    let overlay = document.createElement("div");
     overlay.className = "movie-overlay";
 
     overlay.innerHTML = `
       <p class="movie-overlay-title">${title}</p>
         <p class="movie-overlay-desc">${desc}</p>
       <div class="movie-overlay-bottom">
-        <span class="film-overlay">Movie</span>
+        <span class="film-overlay"> ${time}</span>
         <span class="movie-overlay-rating">${rating} / 5 ★</span>
       </div>
     `;
