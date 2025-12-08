@@ -1066,3 +1066,15 @@ body.menu-open {
     width: 100%;                 /* content full width under media */
   }
 }
+
+    .game-icon {
+      font-size: 90px;
+      margin-bottom: 15px;
+    }
+    
+    .empty-icon {
+      font-size: 120;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+  

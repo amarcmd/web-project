@@ -29,10 +29,10 @@ function showLoginRequired() {
     $('main').html(`
         <div class="profile-modern">
             <div class="empty-watchlist">
-                <div class="empty-icon">🎬</div>
+                <div class="empty-icon"><i class="fas fa-film"></i></div>
                 <h3>Please Log In</h3>
                 <p>You need to be logged in to view your profile and ratings.</p>
-                <a href="../../index.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Go to Login →</a>
+                <a href="../../index.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Go to Login <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     `);
@@ -128,7 +128,7 @@ function loadWatchlist(user) {
                 <div class="empty-watchlist" style="grid-column: 1 / -1;">
                     <h3>Your Watchlist is Empty</h3>
                     <p>Start adding movies to build your personalized collection!</p>
-                    <a href="../pages/search.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Browse Movies →</a>
+                    <a href="../pages/search.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Browse Movies <i class="fas fa-arrow-right"></i></a>
                 </div>
             `);
             return;
@@ -143,10 +143,10 @@ function loadWatchlist(user) {
             return `
                 <div class="watchlist-card-modern">
                     <img src="${safeImage}" alt="${movie.title}" class="card-image" onerror="this.src='../../imgs/default-movie.jpg'">
-                    ${isRated ? `<div class="rated-badge">Rated ${userRatings[movie.title].rating}/5</div>` : ''}
+                    ${isRated ? `<div class="rated-badge">Rated ${userRatings[movie.title].rating}/5 <i class="fas fa-star"></i></div>` : ''}
                     <div class="card-content">
                         <h3 class="card-title">${movie.title}</h3>
-                        <div class="card-rating">⭐ ${movie.rating}/5</div>
+                        <div class="card-rating"><i class="fas fa-star"></i> ${movie.rating}/5</div>
                         <div class="card-actions">
                             <button class="btn-rate-large" data-title="${movie.title}">
                                 ${isRated ? 'Update' : 'Rate'}
@@ -185,6 +185,7 @@ function loadRatedMovies(user) {
         if (ratedCount === 0) {
             $ratedGrid.html(`
                 <div class="empty-rated">
+                    <div class="empty-icon"><i class="fas fa-star-half-alt"></i></div>
                     <h3>No Movies Rated Yet</h3>
                     <p>Rate movies from your watchlist to see them here!</p>
                 </div>
@@ -197,7 +198,7 @@ function loadRatedMovies(user) {
             return `
                 <div class="rated-card-modern">
                     <img src="${safeImage}" alt="${movieTitle}" class="card-image" onerror="this.src='../imgs/default-movie.jpg'">
-                    <div class="rated-badge">${ratingData.rating}/5 ★</div>
+                    <div class="rated-badge">${ratingData.rating}/5 <i class="fas fa-star"></i></div>
                     <div class="card-content">
                         <h3 class="card-title">${movieTitle}</h3>
                         <div class="card-actions">
@@ -239,9 +240,10 @@ function loadBookedMovies(user) {
         if (userBookings.length === 0) {
             $bookedGrid.html(`
                 <div class="empty-booked">
+                    <div class="empty-icon"><i class="fas fa-ticket-alt"></i></div>
                     <h3>No Bookings Yet</h3>
                     <p>Book a movie from the bookings page and it will appear here.</p>
-                    <a href="../pages/bookings.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Book a Movie →</a>
+                    <a href="../pages/bookings.html" style="color: #8a2be2; text-decoration: none; font-weight: bold;">Book a Movie <i class="fas fa-arrow-right"></i></a>
                 </div>
             `);
             return;
@@ -264,8 +266,8 @@ function loadBookedMovies(user) {
             <div class="booked-header">
                 <h3 class="booked-movie-title">${b.movie || 'Unknown Movie'}</h3>
                 <div class="booked-status ${statusClass}">
-                    ${status === 'cancelled' ? ' Cancelled' : 
-                      status === 'watched' ? ' Watched' : 'Upcoming'}
+                    ${status === 'cancelled' ? '<i class="fas fa-times"></i> Cancelled' : 
+                      status === 'watched' ? '<i class="fas fa-check"></i> Watched' : '<i class="fas fa-clock"></i> Upcoming'}
                 </div>
             </div>
             <div class="booked-meta">
@@ -571,11 +573,11 @@ function openLargeRatingModal(movieTitle, currentRating = 0) {
                     </div>
                     
                     <div class="rating-stars-large" id="largeRatingStars">
-                        <span class="rating-star-large" data-rating="1">★</span>
-                        <span class="rating-star-large" data-rating="2">★</span>
-                        <span class="rating-star-large" data-rating="3">★</span>
-                        <span class="rating-star-large" data-rating="4">★</span>
-                        <span class="rating-star-large" data-rating="5">★</span>
+                        <span class="rating-star-large" data-rating="1"><i class="fas fa-star"></i></span>
+                        <span class="rating-star-large" data-rating="2"><i class="fas fa-star"></i></span>
+                        <span class="rating-star-large" data-rating="3"><i class="fas fa-star"></i></span>
+                        <span class="rating-star-large" data-rating="4"><i class="fas fa-star"></i></span>
+                        <span class="rating-star-large" data-rating="5"><i class="fas fa-star"></i></span>
                     </div>
                     
                     <div class="rating-value-large" id="largeRatingValue">
