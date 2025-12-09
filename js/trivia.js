@@ -309,7 +309,7 @@ function createGuessQuestion(question) {
             </div>
             <div class="emoji-clue">${question.emoji}</div>
             <div class="game-question">Which ReelTime movie is represented by these emojis?</div>
-            ${question.hint ? `<div class="hint-text">💡 Hint: ${question.hint}</div>` : ''}
+            ${question.hint ? `<div class="hint-text"> Hint: ${question.hint}</div>` : ''}
             <div class="options-grid">
                 ${question.options.map((option, index) => 
                     `<button class="option-btn" onclick="checkAnswer(${index})">${option}</button>`
@@ -415,10 +415,10 @@ function endGame() {
     let percentage = (score / (totalQuestions * 10)) * 100;
     
     let message = '';
-    if (percentage >= 80) message = "🎉 Movie Master! You're a ReelTime expert!";
-    else if (percentage >= 60) message = "👍 Great job! You know your ReelTime movies!";
-    else if (percentage >= 40) message = "😊 Good effort! Time to watch more movies!";
-    else message = "🎬 Keep exploring ReelTime movies!";
+    if (percentage >= 80) message = " Movie Master! You're a ReelTime expert!";
+    else if (percentage >= 60) message = " Great job! You know your ReelTime movies!";
+    else if (percentage >= 40) message = " Good effort! Time to watch more movies!";
+    else message = " Keep exploring ReelTime movies!";
     
     let resultsHTML = `
         <div class="results-screen">
