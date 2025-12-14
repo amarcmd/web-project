@@ -17,9 +17,9 @@ html, body {
     --text-color: #f0f0f0;
     --card-hover: #2a2a3e;
     --accent: #7765fa;
-    --cards-per-view: 8;  /* how many cards visible at once */
+    --cards-per-view: 7;  /* how many cards visible at once */
     --card-gap: 1rem;     /* space between cards */
-    --card-height: 300px; /* poster height */
+    --card-height: 310px; /* poster height */
     --card-radius: 14px;
 }
 body {

@@ -172,7 +172,7 @@ main{
 /* selectosas */
 
 /* step5 */
-#reserveBtn:disabled {
+#reserveBtn:disabled, #Datebtn:disabled {
     background:#555;
     opacity:.5;
     cursor:not-allowed;

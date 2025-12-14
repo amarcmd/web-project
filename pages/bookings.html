@@ -4,7 +4,7 @@
   <meta http-equiv="Permissions-Policy" content="autoplay=(self),encrypted-media=(self)">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bookings</title>
+  <title>Bookings | ReelTime</title>
   <link rel="shortcut icon" href="../imgs/movie.png" type="image/x-icon">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- for search icon-->
   <link rel="stylesheet" href="../css/styles.css">
@@ -121,7 +121,8 @@
                 <option value="6:00">6:00 pm</option>
                 <option value="9:00">9:00 pm</option>
             </select>
-            <button class="next" onclick="completeStep()">Submit</button>          
+            <button class="next" id="Datebtn" disabled>Submit</button>
+            <div id="datecompletestep"></div>          
         </div>
         <div class="step-content" id="step4">
             <div class="container">
@@ -337,7 +338,7 @@
       <div class="nav-column">
         <strong>Movies</strong>
         <a href="../index.html">Home</a>
-        <a href="../pages/bookings.html">booking</a>
+        <a href="../pages/bookings.html">Bookings</a>
         <a href="../pages/Profile.html">My profile</a>
         <a href="../pages/about.html">About US</a>
       </div>
@@ -349,9 +350,9 @@
       </div> -->
       <div class="nav-column">
         <strong>Social media </strong>
-        <a href="#">instagram</a>
+        <a href="#">Instagram</a>
         <a href="#">Facebook</a>
-        <a href="#">tiktok</a>
+        <a href="#">Tiktok</a>
       </div>
     </div>
   </div>

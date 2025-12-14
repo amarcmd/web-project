@@ -302,6 +302,40 @@ function completeStep() {
 function isNumeric(value) {
     return /^[0-9]+$/.test(value);
 }
+function isValidBookingDate(date){
+    if (!date) return false;
+    let [y, m, d] = date.split("-").map(Number);
+    let selected = new Date(y, m - 1, d); // midnight
+    selected.setHours(0,0,0,0);
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return selected>= today;
+}
+$("#dateselect").on("input change", function () {
+    let date = $(this).val();
+    $("#datecompletestep").empty();
+
+    if (!date) {
+      $("#Datebtn").prop("disabled", true);
+      return;
+    }
+
+    if (!isValidBookingDate(date)) {
+      $("#Datebtn").prop("disabled", true);
+      $("#datecompletestep").html(`<span style="color:#ff6b6b; position: relative; top:10px; bottom: 10px;">Please pick a valid date.</span>`);
+      return;
+    }
+
+    $("#Datebtn").prop("disabled", false);
+});
+
+$("#Datebtn").on("click", function (e) {
+    e.preventDefault();
+    let date = $("#dateselect").val();
+    if (!isValidBookingDate(date)) return;
+    completeStep();
+});
 // confirm booing
 $("#confirmbtn").on("click", function () {
     let userData = sessionStorage.getItem("loggedInUser");
@@ -362,15 +396,15 @@ $("#confirmbtn").on("click", function () {
         return;
     }
     // byekhdo aa step 3
-    if (!date) {
-        $("#confirmation").empty();
-        $("#confirmation").html(
+    // if (!date) {
+    //     $("#confirmation").empty();
+    //     $("#confirmation").html(
             
-            `<span style=" color: #ff6b6b;">Please choose a date. Returning to Step 3...</span>`
-        );
-        setTimeout(() => showStep(3), 800);
-        return;
-    }
+    //         `<span style=" color: #ff6b6b;">Please choose a date. Returning to Step 3...</span>`
+    //     );
+    //     setTimeout(() => showStep(3), 800);
+    //     return;
+    // }
 
     let booking = { name, cinema, movie, date, time, seats, price, status: 'upcoming' };//by default upcoming
   
