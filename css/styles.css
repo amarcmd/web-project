@@ -249,6 +249,37 @@ header {
 
 
 /* login style */
+#loginToggleBtn {
+    background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.3);
+    margin-left: 150px;
+}
+
+#loginToggleBtn:hover {
+    background: linear-gradient(135deg, rgba(95, 16, 160, 0.8), #5f10a0);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.4);
+}
+
+#loginToggleBtn.logged-in {
+    background: linear-gradient(135deg, #5f10a0, #8a2be2);
+}
+
+#loginToggleBtn.logged-in:hover {
+    background: linear-gradient(135deg, #4d0d80, #7a1fd1);
+}
 .login-background {
   position: fixed;
   top: 0;
@@ -382,7 +413,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 99999;
 }
 
 .login-content-panel {
@@ -1491,48 +1522,9 @@ header {
     transform: translateY(-2px);
 }
 
-.added {
-    background:linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent)) ;
-    cursor: pointer;
-}
-
-.added:hover {
-    background:linear-gradient(135deg, rgba(65, 3, 49, 0.678), var(--accent)) ;
-    
-}
-/*watchlist-the notif msg*/
 
 
-#watchlist-toast {/*lama yekpus remove*/
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    z-index: 10000;
-    transform: translateY(100px);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    max-width: 300px;
-    text-align: center;
-}
 
-#watchlist-toast.show {
-  background-color: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
-    transform: translateY(0); /*tkon at the end of screen */
-    opacity: 7;
-}
-
-#watchlist-toast.added {
-    background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
-}
-
-#watchlist-toast.removed {
-    background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
-}
 
 /* for comments */
 .comments-section {

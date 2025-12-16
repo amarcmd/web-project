@@ -218,17 +218,25 @@ let bookingMovieComments = {
     let currentUser = null;
 
     $(document).ready(function () {
-        let $loginPanel = $('.login');
-        let loggedInUser = sessionStorage.getItem('loggedInUser');
-
-        if (loggedInUser) {
-            $loginPanel.hide();
-            if (typeof loadWatchlist === 'function') {
-                loadWatchlist();
+      $('.login').hide();
+        
+        $('#loginToggleBtn').click(function(e) {
+            e.preventDefault();
+            
+            let loggedInUser = sessionStorage.getItem('loggedInUser');
+            if (!loggedInUser) {
+                $('.login').fadeIn(300);
+            } else {
+                window.location.href = '../pages/profile.html';
             }
-        } else {
-            $loginPanel.css('display', 'flex');
-        }
+        });
+        
+      $('.login-background').click(function(e) {
+            if (e.target === this) {
+                $('.login').fadeOut(300);
+            }
+        });
+        
         $('.login-form').on('submit', function (e) {
             e.preventDefault();
 
@@ -249,17 +257,63 @@ let bookingMovieComments = {
                 // Ensure the user object has the watchlist array
                 matchedUser.watchlist = userWatchlist;
                 sessionStorage.setItem('loggedInUser', JSON.stringify(matchedUser));
-                 // Hide login panel
-                $loginPanel.fadeOut();
-                if (typeof loadWatchlist === 'function') {
-                    loadWatchlist();
-                }
+                $('.login').fadeOut();
+                
+                updateLoginStatus();
+              
+                $('#username').val('');
+                $('#password').val('');
+                $('#loginError').text('');
+                
+              
+                setTimeout(() => location.reload(), 500);
             } else {
                  $('#loginError').text('Invalid username or password. Please try again.');
             }
         });
+       
+        updateLoginStatus();
     });
 
+    function updateLoginStatus() {
+        let loggedInUser = sessionStorage.getItem('loggedInUser');
+        let $loginToggleBtn = $('#loginToggleBtn');
+        
+        if (loggedInUser) {
+        
+                let userData = JSON.parse(loggedInUser);
+                $loginToggleBtn.html(`<i class="fas fa-user"></i> ${userData.username}`);
+                $loginToggleBtn.addClass('logged-in');
+           
+        } else {
+            $loginToggleBtn.html('<i class="fas fa-user"></i> Login');
+            $loginToggleBtn.removeClass('logged-in');
+        }
+    }
+
+   
+    
+     $(document).on("click", ".add-watchlist-btn.login-required", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        $('.login').fadeIn();
+        
+        showMessage("Please login to add movies to your watchlist!", 'info');
+    });
+    
+    function showMessage(message, type) {
+        let $message = $('<div class="alert-message"></div>')
+            .text(message)
+            .addClass(type)
+            .hide()
+            .appendTo('body')
+            .fadeIn();
+        
+        setTimeout(() => {
+            $message.fadeOut(() => $(this).remove());
+        }, 3000);
+    }
 });
 let current = 1;
 function showStep(n) {
@@ -339,6 +393,40 @@ $("#Datebtn").on("click", function (e) {
 // confirm booing
 $("#confirmbtn").on("click", function () {
     let userData = sessionStorage.getItem("loggedInUser");
+    
+    if (!userData) {
+        // User is not logged in
+        $("#confirmation").empty();
+        $("#confirmation").html(`
+            <div style="text-align: center; padding: 20px;">
+                <p style="color: #ff6b6b; margin-bottom: 15px;">
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    You need to log in to confirm your booking.
+                </p>
+                <button id="loginFromBookingBtn" style="
+                    background: linear-gradient(135deg, rgba(122, 21, 97, 0.678), var(--accent));
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    margin-top: 10px;
+                ">
+                    <i class="fas fa-sign-in-alt"></i> Log In Now
+                </button>
+            </div>
+        `);
+        
+        setTimeout(() => {
+            $("#loginFromBookingBtn").on("click", function() {
+                $('.login').fadeIn();
+            });
+        }, 100);
+        
+        return; 
+    }
+
 
     let userObj = JSON.parse(userData);
     let username = userObj.username;

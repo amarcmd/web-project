@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="../css/about.css">
   <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
-
+   <script src="../js/scriptJQ.js" defer></script>
   <script src="../js/script.js" defer></script>
+
 </head>
 <body>
   <header>
@@ -24,6 +26,9 @@
         <li><a href="../pages/bookings.html">Bookings</a></li>
         <li><a href="../pages/trivia.html">Games</a></li>   
         <li><a href="../pages/about.html" style="background-color: blueviolet;">About</a></li>
+         <li>       <button id="loginToggleBtn" class="login-toggle-btn">
+        <i class="fas fa-user"></i> Login
+    </button></li>
       </ul>
     </nav>
 
@@ -39,9 +44,7 @@
       <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
       </a>
     </div>
-    <div class="profile-icon">
-      <a href="../pages/Profile.html"><i class="fa-solid fa-circle-user"></i></a>
-    </div>
+    
   </header>
 <section class="about">
     <!-- Hero Section -->
@@ -207,3 +210,30 @@
       <p>&copy; 2024 ReelTime Cinemas</p>
     </div>
   </footer>
+   <div class="login">
+                <div class="login-background">
+  
+              <div class="login-content-panel">
+                  <div class="login-header">
+                      <div class="logo-text">Log In</div>
+                      <p class="welcome-message">Welcome back! Please enter your details</p>
+                  </div>
+
+                  <form class="login-form">
+                      <label >User name</label>
+                      <input id="username"  placeholder=" " required>
+
+                      <label for="password">Password</label>
+                      <div class="password-group">
+                          <input type="password" id="password" name="password" required>
+                
+                      </div>
+            
+            
+                      <button type="submit" class="login-button">Log In</button>
+                      <p id="loginError" class="login-error" aria-live="polite"></p>
+                  </form>
+                </div>
+
+  </body>
+  </html>

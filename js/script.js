@@ -274,6 +274,8 @@ function openMovieModal(cardElement) {
 
 function updateWatchlistButton(movieTitle) {
     let watchlistBtn = document.querySelector('.add-watchlist-btn');
+    if (!watchlistBtn) return;
+    
     let newWatchlistBtn = watchlistBtn.cloneNode(true);
     watchlistBtn.parentNode.replaceChild(newWatchlistBtn, watchlistBtn);
 
@@ -283,7 +285,16 @@ function updateWatchlistButton(movieTitle) {
    
 
     let saved = [];
-   
+    if (!userData) {
+        // User not logged in
+        newWatchlistBtn.textContent = "Login to Add to Watchlist";
+        newWatchlistBtn.classList.add('login-required');
+        newWatchlistBtn.disabled = false;
+        newWatchlistBtn.style.opacity = "1";
+        newWatchlistBtn.style.background = "#6c757d";
+        newWatchlistBtn.style.cursor = "pointer";
+        return;
+    }
         saved = JSON.parse(localStorage.getItem('watchlist')) || [];
     
 
@@ -292,11 +303,10 @@ function updateWatchlistButton(movieTitle) {
     if (inList) {
         newWatchlistBtn.textContent = " Remove from Watchlist";
         newWatchlistBtn.classList.add('added');
-        // newWatchlistBtn.style.background = "#5f10a0";
+        newWatchlistBtn.classList.remove('login-required');
     } else {
         newWatchlistBtn.textContent = "+ Add to Watchlist";
-        newWatchlistBtn.classList.remove('added');
-        // newWatchlistBtn.style.background = "";
+        newWatchlistBtn.classList.remove('added', 'login-required');
     }
     newWatchlistBtn.disabled = false;
     newWatchlistBtn.style.opacity = "1";

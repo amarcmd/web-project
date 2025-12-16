@@ -29,6 +29,9 @@
           <li><a href="../pages/bookings.html" style="background-color: blueviolet;">Bookings</a></li> 
            <li><a href="../pages/trivia.html">Games</a></li>  
           <li><a href="../pages/about.html">About</a></li>
+           <li>       <button id="loginToggleBtn" class="login-toggle-btn">
+        <i class="fas fa-user"></i> Login
+    </button></li>
         </ul>
       </nav>
 
@@ -47,9 +50,7 @@
       </a>
         </button>
       </div>
-      <div class="profile-icon">
-        <a href="../pages/Profile.html"><i class="fa-solid fa-circle-user"></i></a>
-      </div>
+      
 
     </header>
 <div id="searchOverlay" class="search-overlay">
@@ -385,5 +386,30 @@
     card.appendChild(overlay);
   });
 </script>
+ <div class="login">
+                <div class="login-background">
+  
+              <div class="login-content-panel">
+                  <div class="login-header">
+                      <div class="logo-text">Log In</div>
+                      <p class="welcome-message">Welcome back! Please enter your details</p>
+                  </div>
+
+                  <form class="login-form">
+                      <label >User name</label>
+                      <input id="username"  placeholder=" " required>
+
+                      <label for="password">Password</label>
+                      <div class="password-group">
+                          <input type="password" id="password" name="password" required>
+                
+                      </div>
+            
+            
+                      <button type="submit" class="login-button">Log In</button>
+                      <p id="loginError" class="login-error" aria-live="polite"></p>
+                  </form>
+                </div>
+
 </body>
 </html>
