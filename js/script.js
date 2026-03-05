@@ -81,8 +81,7 @@ let TRAILER_URLS = {
 
 document.querySelectorAll(".movie-card").forEach(card => {
     let rating = card.dataset.rating || "N/A";
-    let description = card.dataset.description || "N/A"
-    console.log(description);
+    let description = card.dataset.description || "N/A";
     let overlay = document.createElement("span");
     overlay.className = "rating-overlay";
     // overlay.textContent = `${description} `;
